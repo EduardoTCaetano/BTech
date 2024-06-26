@@ -92,13 +92,13 @@
   }
 
   #slides {
-    width: 100%; /* Ajustado para ocupar 100% da largura disponível */
+    width: 100%; 
     margin: 0 auto;
-    max-width: 100%; /* Ajustado para ocupar 100% da largura disponível */
+    max-width: 100%;
   }
 
   #slides .slide {
-    width: 100%; /* Ajustado para ocupar 100% da largura disponível */
-    height: 300px; /* Mantido a altura para consistência */
+    width: 100%;
+    height: 300px;
   }
 }
