@@ -1,0 +1,6 @@
+@BlitzTech.Application_HostAddress = http://localhost:5078
+
+GET {{BlitzTech.Application_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
