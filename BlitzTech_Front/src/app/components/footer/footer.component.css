@@ -5,6 +5,7 @@ footer {
   height: auto;
   background: #282828;
   padding-bottom: 20px;
+  border-top: 5px solid #ff6000; 
 }
 
 .square {

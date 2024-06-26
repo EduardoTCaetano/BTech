@@ -1,59 +1,71 @@
 .slider {
   margin: 0 auto;
   width: 1400px;
-  max-width: 100%;
+  max-width: 100%; /* Alterado para ser 100% responsivo */
   text-align: center;
   position: relative;
 }
+
 .slider input[type=radio] {
   display: none;
 }
+
 .slider label {
   cursor: pointer;
   text-decoration: none;
 }
+
 .slides {
-  padding: 10px;
+  /* padding: 10px; */ /* Removido o padding para evitar espaço extra */
   border: 3px solid #db7b0e;
   position: relative;
   z-index: 1;
 }
+
 #overflow {
   width: 100%;
   overflow: hidden;
 }
+
 #slides .inner {
   display: flex;
-  width: 400%;
+  width: 400%; /* Mantido para o efeito de transição */
   transition: margin-left 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
   animation: slideAnimation 12s infinite;
 }
+
 #slides .slide {
-  width: 25%;
+  width: 25%; /* Ajuste para ocupar 25% da largura em telas maiores */
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
 }
+
 #slides .slide_1 {
   background: #00171F;
 }
+
 #slides .slide_2 {
   background: #003459;
 }
+
 #slides .slide_3 {
   background: #007EA7;
 }
+
 #slides .slide_4 {
   background: #00A8E8;
 }
+
 @keyframes slideAnimation {
   0%, 25% { margin-left: 0; }
   30%, 50% { margin-left: -100%; }
   55%, 75% { margin-left: -200%; }
   80%, 100% { margin-left: -300%; }
 }
+
 #controls {
   margin: -180px 0 0 0;
   width: 100%;
@@ -61,6 +73,7 @@
   z-index: 3;
   position: relative;
 }
+
 #controls label {
   transition: opacity 0.2s ease-out;
   display: none;
@@ -68,15 +81,24 @@
   height: 50px;
   opacity: .4;
 }
+
 #controls label:hover {
   opacity: 1;
 }
+
 @media screen and (max-width: 900px) {
   #controls label {
     margin: 0;
   }
+
   #slides {
-    max-width: calc(100% - 140px);
+    width: 100%; /* Ajustado para ocupar 100% da largura disponível */
     margin: 0 auto;
+    max-width: 100%; /* Ajustado para ocupar 100% da largura disponível */
+  }
+
+  #slides .slide {
+    width: 100%; /* Ajustado para ocupar 100% da largura disponível */
+    height: 300px; /* Mantido a altura para consistência */
   }
 }

@@ -1,0 +1,17 @@
+.fundo {
+  position: relative;
+  overflow: hidden;
+  background-image: url(/assets/mv_3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.carousel {
+  margin-top: 85px; /* Ajuste o valor conforme necessário */
+}
+
+.carousel-item img {
+  height: 400px; /* Ajuste para a altura desejada */
+  object-fit: cover; /* Para garantir que a imagem preencha a altura definida */
+}

@@ -1,0 +1,8 @@
+.about-container {
+  position: relative;
+  overflow: hidden;
+  background-image: url(/assets/mv_3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
