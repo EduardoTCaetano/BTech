@@ -22,9 +22,12 @@
   z-index: 1;
 }
 
+
 #overflow {
   width: 100%;
   overflow: hidden;
+  border-top: 5px solid #ff6000;
+
 }
 
 #slides .inner {
@@ -92,7 +95,7 @@
   }
 
   #slides {
-    width: 100%; 
+    width: 100%;
     margin: 0 auto;
     max-width: 100%;
   }

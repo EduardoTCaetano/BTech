@@ -8,10 +8,12 @@
 }
 
 .carousel {
-  margin-top: 85px; /* Ajuste o valor conforme necessário */
+  margin-top: 85px;
+  border-bottom: 5px solid #ff6000;
+
 }
 
 .carousel-item img {
-  height: 400px; /* Ajuste para a altura desejada */
-  object-fit: cover; /* Para garantir que a imagem preencha a altura definida */
+  height: 400px;
+  object-fit: cover;
 }
