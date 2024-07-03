@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using BlitzTech.Domain.Entities;
 using BlitzTech.Domain.Validations;
 
@@ -5,6 +6,10 @@ namespace BlitzTech.Model
 {
     public class Category : EntityBase
     {
+        [Required]
+        [MinLength(3, ErrorMessage = "Nome muito curto")]
+        [MaxLength(15, ErrorMessage = "Nome muito grande")]
+
         public string Description { get;  set; } 
         public bool IsActive { get; set; }
 

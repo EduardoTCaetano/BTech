@@ -2,7 +2,10 @@ using BlitzTech.Data.Context;
 using BlitzTech.Data.Mapping;
 using BlitzTech.Data.Migrations;
 using BlitzTech.Domain.Dtos.Category;
+using BlitzTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using BlitzTech.Domain.Helpers;
+using BlitzTech.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlitzTech.Application.Controllers
@@ -12,24 +15,26 @@ namespace BlitzTech.Application.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly DataContext _context;
-        public CategoryController(DataContext context)
+        private readonly ICategoryRepository _categoryRepo;
+
+        public CategoryController(DataContext context, ICategoryRepository categoryRepo)
         {
+            _categoryRepo = categoryRepo;
             _context = context;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
-            var categoryModel = await _context.Categories.ToListAsync();
-
-            var categoryDto =  categoryModel.Select(s => s.ToCategoryDto());
+            var categoryModel = await _categoryRepo.GetAllAsync(query);
+            var categoryDto = categoryModel.Select(s => s.ToCategoryDto());
             return Ok(categoryModel);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var categoryModel = _context.Categories.FindAsync(id);
+            var categoryModel = await _categoryRepo.GetByIdAsync(id);
 
             if (categoryModel == null)
             {
@@ -43,43 +48,34 @@ namespace BlitzTech.Application.Controllers
         public async Task<IActionResult> Post([FromBody] CreateCategoryRequestDto categoryDto)
         {
             var categoryModel = categoryDto.ToCategoryFromCreateDTO();
-            await _context.Categories.AddAsync(categoryModel);
-            await _context.SaveChangesAsync();
+            await _categoryRepo.CreateAsync(categoryModel);
             return CreatedAtAction(nameof(GetById), new { id = categoryModel.Id }, AutoMapperProfiles.ToCategoryDto(categoryModel));
         }
 
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto updateDto)
         {
-            var categoryModel = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            var categoryModel = await _categoryRepo.UpdateAsync(id, updateDto);
 
             if (categoryModel == null)
             {
                 return NotFound("Id não encontrado :( ");
             }
-            categoryModel.Description = updateDto.Description;
-            categoryModel.IsActive = updateDto.IsActive;
 
-            await _context.SaveChangesAsync();
             return Ok(categoryModel.ToCategoryDto());
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var categoryModel = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            var categoryModel = await _categoryRepo.DeleteAsync(id);
 
             if (categoryModel == null)
             {
                 return NotFound("Id não encontrado :( ");
             }
 
-            _context.Categories.Remove(categoryModel);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
-
     }
 }
