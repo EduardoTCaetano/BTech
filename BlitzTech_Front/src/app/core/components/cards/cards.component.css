@@ -14,7 +14,7 @@ div.cards {
 div.cards section.card:hover {
   transform: scale(0.98);
   border-radius: 20px;
-  background-color: #282828;
+  background-color: #303030;
   border: 4px solid rgb(224, 123, 7);
   transition: all 0.5s;
 }

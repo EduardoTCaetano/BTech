@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './features/pages/home/home.component';
@@ -12,6 +10,11 @@ import { AboutComponent } from './core/components/about/about.component';
 import { CarouselComponent } from './core/components/carousel/carousel.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { AdvertisingComponent } from './core/components/advertising/advertising.component';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,11 +26,14 @@ import { AdvertisingComponent } from './core/components/advertising/advertising.
     AdvertisingComponent,
     FooterComponent,
     CarouselComponent,
-    AboutComponent
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
