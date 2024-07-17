@@ -1,0 +1,35 @@
+.fundo {
+  position: relative;
+  overflow: hidden;
+  background-image: url(/assets/mv_3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.carousel {
+  margin-top: 85px;
+  border-bottom: 5px solid #ff6000;
+}
+
+.carousel-item {
+  height: 500px; /* Ajuste a altura conforme necessário */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Adicionado para garantir que as imagens não transbordem */
+}
+
+.carousel-item img {
+  height: 100%; /* Ajusta a altura da imagem ao contêiner */
+  width: auto; /* Mantém a proporção da largura */
+  object-fit: cover; /* Ajusta a imagem ao contêiner */
+}
+
+.carousel-indicators li {
+  background-color: #000; /* Cor dos indicadores */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #000; /* Cor das setas */
+}
