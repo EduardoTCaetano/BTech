@@ -1,5 +1,4 @@
 using BlitzTech.Data.Context;
-using BlitzTech.Data.Migrations;
 using BlitzTech.Domain.Dtos.Category;
 using BlitzTech.Domain.Helpers;
 using BlitzTech.Domain.Interfaces;
@@ -17,44 +16,44 @@ namespace BlitzTech.Data.Repository
 
         public async Task<Model.Category> CreateAsync(Model.Category categoryModel)
         {
-            await _context.Categories.AddAsync(categoryModel);
+            await _context.Category.AddAsync(categoryModel);
             await _context.SaveChangesAsync();
             return categoryModel;
         }
 
         public async Task<Model.Category?> DeleteAsync(Guid Id)
         {
-            var categoryModel = await _context.Categories.FirstOrDefaultAsync(x => x.Id == Id);
+            var categoryModel = await _context.Category.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (categoryModel == null)
             {
                 return null;
             }
 
-            _context.Categories.Remove(categoryModel);
+            _context.Category.Remove(categoryModel);
             await _context.SaveChangesAsync();
             return categoryModel;
         }
 
         public async Task<List<Model.Category>> GetAllAsync(QueryObject query)
         {
-            var categories =  _context.Categories.AsQueryable();
+            var Category =  _context.Category.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(query.Description))
             {
-                categories = categories.Where(s => s.Description.Contains(query.Description));
+                Category = Category.Where(s => s.Description.Contains(query.Description));
             }
-            return await categories.ToListAsync();
+            return await Category.ToListAsync();
         }
 
         public async Task<Model.Category?> GetByIdAsync(Guid Id)
         {
-            return await _context.Categories.FindAsync(Id);
+            return await _context.Category.FindAsync(Id);
         }
 
         public async Task<Model.Category?> UpdateAsync(Guid Id, UpdateCategoryRequestDto categoryDto)
         {
-            var exitingCategory = await _context.Categories.FirstOrDefaultAsync(x => x.Id == Id);
+            var exitingCategory = await _context.Category.FirstOrDefaultAsync(x => x.Id == Id);
 
             if (exitingCategory == null)
             {

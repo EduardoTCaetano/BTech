@@ -1,12 +1,10 @@
 using BlitzTech.Data.Context;
 using BlitzTech.Data.Mapping;
-using BlitzTech.Data.Migrations;
 using BlitzTech.Domain.Dtos.Category;
 using BlitzTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BlitzTech.Domain.Helpers;
-using BlitzTech.Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlitzTech.Application.Controllers
 {
@@ -23,6 +21,7 @@ namespace BlitzTech.Application.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
@@ -31,6 +30,7 @@ namespace BlitzTech.Application.Controllers
             return Ok(categoryModel);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
@@ -44,6 +44,7 @@ namespace BlitzTech.Application.Controllers
             return Ok(categoryModel);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCategoryRequestDto categoryDto)
         {
@@ -52,6 +53,7 @@ namespace BlitzTech.Application.Controllers
             return CreatedAtAction(nameof(GetById), new { id = categoryModel.Id }, AutoMapperProfiles.ToCategoryDto(categoryModel));
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto updateDto)
         {
@@ -65,6 +67,7 @@ namespace BlitzTech.Application.Controllers
             return Ok(categoryModel.ToCategoryDto());
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
