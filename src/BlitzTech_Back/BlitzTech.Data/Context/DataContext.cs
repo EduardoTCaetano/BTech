@@ -35,3 +35,6 @@ public class DataContext : IdentityDbContext<IUnitOfWork>
             builder.Entity<IdentityRole>().HasData(roles);
         }
     }
+
+//dotnet ef migrations add Category --project ..\BlitzTech.Data\
+//dotnet ef database update 0 --project ..\BlitzTech.Data\

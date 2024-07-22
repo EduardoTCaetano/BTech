@@ -21,7 +21,6 @@ namespace BlitzTech.Application.Controllers
             _context = context;
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {

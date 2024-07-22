@@ -13,7 +13,7 @@ namespace api.Controllers
 {
 
     //     {
-    //   "userName": "EduAdm",
+    //   "userName": "Admin",
     //   "emailAddress": "user@example.com",
     //   "passWord": "Teste_12345678"
     // }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlitzTech.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CategoryIdentity : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,7 +57,7 @@ namespace BlitzTech.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", unicode: false, maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 15, nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -176,8 +176,8 @@ namespace BlitzTech.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "c0d53270-a77e-4bb0-b966-12cf871ddc97", null, "User", "USER" },
-                    { "ed8aa06b-3df4-4e71-9386-b2d14dd52441", null, "ADMIN", "ADMIN" }
+                    { "4cf731ee-ea33-4f25-aca7-92be24a71058", null, "Admin", "ADMIN" },
+                    { "bdc88116-6a15-4916-bcef-6e10bff9ce2c", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
