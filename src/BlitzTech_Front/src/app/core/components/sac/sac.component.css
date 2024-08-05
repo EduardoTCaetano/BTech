@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee+Spice&display=swap");
+
+body {
+  position: relative;
+  overflow: hidden;
+  background-image: url(/assets/fundologin.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+h2 {
+  font-family: "Bungee Spice", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+header {
+  min-height: 100px;
+}
+
+header h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+#contact-form {
+  background: #303030;
+  padding: 30px;
+  margin-top: 30px;
+  box-shadow: 0 0 10px rgba(227, 65, 6, 0.1);
+  border-radius: 50px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #35424a;
+  box-shadow: 0 0 8px rgba(53, 66, 74, 0.3);
+}
+
+.form-group button {
+  background: #ff600f;
+  color: #ffffff;
+  border: 0;
+  margin: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.form-group button:hover {
+  background: #e8491d;
+}
+
+.faq-section {
+  margin-top: 50px;
+}
+
+.faq {
+  background: #303030;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.faq:hover {
+  background: #1e1e1e;
+}
+
+.faq p {
+  margin: 0;
+  color: #ddd;
+}
+
+.faq-question-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question {
+  font-weight: bold;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  display: none;
+  margin-top: 10px;
+}
+
+.faq-answer.show {
+  display: block;
+}
+
+.faq-answer {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.faq-answer p {
+  margin-bottom: 1em;
+}

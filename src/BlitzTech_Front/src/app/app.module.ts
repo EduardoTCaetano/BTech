@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SacComponent } from './core/components/sac/sac.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     CarouselComponent,
     AboutComponent,
+    SacComponent,
   ],
   imports: [
     BrowserModule,
