@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Domain", "BlitzTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Domain.Tests", "BlitzTech.Domain.Tests\BlitzTech.Domain.Tests.csproj", "{598125F7-E51B-4F13-B591-7A60AF29414B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A344531E-6731-46CB-94D9-B70CA17B9EA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Domain.Tests", "tests\BlitzTech.Domain.Tests\BlitzTech.Domain.Tests.csproj", "{5E2B474F-F3FF-4C9B-B691-4F8E398882C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,12 @@ Global
 		{598125F7-E51B-4F13-B591-7A60AF29414B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{598125F7-E51B-4F13-B591-7A60AF29414B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{598125F7-E51B-4F13-B591-7A60AF29414B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E2B474F-F3FF-4C9B-B691-4F8E398882C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E2B474F-F3FF-4C9B-B691-4F8E398882C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E2B474F-F3FF-4C9B-B691-4F8E398882C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E2B474F-F3FF-4C9B-B691-4F8E398882C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5E2B474F-F3FF-4C9B-B691-4F8E398882C0} = {A344531E-6731-46CB-94D9-B70CA17B9EA3}
 	EndGlobalSection
 EndGlobal
