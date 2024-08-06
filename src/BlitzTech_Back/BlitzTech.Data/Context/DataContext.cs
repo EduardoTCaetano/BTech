@@ -1,24 +1,25 @@
-using BlitzTech.Data.Context;
-using BlitzTech.Model;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BlitzTech.Model;
+using Microsoft.AspNetCore.Identity;
 
-public class DataContext : IdentityDbContext<IUnitOfWork>
+namespace BlitzTech.Data.Context
+{
+    public class DataContext : IdentityDbContext<IdentityUser>
     {
-        public DataContext(DbContextOptions dbContextOptions)
-        : base(dbContextOptions)
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
         {
-
         }
 
         public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Product { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-
+            // Dados iniciais de roles
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
@@ -35,6 +36,4 @@ public class DataContext : IdentityDbContext<IUnitOfWork>
             builder.Entity<IdentityRole>().HasData(roles);
         }
     }
-
-//dotnet ef migrations add Category --project ..\BlitzTech.Data\
-//dotnet ef database update 0 --project ..\BlitzTech.Data\
+}

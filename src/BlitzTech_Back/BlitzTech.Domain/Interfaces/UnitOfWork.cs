@@ -1,5 +1,3 @@
-
-
 using Microsoft.AspNetCore.Identity;
 
 namespace BlitzTech.Data.Context

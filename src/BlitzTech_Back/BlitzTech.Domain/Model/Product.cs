@@ -1,5 +1,6 @@
 using BlitzTech.Domain.Entities;
 using BlitzTech.Domain.Validations;
+using System;
 
 namespace BlitzTech.Model
 {
@@ -11,14 +12,16 @@ namespace BlitzTech.Model
         public int Stock { get; set; }
         public string Image { get; set; }
         public bool IsActive { get; set; } = true;
-        public Category CategoryId { get; set; }
+        public Guid CategoryId { get; set; }  // Chave estrangeira
+        public Category Category { get; set; }  // Navegação
 
-        public Product(string name, string description, decimal price, int stock, string image, Category categoryId)
+        // Alterar para aceitar Guid para CategoryId
+        public Product(string name, string description, decimal price, int stock, string image, Guid categoryId)
         {
             ValidateAndSetValues(name, description, price, stock, image, categoryId);
         }
 
-        private void ValidateAndSetValues(string name, string description, decimal price, int stock, string image, Category categoryId)
+        private void ValidateAndSetValues(string name, string description, decimal price, int stock, string image, Guid categoryId)
         {
             ValidateName(name);
             ValidateDescription(description);
@@ -39,7 +42,7 @@ namespace BlitzTech.Model
         {
             if (string.IsNullOrEmpty(name))
                 DomainExceptionValidations.ExceptionHandler(true, "Invalid name. Name is required!");
-            if (name.Length > 30)
+            if (name.Length > 100)
                 DomainExceptionValidations.ExceptionHandler(true, "Too long name.");
         }
 
@@ -47,7 +50,7 @@ namespace BlitzTech.Model
         {
             if (string.IsNullOrEmpty(description))
                 DomainExceptionValidations.ExceptionHandler(true, "Invalid description. Description is required!");
-            if (description.Length > 30)
+            if (description.Length > 500)
                 DomainExceptionValidations.ExceptionHandler(true, "Too long description.");
         }
 
@@ -66,9 +69,9 @@ namespace BlitzTech.Model
             DomainExceptionValidations.ExceptionHandler(string.IsNullOrEmpty(image), "Invalid Image. Image is required!");
         }
 
-        private void ValidateCategoryId(Category categoryId)
+        private void ValidateCategoryId(Guid categoryId)
         {
-            DomainExceptionValidations.ExceptionHandler(categoryId == null, "Invalid Category. Category is required!");
+            DomainExceptionValidations.ExceptionHandler(categoryId == Guid.Empty, "Invalid CategoryId. CategoryId is required!");
         }
     }
 }

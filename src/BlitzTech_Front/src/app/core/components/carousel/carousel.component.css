@@ -26,10 +26,7 @@
 }
 
 .carousel-indicators li {
-  background-color: #000; /* Cor dos indicadores */
+  background-color: #ff6000;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: #000; /* Cor das setas */
-}
+

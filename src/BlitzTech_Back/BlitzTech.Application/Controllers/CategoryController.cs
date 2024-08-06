@@ -1,24 +1,25 @@
-using BlitzTech.Data.Context;
-using BlitzTech.Data.Mapping;
 using BlitzTech.Domain.Dtos.Category;
 using BlitzTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BlitzTech.Domain.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using BlitzTech.Data.Mapping;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlitzTech.Application.Controllers
 {
-    [Route("API/Category")]
+    [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "AdminOnly")]
     public class CategoryController : ControllerBase
     {
-        private readonly DataContext _context;
         private readonly ICategoryRepository _categoryRepo;
 
-        public CategoryController(DataContext context, ICategoryRepository categoryRepo)
+        public CategoryController(ICategoryRepository categoryRepo)
         {
             _categoryRepo = categoryRepo;
-            _context = context;
         }
 
         [HttpGet]
@@ -26,10 +27,9 @@ namespace BlitzTech.Application.Controllers
         {
             var categoryModel = await _categoryRepo.GetAllAsync(query);
             var categoryDto = categoryModel.Select(s => s.ToCategoryDto());
-            return Ok(categoryModel);
+            return Ok(categoryDto);
         }
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
@@ -37,36 +37,39 @@ namespace BlitzTech.Application.Controllers
 
             if (categoryModel == null)
             {
-                return NotFound("Nada encontrado :( ");
-            }
-
-            return Ok(categoryModel);
-        }
-
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateCategoryRequestDto categoryDto)
-        {
-            var categoryModel = categoryDto.ToCategoryFromCreateDTO();
-            await _categoryRepo.CreateAsync(categoryModel);
-            return CreatedAtAction(nameof(GetById), new { id = categoryModel.Id }, AutoMapperProfiles.ToCategoryDto(categoryModel));
-        }
-
-        [Authorize]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto updateDto)
-        {
-            var categoryModel = await _categoryRepo.UpdateAsync(id, updateDto);
-
-            if (categoryModel == null)
-            {
-                return NotFound("Id não encontrado :( ");
+                return NotFound("Nada encontrado :(");
             }
 
             return Ok(categoryModel.ToCategoryDto());
         }
 
-        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateCategoryRequestDto categoryDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var categoryModel = categoryDto.ToCategoryFromCreateDTO();
+            await _categoryRepo.CreateAsync(categoryModel);
+            return CreatedAtAction(nameof(GetById), new { id = categoryModel.Id }, categoryModel.ToCategoryDto());
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto updateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var categoryModel = await _categoryRepo.UpdateAsync(id, updateDto);
+
+            if (categoryModel == null)
+            {
+                return NotFound("Id não encontrado :(");
+            }
+
+            return Ok(categoryModel.ToCategoryDto());
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
@@ -74,7 +77,7 @@ namespace BlitzTech.Application.Controllers
 
             if (categoryModel == null)
             {
-                return NotFound("Id não encontrado :( ");
+                return NotFound("Id não encontrado :(");
             }
 
             return NoContent();

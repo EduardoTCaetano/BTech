@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BlitzTech.Data.Context;
 using BlitzTech.Domain.Interfaces;
-using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BlitzTech.Application.Services
 {
@@ -17,29 +19,35 @@ namespace BlitzTech.Application.Services
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
         }
-        public string CreateToken(UnitOfWork user)
+
+        public string CreateToken(IdentityUser user, IList<string> roles)
         {
             var claims = new List<Claim>
             {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName)
             };
 
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            // Adicionando os roles aos claims
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+            var creds = new SigningCredentials(
+                _key, // Use a chave já definida no construtor
+                SecurityAlgorithms.HmacSha512
+            );
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = creds,
                 Issuer = _config["JWT:Issuer"],
                 Audience = _config["JWT:Audience"]
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
-
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
             return tokenHandler.WriteToken(token);
         }
     }

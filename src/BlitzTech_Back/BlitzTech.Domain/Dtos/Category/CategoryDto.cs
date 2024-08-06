@@ -13,7 +13,5 @@ namespace BlitzTech.Domain.Dtos.Category
             Description = description;
             IsActive = isActive;
         }
-
-
     }
 }
