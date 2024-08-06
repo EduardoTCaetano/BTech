@@ -8,6 +8,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using BlitzTech.Domain.Interfaces;
 using BlitzTech.Application.Services;
 using BlitzTech.Data.Repository;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using System;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configurar o contexto do banco de dados

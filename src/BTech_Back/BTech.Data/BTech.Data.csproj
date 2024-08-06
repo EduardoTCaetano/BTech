@@ -18,6 +18,6 @@
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../BlitzTech.Domain/BlitzTech.Domain.csproj" />      
+    <ProjectReference Include="../BTech.Domain/BTech.Domain.csproj" />      
   </ItemGroup>
 </Project>

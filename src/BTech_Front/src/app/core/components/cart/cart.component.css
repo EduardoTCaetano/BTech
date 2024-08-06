@@ -1,0 +1,10 @@
+.cart-container {
+  display: flex;
+  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+  align-items: center;
+  height: 100vh;
+  background-image: url(/assets/mv_2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}

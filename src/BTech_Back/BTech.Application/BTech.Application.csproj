@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>disable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
   <ItemGroup>
@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-      <ProjectReference Include="../BlitzTech.Data/BlitzTech.Data.csproj" />
-      <ProjectReference Include="../BlitzTech.Domain/BlitzTech.Domain.csproj" />
+      <ProjectReference Include="../BTech.Data/BTech.Data.csproj" />
+      <ProjectReference Include="../BTech.Domain/BTech.Domain.csproj" />
   </ItemGroup>
 </Project>

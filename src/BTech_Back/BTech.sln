@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Application", "BlitzTech.Application\BlitzTech.Application.csproj", "{54389AB1-2F2D-4C19-9904-BA6DCCB7C246}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTech.Application", "BTech.Application\BTech.Application.csproj", "{54389AB1-2F2D-4C19-9904-BA6DCCB7C246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Data", "BlitzTech.Data\BlitzTech.Data.csproj", "{AEFDAA9D-09E4-4D36-84BA-176CF83AE09C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTech.Data", "BTech.Data\BTech.Data.csproj", "{AEFDAA9D-09E4-4D36-84BA-176CF83AE09C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Domain", "BlitzTech.Domain\BlitzTech.Domain.csproj", "{D3E0B889-0171-4A94-8B29-A4772D72CCBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTech.Domain", "BTech.Domain\BTech.Domain.csproj", "{D3E0B889-0171-4A94-8B29-A4772D72CCBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Domain.Tests", "BlitzTech.Domain.Tests\BlitzTech.Domain.Tests.csproj", "{598125F7-E51B-4F13-B591-7A60AF29414B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTech.Domain.Tests", "BTech.Domain.Tests\BTech.Domain.Tests.csproj", "{598125F7-E51B-4F13-B591-7A60AF29414B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A344531E-6731-46CB-94D9-B70CA17B9EA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzTech.Domain.Tests", "tests\BlitzTech.Domain.Tests\BlitzTech.Domain.Tests.csproj", "{5E2B474F-F3FF-4C9B-B691-4F8E398882C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTech.Domain.Tests", "tests\BTech.Domain.Tests\BTech.Domain.Tests.csproj", "{5E2B474F-F3FF-4C9B-B691-4F8E398882C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

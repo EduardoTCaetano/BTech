@@ -6,6 +6,8 @@ using System.Text;
 using BlitzTech.Domain.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace BlitzTech.Application.Services
 {

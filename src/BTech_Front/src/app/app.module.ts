@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SacComponent } from './core/components/sac/sac.component';
+import { CartComponent } from './core/components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SacComponent } from './core/components/sac/sac.component';
     CarouselComponent,
     AboutComponent,
     SacComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

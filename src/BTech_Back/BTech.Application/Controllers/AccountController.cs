@@ -6,6 +6,7 @@ using BlitzTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace api.Controllers
 {

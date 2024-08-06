@@ -20,6 +20,6 @@
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlitzTech.Domain\BlitzTech.Domain.csproj" />
+    <ProjectReference Include="..\BTech.Domain\BTech.Domain.csproj" />
   </ItemGroup>
 </Project>
