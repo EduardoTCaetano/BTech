@@ -19,6 +19,10 @@ h2 {
   width: 80%;
   margin: auto;
   overflow: hidden;
+  padding: 50px;
+  background-color: #303030;
+  box-shadow: 0 0px 10px 0 #FF6000;
+  border-radius: 20px;
 }
 
 header {
@@ -32,11 +36,12 @@ header h1 {
 }
 
 #contact-form {
-  background: #303030;
+  background: #1E1E1E;
   padding: 30px;
   margin-top: 0px;
-  box-shadow: 0 0 10px rgba(227, 65, 6, 0.1);
   border-radius: 50px;
+  box-shadow: 0 0px 8px 0 #FF6000;
+  text-align: center;
 }
 
 .form-group {
@@ -67,9 +72,9 @@ header h1 {
   color: #ffffff;
   border: 0;
   margin: 5px;
-  padding: 10px 15px;
+  padding: 10px 25px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 15px;
   transition: background 0.3s ease;
 }
 
@@ -82,17 +87,17 @@ header h1 {
 }
 
 .faq {
-  background: #303030;
+  background: #1e1e1e;
   padding: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 8px 0 #FF6000;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .faq:hover {
-  background: #1e1e1e;
+  background: #303030;
 }
 
 .faq p {
@@ -112,6 +117,8 @@ header h1 {
 
 .arrow {
   transition: transform 0.3s ease;
+  color: #ddd;
+  font-size: 20px;
 }
 
 .arrow.rotated {
