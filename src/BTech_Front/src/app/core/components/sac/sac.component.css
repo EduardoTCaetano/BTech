@@ -16,8 +16,8 @@ h2 {
 }
 
 .container {
-  width: 80%;
-  margin: auto;
+  width: 100%;
+  margin: 0 auto;
   overflow: hidden;
   padding: 50px;
   background-color: #303030;
@@ -45,7 +45,7 @@ header h1 {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  padding: 10px;
 }
 
 .form-group label {

@@ -22,7 +22,6 @@
 .carousel-item img {
   height: 100%; /* Ajusta a altura da imagem ao contêiner */
   width: auto; /* Mantém a proporção da largura */
-  object-fit: cover; /* Ajusta a imagem ao contêiner */
 }
 
 .carousel-indicators li {
