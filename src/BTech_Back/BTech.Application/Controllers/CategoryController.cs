@@ -12,7 +12,6 @@ namespace BlitzTech.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "AdminOnly")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepo;
@@ -43,6 +42,7 @@ namespace BlitzTech.Application.Controllers
             return Ok(categoryModel.ToCategoryDto());
         }
 
+        [Authorize(Policy = "AdminOnly")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCategoryRequestDto categoryDto)
         {
@@ -54,6 +54,7 @@ namespace BlitzTech.Application.Controllers
             return CreatedAtAction(nameof(GetById), new { id = categoryModel.Id }, categoryModel.ToCategoryDto());
         }
 
+        [Authorize(Policy = "AdminOnly")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto updateDto)
         {
@@ -70,6 +71,7 @@ namespace BlitzTech.Application.Controllers
             return Ok(categoryModel.ToCategoryDto());
         }
 
+        [Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {

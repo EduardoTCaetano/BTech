@@ -1,44 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <body>
-
     <div class="home-container">
-      <div class="product-card spacing">
-        <div class="badge">Novo Produto</div>
+      <div *ngFor="let product of products" class="product-card spacing">
+        <!-- <div class="badge" *ngIf="product.isActive">Novo Produto</div> -->
         <div class="product-thumb">
-          <img src="assets/mouse.png" />
+          <img [src]="product.image" alt="{{ product.name }}" />
         </div>
         <div class="product-details">
-          <span class="product-price">R$ 16.99</span>
-          <h4><a href="#">Novo mouse GT</a></h4>
-          <p>DPI 1600</p>
-          <div class="product-bottom-details">
-            <button class="button">
-              Comprar
-              <svg class="cartIcon" viewBox="0 0 576 512">
-                <path
-                  d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
-                ></path>
-              </svg>
-            </button>
-            <div class="product-links">
-              <a href=""><i class="fa fa-heart"></i></a>
-              <a href=""><i class="fa fa-shopping-cart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--
-      <div class="product-card spacing">
-        <div class="badge">Novo Produto</div>
-        <div class="product-thumb">
-          <img src="assets/teclado.png" />
-        </div>
-        <div class="product-details">
-          <span class="product-price">R$ 99.99</span>
-          <h4><a href="#">Teclado Gamer</a></h4>
-          <p> Mecânico HyperX</p>
+          <span class="product-price"
+          >{{ product.price | currency: 'BRL':'symbol':'1.2-2' }}</span>
+          <h4>
+            <a href="#">{{ product.name }}</a>
+          </h4>
+          <p>{{ product.description }}</p>
           <div class="product-bottom-details">
             <button class="button">
               Comprar
@@ -55,84 +30,6 @@
           </div>
         </div>
       </div>
-
-      <div class="product-card spacing">
-        <div class="badge">Novo Produto</div>
-        <div class="product-thumb">
-          <img src="assets/monitor.png" />
-        </div>
-        <div class="product-details">
-          <span class="product-price">R$ 149.99</span>
-          <h4><a href="#">Monitor Gamer</a></h4>
-          <p>Curvo QD-OLED</p>
-          <div class="product-bottom-details">
-            <button class="button">
-              Comprar
-              <svg class="cartIcon" viewBox="0 0 576 512">
-                <path
-                  d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
-                ></path>
-              </svg>
-            </button>
-            <div class="product-links">
-              <a href="#"><i class="fa fa-heart"></i></a>
-              <a href="#"><i class="fa fa-shopping-cart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card spacing">
-        <div class="badge">Novo Produto</div>
-        <div class="product-thumb">
-          <img src="assets/mousepad.png" />
-        </div>
-        <div class="product-details">
-          <span class="product-price">R$ 19.15</span>
-          <h4><a href="#">Mouse Pad</a></h4>
-          <p>SPEED MPG102 Preto FORTREK</p>
-          <div class="product-bottom-details">
-            <button class="button">
-              Comprar
-              <svg class="cartIcon" viewBox="0 0 576 512">
-                <path
-                  d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
-                ></path>
-              </svg>
-            </button>
-            <div class="product-links">
-              <a href="#"><i class="fa fa-heart"></i></a>
-              <a href="#"><i class="fa fa-shopping-cart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card spacing">
-        <div class="badge">Novo Produto</div>
-        <div class="product-thumb">
-          <img src="assets/headset.png" />
-        </div>
-        <div class="product-details">
-          <span class="product-price">R$ 699.00</span>
-          <h4><a href="#">Headset</a></h4>
-          <p>HI-RES EDIFIER G5BT CAT</p>
-          <div class="product-bottom-details">
-            <button class="button">
-              Comprar
-              <svg class="cartIcon" viewBox="0 0 576 512">
-                <path
-                  d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
-                ></path>
-              </svg>
-            </button>
-            <div class="product-links">
-              <a href="#"><i class="fa fa-heart"></i></a>
-              <a href="#"><i class="fa fa-shopping-cart"></i></a>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </body>
 </html>

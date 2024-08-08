@@ -5,12 +5,12 @@ using BlitzTech.Domain.Interfaces;
 using BlitzTech.Model;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace BlitzTech.Data.Repository
 {
     public class ProductRepository : IProductRepository
     {
         private readonly DataContext _context;
+
         public ProductRepository(DataContext context)
         {
             _context = context;
@@ -27,7 +27,6 @@ namespace BlitzTech.Data.Repository
         {
             throw new NotImplementedException();
         }
-
 
         public async Task<Model.Product?> DeleteAsync(Guid id)
         {
@@ -83,10 +82,19 @@ namespace BlitzTech.Data.Repository
             return existingProduct;
         }
 
-        Task<bool> IProductRepository.DeleteAsync(Guid id)
+        // Implement the correct DeleteAsync method from the interface
+        async Task<Product> IProductRepository.DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var productModel = await _context.Product.FirstOrDefaultAsync(x => x.Id == id);
 
+            if (productModel == null)
+            {
+                throw new KeyNotFoundException("Product not found");
+            }
+
+            _context.Product.Remove(productModel);
+            await _context.SaveChangesAsync();
+            return productModel;
+        }
     }
 }

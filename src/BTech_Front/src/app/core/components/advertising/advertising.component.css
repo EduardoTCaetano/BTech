@@ -55,7 +55,7 @@ img {
 
 #slides .slide img {
   position: absolute;
-  width: 80%;
+  width: auto;
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;

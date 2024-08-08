@@ -23,7 +23,6 @@ namespace BlitzTech.Application.Controllers
             _productRepo = productRepo;
         }
 
-        [Authorize(Policy = "AdminOnly")]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
@@ -32,7 +31,6 @@ namespace BlitzTech.Application.Controllers
             return Ok(productDto);
         }
 
-        [Authorize(Policy = "AdminOnly")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
@@ -82,5 +80,6 @@ namespace BlitzTech.Application.Controllers
 
             return NoContent();
         }
+
     }
 }

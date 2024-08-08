@@ -12,6 +12,6 @@ namespace BlitzTech.Domain.Interfaces
         Task<Product> GetByIdAsync(Guid id);
         Task<Product> CreateAsync(Product productModel);
         Task<Product> UpdateAsync(Guid id, UpdateProductRequestDto updateDto);
-        Task<bool> DeleteAsync(Guid id);
+        Task<Product> DeleteAsync(Guid id);
     }
 }
