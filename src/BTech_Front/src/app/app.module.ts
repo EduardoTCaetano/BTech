@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SacComponent } from './core/components/sac/sac.component';
 import { CartComponent } from './core/components/cart/cart.component';
+import { ProductPageComponent } from './core/components/product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CartComponent } from './core/components/cart/cart.component';
     AboutComponent,
     SacComponent,
     CartComponent,
+    ProductPageComponent,
   ],
   imports: [
     BrowserModule,

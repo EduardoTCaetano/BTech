@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #de570a;
+}
+.container {
+  max-width: 1300px;
+  margin: 50px auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  background-color: #ffffff;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border-radius: 30px;
+}
+.product-images img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  border-radius: 10px;
+}
+.product-info {
+  text-align: center;
+  border-radius: 10px;
+}
+h1 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #333333;
+}
+header, main, footer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  color: #333;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  background-color: #d86907;
+  margin-right: 50px;
+}
+button {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(2, 2, 2, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#2a2a4d 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+
+}
+button:hover {
+  background-color: #d86907;
+}
+.rating {
+  display: inline-block;
+  margin-top: 10px;
+}
+.star {
+  font-size: 20px;
+  color: #f0c040;
+}
+
+
