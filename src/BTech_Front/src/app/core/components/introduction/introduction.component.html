@@ -1,27 +1,28 @@
-
-  <body>
-    <div class="home-container">
+<body>
+  <div class="home-container">
     <div class="name">Promoção</div>
-      <div *ngFor="let product of products" class="product-card spacing">
-        <div class="product-thumb">
-          <img [src]="product.image" alt="{{ product.name }}" />
-        </div>
-        <div class="product-details">
-          <span class="product-price"
-            >{{ product.price | currency: 'BRL':'symbol':'1.2-2' }}</span
-          >
-          <h4>
-            <a href="#">{{ product.name }}</a>
-          </h4>
-          <p>{{ product.description }}</p>
-          <div class="product-bottom-details">
-            <button class="button">Ver Mais</button>
-            <div class="product-links">
-              <!-- Ícone de carrinho usando Font Awesome -->
-              <a href="#"><i class="fas fa-shopping-cart"></i></a>
-            </div>
+    <div *ngFor="let product of products" class="product-card spacing">
+      <!-- Adicione a badge aqui -->
+      <div class="badge">Promoção</div>
+      <div class="product-thumb">
+        <img [src]="product.image" alt="{{ product.name }}" />
+      </div>
+      <div class="product-details">
+        <span class="product-price">
+          {{ product.price | currency: 'BRL':'symbol':'1.2-2' }}
+        </span>
+        <h4>
+          <a href="#">{{ product.name }}</a>
+        </h4>
+        <p>{{ product.description }}</p>
+        <div class="product-bottom-details">
+          <button class="button">Ver Mais</button>
+          <div class="product-links">
+            <!-- Ícone de carrinho usando Font Awesome -->
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>

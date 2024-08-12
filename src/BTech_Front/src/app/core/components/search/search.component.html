@@ -1,39 +1,57 @@
 <body>
+  <app-navbar></app-navbar>
 
-<app-navbar></app-navbar>
-<button class="menu-toggle" aria-label="Toggle menu" (click)="toggleSidebar()">
+  <!-- Botão para alternar o menu lateral -->
+  <button
+    class="menu-toggle"
+    aria-label="Toggle menu"
+    (click)="toggleSidebar()"
+  >
     <i class="fas fa-bars"></i>
-</button>
+  </button>
 
-<div class="sidebar" [class.active]="sidebarActive">
+  <!-- Menu lateral -->
+  <div class="sidebar" [class.active]="sidebarActive">
     <ul>
-        <li><a href="#"><i class="fas fa-desktop icon"></i> Gabinete</a>
-        </li>
-        <li><a href="#"><i class="fas fa-video icon"></i> Celulares</a>
-        </li>
-        <li><a href="#"><i class="fas fa-keyboard icon"></i> Teclados</a>
-        </li>
-        <li><a href="#"><i class="fas fa-mouse icon"></i> Mouse</a>
-        </li>
+      <!-- Botão para mostrar todos os produtos -->
+      <li (click)="clearCategoryFilter()">
+        <a>
+          <i class="fas fa-th-large icon"></i> Todos 
+        </a>
+      </li>
+      <li
+        *ngFor="let category of categories"
+        [class.inactive]="!category.isActive"
+        (click)="selectCategory(category)"
+      >
+        <a>
+          <i class="fas fa-search icon"></i> {{ category.description }}
+        </a>
+      </li>
     </ul>
-</div>
+  </div>
 
-<div class="content">
-    <div *ngFor="let product of products" class="product-card spacing">
-        <div class="product-thumb">
-            <img [src]="product.image" alt="{{ product.name }}" />
+  <!-- Conteúdo principal -->
+  <div class="content">
+    <div *ngFor="let product of filteredProducts" class="product-card spacing">
+      <div class="product-thumb">
+        <img [src]="product.image" alt="{{ product.name }}" />
+      </div>
+      <div class="product-details">
+        <span class="product-price">
+          {{ product.price | currency: 'BRL': 'symbol': '1.2-2' }}
+        </span>
+        <h4>
+          <a href="#">{{ product.name }}</a>
+        </h4>
+        <p>{{ product.description }}</p>
+        <div class="product-bottom-details">
+          <button class="button">Ver Mais</button>
+          <div class="product-links">
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+          </div>
         </div>
-        <div class="product-details">
-            <span class="product-price">{{ product.price | currency: 'BRL':'symbol':'1.2-2' }}</span>
-            <h4><a href="#">{{ product.name }}</a></h4>
-            <p>{{ product.description }}</p>
-            <div class="product-bottom-details">
-                <button class="button">Ver Mais</button>
-                <div class="product-links">
-                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
 </body>

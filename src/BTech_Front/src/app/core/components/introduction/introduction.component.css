@@ -25,6 +25,7 @@
 }
 
 .product-card {
+  position: relative;
   flex: 1 1 22%;
   max-width: 380px;
   box-shadow: 0 2px 5px #333;
@@ -50,7 +51,7 @@
   font-size: 13px;
   font-weight: 700;
   background: #282828;
-  color: #a6ff00;
+  color: #ff0000;
   padding: 3px 10px;
 }
 
