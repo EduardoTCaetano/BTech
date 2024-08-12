@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { SacComponent } from './core/components/sac/sac.component';
 import { CartComponent } from './core/components/cart/cart.component';
 import { ProductPageComponent } from './core/components/product-page/product-page.component';
+import { SearchComponent } from './core/components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ProductPageComponent } from './core/components/product-page/product-pag
     SacComponent,
     CartComponent,
     ProductPageComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

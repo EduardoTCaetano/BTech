@@ -5,27 +5,30 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel {
-  margin-top: 85px;
+  margin-top: 14.5vh;
+  width: 1920px;
+  height: 510px;
+  border-top: 5px solid #ff6000;
   border-bottom: 5px solid #ff6000;
 }
 
 .carousel-item {
-  height: 500px; /* Ajuste a altura conforme necessário */
+  height: 500px;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Adicionado para garantir que as imagens não transbordem */
+  overflow: hidden;
 }
 
 .carousel-item img {
-  height: 100%; /* Ajusta a altura da imagem ao contêiner */
-  width: auto; /* Mantém a proporção da largura */
+  height: 100%;
+  width: auto;
 }
 
 .carousel-indicators li {
   background-color: #ff6000;
 }
-
-

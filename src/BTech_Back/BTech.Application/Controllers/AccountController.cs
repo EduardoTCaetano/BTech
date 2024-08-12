@@ -5,12 +5,11 @@ using BlitzTech.Domain.DTOs.RegisterDTO;
 using BlitzTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace api.Controllers
 {
-    [Route("api/account")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -51,36 +50,18 @@ namespace api.Controllers
             });
         }
 
-        private async Task<bool> IsAdminUser()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            return user != null && user.UserName == "Admin";
-        }
-
-        [Authorize(Policy = "AdminOnly")]
         [HttpGet("admindata")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> GetAdminData()
         {
-            var currentUser = await _userManager.GetUserAsync(User);
-            if (currentUser == null || currentUser.UserName != "Admin")
-            {
-                return Forbid("Only the user with username 'Admin' can access this endpoint.");
-            }
-
             var users = _userManager.Users.Select(u => new { u.UserName, u.Email }).ToList();
             return Ok(users);
         }
 
-
-        [Authorize]
         [HttpPost("Register-ADM")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDTO registerDto)
         {
-            if (!await IsAdminUser())
-            {
-                return Forbid("Only the user with username 'Admin' can access this endpoint.");
-            }
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -116,15 +97,34 @@ namespace api.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost("Test")]
+        [Authorize]
         public async Task<IActionResult> SomeOtherAction()
         {
-            if (!await IsAdminUser())
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || !await _userManager.IsInRoleAsync(user, "Admin"))
             {
-                return Forbid("Only the user with username 'Admin' can access this endpoint.");
+                return Forbid();
             }
-            return Ok("Ação executada com sucesso!");
+            return Ok("Action executed successfully!");
         }
+        
+        // [HttpDelete("Delete/{userName}")]
+        // public async Task<IActionResult> DeleteUser(string userName)
+        // {
+        //     var user = await _userManager.FindByNameAsync(userName.ToLower());
+
+        //     if (user == null)
+        //         return NotFound("User not found!");
+
+        //     var result = await _userManager.DeleteAsync(user);
+
+        //     if (result.Succeeded)
+        //         return Ok("User deleted successfully!");
+
+        //     return StatusCode(500, result.Errors);
+        // }
     }
 }
+
+

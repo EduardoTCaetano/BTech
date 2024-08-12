@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
 }
 
 .header::before {
@@ -20,7 +20,7 @@
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: saturate(180%) blur(50px);
   width: 100%;
-  height: 85%;
+  height: 90%;
   z-index: -1;
 }
 
@@ -36,7 +36,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.4),
+    rgba(255, 98, 0, 0.58),
     transparent
   );
   transition: 0.5s;

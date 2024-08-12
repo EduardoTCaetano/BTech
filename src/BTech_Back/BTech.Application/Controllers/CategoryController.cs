@@ -42,7 +42,8 @@ namespace BlitzTech.Application.Controllers
             return Ok(categoryModel.ToCategoryDto());
         }
 
-        [Authorize(Policy = "AdminOnly")]
+        // Restringe o acesso apenas para administradores
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCategoryRequestDto categoryDto)
         {
@@ -54,7 +55,8 @@ namespace BlitzTech.Application.Controllers
             return CreatedAtAction(nameof(GetById), new { id = categoryModel.Id }, categoryModel.ToCategoryDto());
         }
 
-        [Authorize(Policy = "AdminOnly")]
+        // Restringe o acesso apenas para administradores
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto updateDto)
         {
@@ -71,7 +73,8 @@ namespace BlitzTech.Application.Controllers
             return Ok(categoryModel.ToCategoryDto());
         }
 
-        [Authorize(Policy = "AdminOnly")]
+        // Restringe o acesso apenas para administradores
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {

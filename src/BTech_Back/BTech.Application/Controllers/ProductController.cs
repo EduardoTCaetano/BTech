@@ -44,19 +44,27 @@ namespace BlitzTech.Application.Controllers
             return Ok(productModel.ToProductDto());
         }
 
-        [Authorize(Policy = "AdminOnly")]
+        // Restringe o acesso apenas para administradores
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProductRequestDto productDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var productModel = productDto.ToProductFromCreateDTO();
             await _productRepo.CreateAsync(productModel);
             return CreatedAtAction(nameof(GetById), new { id = productModel.Id }, productModel.ToProductDto());
         }
 
-        [Authorize(Policy = "AdminOnly")]
+        // Restringe o acesso apenas para administradores
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateProductRequestDto updateDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var productModel = await _productRepo.UpdateAsync(id, updateDto);
 
             if (productModel == null)
@@ -67,7 +75,8 @@ namespace BlitzTech.Application.Controllers
             return Ok(productModel.ToProductDto());
         }
 
-        [Authorize(Policy = "AdminOnly")]
+        // Restringe o acesso apenas para administradores
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
@@ -81,5 +90,17 @@ namespace BlitzTech.Application.Controllers
             return NoContent();
         }
 
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetByCategory([FromRoute] Guid categoryId)
+        {
+            var products = await _productRepo.GetByCategoryAsync(categoryId);
+
+            if (products == null || !products.Any())
+            {
+                return NotFound("Nenhum produto encontrado para esta categoria.");
+            }
+            var productDtos = products.Select(p => p.ToProductDto());
+            return Ok(productDtos);
+        }
     }
 }

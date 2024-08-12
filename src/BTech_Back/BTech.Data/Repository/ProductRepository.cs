@@ -23,10 +23,6 @@ namespace BlitzTech.Data.Repository
             return productModel;
         }
 
-        public Task<Product> CreateAsync(Category productModel)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Model.Product?> DeleteAsync(Guid id)
         {
@@ -54,10 +50,17 @@ namespace BlitzTech.Data.Repository
             return await products.ToListAsync();
         }
 
+        public async Task<List<Model.Product>> GetByCategoryAsync(Guid categoryId)
+        {
+            return await _context.Product
+                .Where(p => p.CategoryId == categoryId && p.IsActive)
+                .ToListAsync();
+        }
+
         public async Task<Model.Product?> GetByIdAsync(Guid id)
         {
             return await _context.Product
-                .Include(p => p.Category) // Include related category if needed
+                .Include(p => p.Category) 
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
@@ -76,7 +79,7 @@ namespace BlitzTech.Data.Repository
             existingProduct.Stock = productDto.Stock;
             existingProduct.Image = productDto.Image;
             existingProduct.IsActive = productDto.IsActive;
-            existingProduct.CategoryId = productDto.CategoryId; 
+            existingProduct.CategoryId = productDto.CategoryId;
 
             await _context.SaveChangesAsync();
             return existingProduct;
@@ -96,5 +99,6 @@ namespace BlitzTech.Data.Repository
             await _context.SaveChangesAsync();
             return productModel;
         }
+
     }
 }
