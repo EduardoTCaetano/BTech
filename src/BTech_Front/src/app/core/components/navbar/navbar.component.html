@@ -2,7 +2,7 @@
 <html lang="pt-br">
   <body>
     <header class="header">
-      <a href="" class="logo">Busca Tech </a>
+      <a href="/home" class="logo">Busca Tech </a>
 
       <input type="checkbox" id="check" />
       <label for="check" class="icons">
@@ -11,17 +11,17 @@
       </label>
       <nav class="navbar">
         <ul>
-          <li class="items"><a href="#" style="--i: 0">Home</a></li>
-          <li class="items"><a routerLink="/sac" style="--i: 1">Ajuda</a></li>
-          <li class="items"><a [routerLink]="['/search']">Navegar</a>
+          <li class="items"><a href="/home" style="--i: 0">Home</a></li>
+          <li class="items"><a href="/sac" style="--i: 1">Ajuda</a></li>
+          <li class="items"><a href="/search">Navegar</a>
           </li>
           <li class="items">
-            <a routerLink="/cart" style="--i: 3"
+            <a href="/cart" style="--i: 3"
               ><i class="bx bxs-cart"></i> Seu carrinho
             </a>
           </li>
           <li class="items">
-            <a href="/user" style="--i: 4"
+            <a href="/login" style="--i: 4"
               ><i class="bx bx-user" id="user-icon"></i>User</a
             >
           </li>

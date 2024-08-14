@@ -19,6 +19,7 @@ import { SacComponent } from './core/components/sac/sac.component';
 import { CartComponent } from './core/components/cart/cart.component';
 import { ProductPageComponent } from './core/components/product-page/product-page.component';
 import { SearchComponent } from './core/components/search/search.component';
+import { LoginComponent } from './core/components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,14 @@ import { SearchComponent } from './core/components/search/search.component';
     CartComponent,
     ProductPageComponent,
     SearchComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
