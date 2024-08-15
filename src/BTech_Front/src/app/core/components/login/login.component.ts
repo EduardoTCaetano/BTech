@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router'; // Importe o Router
+import { AuthService } from '../../../services/auth.service';
+import { AuthResponse } from '../../../models/authresponsemodel';
 
 @Component({
   selector: 'app-login',
@@ -9,42 +12,56 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  isSignDivVisiable: boolean = true;
-  passwordFieldType: string = 'password'; // Controla o tipo do campo de senha
-  errorMessage: string | null = null; // Mensagem de erro
+  passwordFieldType: string = 'password'; // For toggling password visibility
+  errorMessage: string | null = null;
+  isSignDivVisible: boolean = false; // Toggle between sign-in and sign-up forms
 
-  // Alterna a visibilidade da senha
+  constructor(private authService: AuthService, private router: Router) {} // Adicione o Router no construtor
+
+  // Toggles the visibility of the password field
   togglePasswordVisibility() {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-  // Submete o formulário e exibe mensagens de erro se necessário
-  onSubmit(form: NgForm) {
-    if (form.invalid) {
-      this.errorMessage = this.getErrorMessage();
-      return;
+  // Handles user registration
+  register(form: NgForm) {
+    if (form.valid) {
+      console.log('Registering:', this.email, this.password);
+      this.authService.register(this.email, this.password).subscribe(
+        (response: AuthResponse) => {
+          console.log('Registration successful:', response);
+          form.reset();
+          this.errorMessage = null;
+          // Handle successful registration (e.g., redirect or show a success message)
+        },
+        (error: any) => {
+          console.error('Registration failed:', error);
+          this.errorMessage = 'Registration failed. Please try again.';
+        }
+      );
+    } else {
+      this.errorMessage = 'Please fill out all required fields.';
     }
-
-    // Lógica de submissão do formulário
-    console.log('Form Submitted', { email: this.email, password: this.password });
-
-    // Limpa o formulário e a mensagem de erro após o envio
-    form.reset();
-    this.errorMessage = null;
   }
 
-  // Obtém a mensagem de erro com base na validação dos campos
-  private getErrorMessage(): string {
-    const passwordPattern = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}/;
-    if (!this.password) {
-      return 'A senha é obrigatória.';
-    } else if (this.password.length < 6) {
-      return 'A senha deve ter pelo menos 6 caracteres.';
-    } else if (!passwordPattern.test(this.password)) {
-      return 'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.';
+  // Handles user login
+  login(form: NgForm) {
+    if (form.valid) {
+      this.authService.login(this.email, this.password).subscribe(
+        (response: AuthResponse) => {
+          console.log('Login successful:', response);
+          form.reset();
+          this.errorMessage = null;
+          // Redirect to home page
+          this.router.navigate(['/home']); // Use o caminho da sua página inicial
+        },
+        (error: any) => {
+          console.error('Login failed:', error);
+          this.errorMessage = 'Login failed. Check your credentials and try again.';
+        }
+      );
     } else {
-      return '';
+      this.errorMessage = 'Please fill out all required fields.';
     }
   }
 }
-  

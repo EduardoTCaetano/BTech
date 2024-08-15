@@ -5,7 +5,8 @@ namespace BlitzTech.Domain.DTOs.LoginDTO
     public class LoginDTO
     {
         [Required]
-        public string UserName { get; set; }
+        [EmailAddress] 
+        public string EmailAddress {get; set;}
         [Required]
         public string Password { get; set; }
     }

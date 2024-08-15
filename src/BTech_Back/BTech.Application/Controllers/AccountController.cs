@@ -30,10 +30,10 @@ namespace api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = await _userManager.FindByNameAsync(loginDto.UserName.ToLower());
+            var user = await _userManager.FindByEmailAsync(loginDto.EmailAddress);
 
             if (user == null)
-                return Unauthorized("Invalid username!");
+                return Unauthorized("Invalid email address!");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
@@ -126,5 +126,3 @@ namespace api.Controllers
         // }
     }
 }
-
-

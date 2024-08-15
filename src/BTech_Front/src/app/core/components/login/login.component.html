@@ -1,27 +1,21 @@
 <body>
   <div class="parent">
-    <div class="container" [ngClass]="isSignDivVisiable ? 'active' : ''" id="container">
+    <div class="container" [ngClass]="isSignDivVisible ? 'active' : ''" id="container">
       <!-- Sign Up Form -->
       <div class="form-container sign-up">
-        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-          <h1>Entrar</h1>
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <h1>Registrar</h1>
           <span>ou use sua senha de e-mail</span>
           <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required>
-          <div class="password-container">
-            <input type="password" name="password" placeholder="Senha" [(ngModel)]="password" [type]="passwordFieldType" required>
-            <span class="eye-icon" (click)="togglePasswordVisibility()">
-              <i [ngClass]="passwordFieldType === 'password' ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
-            </span>
-          </div>
+          <input type="password" name="password" placeholder="Senha" [(ngModel)]="password" [type]="passwordFieldType" required>
           <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-          <a href="#">→ Esqueceu sua senha? ←</a>
-          <button type="submit">Entrar</button>
+          <button type="submit">Registrar</button>
         </form>
       </div>
 
       <!-- Sign In Form -->
       <div class="form-container sign-in">
-        <form>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
           <h1>Entrar</h1>
           <span>ou use sua senha de e-mail</span>
           <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required>
@@ -43,12 +37,12 @@
           <div class="toggle-panel toggle-left">
             <h1>Bem-vindo de volta!</h1>
             <p>Insira seus detalhes pessoais para usar todos os recursos do site</p>
-            <button type="button" class="hidden" id="login" (click)="isSignDivVisiable = false">Entrar</button>
+            <button type="button" class="hidden" id="login" (click)="isSignDivVisible = false">Entrar</button>
           </div>
           <div class="toggle-panel toggle-right">
             <h1>Olá, Amigo!</h1>
             <p>Registre-se com seus detalhes pessoais para usar todos os recursos do site</p>
-            <button type="button" class="hidden" id="register" (click)="isSignDivVisiable = true">Inscrever-se</button>
+            <button type="button" class="hidden" id="register" (click)="isSignDivVisible = true">Inscrever-se</button>
           </div>
         </div>
       </div>
