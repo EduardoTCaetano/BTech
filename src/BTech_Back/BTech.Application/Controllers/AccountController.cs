@@ -54,7 +54,7 @@ namespace api.Controllers
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> GetAdminData()
         {
-            var users = _userManager.Users.Select(u => new { u.UserName, u.Email }).ToList();
+            var users = _userManager.Users.Select(u => new {u.Id, u.UserName, u.Email }).ToList();
             return Ok(users);
         }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router'; // Importe o Router
-import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 import { AuthResponse } from '../../../models/authresponsemodel';
 
 @Component({
@@ -12,30 +12,24 @@ import { AuthResponse } from '../../../models/authresponsemodel';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  passwordFieldType: string = 'password'; // For toggling password visibility
+  passwordFieldType: string = 'password';
   errorMessage: string | null = null;
-  isSignDivVisible: boolean = false; // Toggle between sign-in and sign-up forms
+  isSignDivVisible: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {} // Adicione o Router no construtor
+  constructor(private authService: AuthService, private router: Router) {}
 
-  // Toggles the visibility of the password field
   togglePasswordVisibility() {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-  // Handles user registration
   register(form: NgForm) {
     if (form.valid) {
-      console.log('Registering:', this.email, this.password);
       this.authService.register(this.email, this.password).subscribe(
         (response: AuthResponse) => {
-          console.log('Registration successful:', response);
           form.reset();
           this.errorMessage = null;
-          // Handle successful registration (e.g., redirect or show a success message)
         },
         (error: any) => {
-          console.error('Registration failed:', error);
           this.errorMessage = 'Registration failed. Please try again.';
         }
       );
@@ -44,19 +38,15 @@ export class LoginComponent {
     }
   }
 
-  // Handles user login
   login(form: NgForm) {
     if (form.valid) {
       this.authService.login(this.email, this.password).subscribe(
         (response: AuthResponse) => {
-          console.log('Login successful:', response);
           form.reset();
           this.errorMessage = null;
-          // Redirect to home page
-          this.router.navigate(['/home']); // Use o caminho da sua página inicial
+          this.router.navigate(['/home']);
         },
         (error: any) => {
-          console.error('Login failed:', error);
           this.errorMessage = 'Login failed. Check your credentials and try again.';
         }
       );

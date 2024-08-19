@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using BlitzTech.Domain.Entities;
 using BlitzTech.Domain.Validations;
@@ -15,7 +13,6 @@ namespace BlitzTech.Model
 
         public bool IsActive { get; set; }
 
-        // Propriedade de navegação
         public ICollection<Product> Products { get; set; }
 
         public Category(Guid id, string description, bool isActive)
@@ -25,7 +22,7 @@ namespace BlitzTech.Model
             Id = id;
             Description = description;
             IsActive = isActive;
-            Products = new HashSet<Product>(); // Inicializando a coleção de produtos
+            Products = new HashSet<Product>(); 
         }
 
         public void ValidateDescription(string description)

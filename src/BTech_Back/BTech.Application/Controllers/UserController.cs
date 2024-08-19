@@ -80,14 +80,15 @@ namespace BTech.Application.Controllers
             {
                 UserName = user.UserName,
                 EmailAddress = user.Email,
-                Token = token
+                Token = token,
+                UserId = user.Id
             };
 
             return Ok(response);
         }
 
         [HttpGet("GetAllUsers")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, User")]
         public IActionResult GetAllUsers()
         {
             var users = _userManager.Users.Select(u => new
@@ -112,14 +113,21 @@ namespace BTech.Application.Controllers
         //     return Ok(activeUsers);
         // }
 
-        [HttpGet("{userName}")]
+        [HttpGet("{userId}")]
         [Authorize(Roles = "Admin, User")]
-        public async Task<IActionResult> GetByUserName(string userName)
+        public async Task<IActionResult> GetById(string userId)
         {
-            var user = await _userManager.FindByNameAsync(userName);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest("User ID cannot be null or empty.");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
+            {
                 return NotFound("User not found!");
+            }
 
             var response = new
             {
@@ -129,5 +137,6 @@ namespace BTech.Application.Controllers
 
             return Ok(response);
         }
+
     }
 }

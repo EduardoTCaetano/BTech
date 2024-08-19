@@ -4,6 +4,7 @@ using BlitzTech.Application.Services;
 using BlitzTech.Data.Context;
 using BlitzTech.Data.Repository;
 using BlitzTech.Domain.Interfaces;
+using BTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -59,6 +60,11 @@ builder.Services.AddAuthentication(options =>
 // Configurar serviços
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+// Registrar repositórios
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 // Configurar CORS
 builder.Services.AddCors(options =>
 {
@@ -110,10 +116,6 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddControllers();
-
-// Registrar repositórios e serviços
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 

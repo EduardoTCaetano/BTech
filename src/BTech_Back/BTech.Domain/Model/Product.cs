@@ -12,10 +12,9 @@ namespace BlitzTech.Model
         public int Stock { get; set; }
         public string Image { get; set; }
         public bool IsActive { get; set; } = true;
-        public Guid CategoryId { get; set; }  // Chave estrangeira
-        public Category Category { get; set; }  // Navegação
+        public Guid CategoryId { get; set; }  
+        public Category Category { get; set; }  
 
-        // Alterar para aceitar Guid para CategoryId
         public Product(string name, string description, decimal price, int stock, string image, Guid categoryId)
         {
             ValidateAndSetValues(name, description, price, stock, image, categoryId);

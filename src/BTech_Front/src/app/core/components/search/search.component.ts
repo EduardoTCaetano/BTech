@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../services/product.service';
-import { CategoryService } from '../../../services/category.service';
+import { ProductService } from '../../../services/product/product.service';
+import { CategoryService } from '../../../services/category/category.service';
 import { CategoryModel } from '../../../models/categorymodel';
 import { ProductModel } from '../../../models/ProductModel';
 

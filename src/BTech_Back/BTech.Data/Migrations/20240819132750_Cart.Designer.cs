@@ -3,6 +3,7 @@ using System;
 using BlitzTech.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlitzTech.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240819132750_Cart")]
+    partial class Cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
@@ -130,13 +133,13 @@ namespace BlitzTech.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "507f22ca-bedd-4d2f-9361-fb462f00211a",
+                            Id = "5be5fcf8-02d1-4161-97e9-3200c8cd906a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "58bd1b28-bb7e-4fe4-8ebf-5c4a4678c196",
+                            Id = "349afa2c-1450-4a96-86b7-a9f5cdb89517",
                             Name = "User",
                             NormalizedName = "USER"
                         });

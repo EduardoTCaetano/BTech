@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +9,8 @@ import { AuthService } from '../../../services/auth.service';
 export class NavbarComponent implements OnInit {
   userName: string | null = null;
   menuOpen = false;
-  emailAddress: string | null = null;
+  showLogoutButton = false;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
@@ -24,5 +25,9 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  toggleLogoutButton(show: boolean) {
+    this.showLogoutButton = show;
   }
 }

@@ -6,7 +6,7 @@
   font-style: normal;
   font-size: 3rem;
   position: absolute;
-  top: 85vh;
+  top: 90vh;
   left: 5vh;
   color: #ffffff;
   z-index: 9;
@@ -36,9 +36,9 @@
 }
 
 .product-card:hover {
-  transform: scale(1.05); /* Aumenta o tamanho do card */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra mais intensa */
-  border: 4px solid rgb(182, 83, 6); /* Muda a borda ao passar o mouse */
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border: 4px solid rgb(182, 83, 6);
 }
 
 .spacing {
@@ -67,14 +67,14 @@
 }
 
 .product-thumb img {
-  max-width: 300px;
+  max-width: 250px;
   max-height: 250px;
   object-fit: cover;
   transition: transform 0.3s;
 }
 
 .product-card:hover .product-thumb img {
-  transform: scale(1.1); /* Aumenta o tamanho da imagem no hover */
+  transform: scale(1.1);
 }
 
 .product-details {
@@ -98,6 +98,10 @@
   color: #ffffff;
   text-decoration: none;
   transition: 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .product-details h4 a:hover {
@@ -109,6 +113,9 @@
   line-height: 22px;
   margin-bottom: 18px;
   color: #ffffff;
+  height: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-bottom-details {
@@ -219,4 +226,53 @@
   .product-card {
     flex: 1 1 90%;
   }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 15px;
+  font-size: 24px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.carousel-control-prev-icon {
+  transform: rotate(135deg);
+}
+
+.carousel-control-next-icon {
+  transform: rotate(-45deg);
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  color: #ff6000;
+}
+
+.carousel-control-prev:focus,
+.carousel-control-next:focus {
+  outline: none;
+}
+
+.carousel-control-prev:active,
+.carousel-control-next:active {
+  transform: scale(0.95);
 }

@@ -18,7 +18,7 @@ footer {
 
 .brand {
   margin-top: 20px;
-  font-size: 38px;
+  font-size: 18px;
   color: #ff6000;
   font-family: "Bungee Spice", sans-serif;
   font-weight: 400;
@@ -33,7 +33,7 @@ footer {
 
 .heading {
   margin-top: 20px;
-  font-size: 38px;
+  font-size: 18px;
   color: #ff6000;
   font-family: "Bungee Spice", sans-serif;
   font-weight: 400;
@@ -94,6 +94,65 @@ p {
   text-align: center;
   color: white;
   margin-top: 20px;
+}
+
+.youtube-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.youtube-icon {
+  color: #FF0000;
+  font-size: 24px;
+}
+
+
+.instagram-link i {
+  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+}
+
+.linkedin-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #ffff;
+  border-radius: 50%;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.linkedin-icon {
+  color: #0077B5;
+  font-size: 24px;
+}
+
+.twitter-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1px;
+  height: 1px;
+  background-color: #000;
+  border-radius: 50%;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.twitter-icon {
+  color: #FFFFFF;
+  font-size: 24px;
 }
 
 @media only screen and (max-width: 767px) {

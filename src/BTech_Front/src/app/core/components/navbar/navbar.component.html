@@ -18,10 +18,13 @@
             <i class="bx bxs-cart"></i> Seu carrinho
           </a>
         </li>
-        <li class="items">
-          <a href="/login" style="--i: 4">
-            <i class="bx bx-user" id="user-icon"></i> {{ userName || 'User' }}
+        <li class="items user-item">
+          <a href="/login" class="user-name" style="--i: 4">
+            <i class="bx bx-user" id="user-icon"></i> {{ userName || 'Entrar' }}
           </a>
+          <ul class="dropdown-menu" *ngIf="userName">
+            <li><a href="#" (click)="logout()">Sair</a></li>
+          </ul>
         </li>
       </ul>
     </nav>

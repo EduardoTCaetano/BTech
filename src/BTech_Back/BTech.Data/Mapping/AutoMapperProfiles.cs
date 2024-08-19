@@ -2,7 +2,7 @@ using BlitzTech.Domain.Dtos.Category;
 using BlitzTech.Domain.Dtos.Product;
 using BlitzTech.Domain.DTOs.Product;
 using BlitzTech.Model;
-using System;
+using BTech.Domain.DTOs.Cart;
 
 namespace BlitzTech.Data.Mapping
 {
@@ -56,6 +56,48 @@ namespace BlitzTech.Data.Mapping
             {
                 IsActive = productDto.IsActive
             };
+        }
+        public static CartItemDto ToCartItemDto(this CartItem cartItem)
+        {
+            return new CartItemDto(
+                cartItem.Id,
+                cartItem.ProductId,
+                cartItem.UserId,
+                cartItem.NameProd,
+                cartItem.Image,
+                cartItem.Description,
+                cartItem.Price,
+                cartItem.Quantity
+            );
+        }
+
+        public static CartItem ToCartItemFromCreateDTO(this CreateCartItemRequestDto cartItemDto)
+        {
+            return new CartItem
+            (
+                cartItemDto.ProductId,
+                cartItemDto.UserId,
+                cartItemDto.NameProd,
+                cartItemDto.Image,
+                cartItemDto.Description,
+                cartItemDto.Price,
+                cartItemDto.Quantity
+            );
+        }
+
+        public static CartItem ToCartItemFromUpdateDTO(this UpdateCartItemRequestDto cartItemDto, CartItem existingCartItem)
+        {
+            if (existingCartItem == null) throw new ArgumentNullException(nameof(existingCartItem));
+
+            existingCartItem.ProductId = cartItemDto.ProductId;
+            existingCartItem.UserId = cartItemDto.UserId;
+            existingCartItem.NameProd = cartItemDto.NameProd;
+            existingCartItem.Image = cartItemDto.Image;
+            existingCartItem.Description = cartItemDto.Description;
+            existingCartItem.Price = cartItemDto.Price;
+            existingCartItem.Quantity = cartItemDto.Quantity;
+
+            return existingCartItem;
         }
     }
 }

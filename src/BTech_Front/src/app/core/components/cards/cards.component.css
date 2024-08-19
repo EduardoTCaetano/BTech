@@ -1,4 +1,4 @@
-.cards{
+.cards {
   background-image: url(/assets/mv_2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -21,12 +21,13 @@ div.cards section.card:hover {
 
 div.cards section.card {
   flex: 1;
+  flex-basis: calc(25% - 16px); /* Ajuste do tamanho dos cards */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   background: #1E1E1E;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem; /* Redução do padding */
   border-radius: 8px;
   margin-right: 16px;
   margin-bottom: 16px;
@@ -37,8 +38,8 @@ div.cards section.card:last-child {
 }
 
 div.cards section.card .icon {
-  width: 120px;
-  height: 120px;
+  width: 80px; /* Redução do tamanho do ícone */
+  height: 80px; /* Redução do tamanho do ícone */
 }
 
 div.cards section.card img {
@@ -46,14 +47,14 @@ div.cards section.card img {
 }
 
 div.cards section.card h3 {
-  font-size: 100%;
+  font-size: 90%; /* Redução do tamanho da fonte */
   margin: 16px 0;
 }
 
 div.cards section.card span {
   font-weight: 400;
   max-width: 640px;
-  font-size: 80%;
+  font-size: 75%; /* Redução do tamanho da fonte */
   margin-bottom: 16px;
 }
 
@@ -61,9 +62,11 @@ h3 {
   color: #ff6000;
   font-family: "Bungee Spice", sans-serif;
 }
+
 div.cards section.card:not(:last-child) {
   margin-right: 8px;
 }
+
 @media screen and (max-width: 720px) {
   div.cards section.card {
     flex-basis: calc(50% - 16px);

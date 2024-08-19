@@ -1,10 +1,97 @@
-.cart-container {
+/* Estilização do container principal */
+.main {
   display: flex;
-  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
-  align-items: center;
-  height: 100vh;
-  background-image: url(/assets/mv_2.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #fff;
+}
+
+/* Estilização da tabela de produtos */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #ff6600;
+  color: white;
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+tbody td {
+  padding: 15px;
+  vertical-align: middle;
+}
+
+/* Estilização dos botões de quantidade */
+.qty button {
+  background-color: #ff6600;
+  border: none;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.qty span {
+  margin: 0 10px;
+  font-size: 16px;
+}
+
+.remove {
+  background-color: transparent;
+  border: none;
+  color: #ff6600;
+  cursor: pointer;
+}
+
+/* Estilização do resumo da compra */
+aside .box {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+aside footer {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+aside button {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.product img {
+  max-width: 100px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.product .info {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.product .name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.product .category {
+  font-size: 12px;
+  color: #777;
 }

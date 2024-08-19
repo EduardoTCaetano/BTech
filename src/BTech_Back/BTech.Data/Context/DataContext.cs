@@ -12,6 +12,7 @@ namespace BlitzTech.Data.Context
         {
         }
 
+        public DbSet<CartItem> CartItem {get; set;}
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
 
@@ -19,7 +20,6 @@ namespace BlitzTech.Data.Context
         {
             base.OnModelCreating(builder);
 
-            // Dados iniciais de roles
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
