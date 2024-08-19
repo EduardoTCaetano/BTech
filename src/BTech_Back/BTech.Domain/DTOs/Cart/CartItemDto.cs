@@ -21,10 +21,9 @@ namespace BTech.Domain.DTOs.Cart
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
         public decimal Price { get; set; }
-
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "A quantidade deve ser pelo menos 1.")]
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } = 1; 
         public CartItemDto(Guid id, Guid productId, Guid userId, string nameProd, string image, string description, decimal price, int quantity)
         {
             Id = id;

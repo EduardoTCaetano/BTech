@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { AuthResponse } from '../../models/authresponsemodel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private userEmailSubject = new BehaviorSubject<string | null>(null);
@@ -33,53 +33,57 @@ export class AuthService {
 
   login(email: string, password: string): Observable<AuthResponse> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
     const body = { EmailAddress: email, Password: password };
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, body, { headers }).pipe(
-      tap(response => {
-        if (response && response.token) {
-          localStorage.setItem('authToken', response.token);
-          localStorage.setItem('userEmail', response.emailAddress);
-          localStorage.setItem('userId', response.userId);
-          localStorage.setItem('userName', response.userName);
-          this.userEmailSubject.next(response.emailAddress);
-          this.userNameSubject.next(response.userName);
-        }
-      }),
-      catchError(error => {
-        console.error('Login error', error);
-        this.userEmailSubject.next(null);
-        this.userNameSubject.next(null);
-        throw error;
-      })
-    );
+    return this.http
+      .post<AuthResponse>(`${this.apiUrl}/login`, body, { headers })
+      .pipe(
+        tap((response) => {
+          if (response && response.token) {
+            localStorage.setItem('authToken', response.token);
+            localStorage.setItem('userEmail', response.emailAddress);
+            localStorage.setItem('userId', response.userId);
+            localStorage.setItem('userName', response.userName);
+            this.userEmailSubject.next(response.emailAddress);
+            this.userNameSubject.next(response.userName);
+          }
+        }),
+        catchError((error) => {
+          console.error('Login error', error);
+          this.userEmailSubject.next(null);
+          this.userNameSubject.next(null);
+          throw error;
+        })
+      );
   }
 
   register(email: string, password: string): Observable<AuthResponse> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
     const body = { EmailAddress: email, Password: password };
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, body, { headers }).pipe(
-      tap(response => {
-        if (response && response.token) {
-          localStorage.setItem('authToken', response.token);
-          localStorage.setItem('userEmail', response.emailAddress);
-          localStorage.setItem('userName', response.userName);
-          this.userEmailSubject.next(response.emailAddress);
-          this.userNameSubject.next(response.userName);
-        }
-      }),
-      catchError(error => {
-        console.error('Registration error', error);
-        this.userEmailSubject.next(null);
-        this.userNameSubject.next(null);
-        throw error;
-      })
-    );
+    return this.http
+      .post<AuthResponse>(`${this.apiUrl}/register`, body, { headers })
+      .pipe(
+        tap((response) => {
+          if (response && response.token) {
+            localStorage.setItem('authToken', response.token);
+            localStorage.setItem('userEmail', response.emailAddress);
+            localStorage.setItem('userName', response.userName);
+            this.userEmailSubject.next(response.emailAddress);
+            this.userNameSubject.next(response.userName);
+          }
+        }),
+        catchError((error) => {
+          console.error('Registration error', error);
+          this.userEmailSubject.next(null);
+          this.userNameSubject.next(null);
+          throw error;
+        })
+      );
   }
 
   logout() {
@@ -93,12 +97,12 @@ export class AuthService {
   getUserId(): Observable<string> {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      return new Observable<string>(observer => {
+      return new Observable<string>((observer) => {
         observer.next(userId);
         observer.complete();
       });
     } else {
-      return new Observable<string>(observer => {
+      return new Observable<string>((observer) => {
         observer.error('User ID not found');
       });
     }
