@@ -48,7 +48,7 @@ namespace BlitzTech.Application.Controllers
             return Ok(cartItem.ToCartItemDto());
         }
 
-        [HttpPost]
+        [HttpPost("user/{userId}/items")]
         public async Task<IActionResult> Post([FromBody] CreateCartItemRequestDto cartItemDto)
         {
             if (!ModelState.IsValid)
@@ -74,7 +74,7 @@ namespace BlitzTech.Application.Controllers
 
             return Ok(updatedCartItem.ToCartItemDto());
         }
-        
+
         [HttpDelete("user/{userId}/item/{id}")]
         public async Task<IActionResult> Delete(Guid userId, Guid id)
         {

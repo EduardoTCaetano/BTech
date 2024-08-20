@@ -6,14 +6,17 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="d-flex justify-content-around">
-            <div *ngFor="let product of products.slice(0, 5)" class="product-card spacing">
+            <div
+              *ngFor="let product of products.slice(0, 5)"
+              class="product-card spacing"
+            >
               <div class="badge">Promoção</div>
               <div class="product-thumb">
                 <img [src]="product.image" alt="{{ product.name }}" />
               </div>
               <div class="product-details">
                 <span class="product-price">
-                  {{ product.price | currency: 'BRL':'symbol':'1.2-2' }}
+                  {{ product.price | currency : "BRL" : "symbol" : "1.2-2" }}
                 </span>
                 <h4>
                   <a href="#">{{ product.name }}</a>
@@ -22,7 +25,12 @@
                 <div class="product-bottom-details">
                   <button class="button">Ver Mais</button>
                   <div class="product-links">
-                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                    <a href=""
+                      ><i
+                        class="fas fa-shopping-cart"
+                        (click)="addToCart($event, product)"
+                      ></i
+                    ></a>
                   </div>
                 </div>
               </div>
@@ -32,14 +40,17 @@
 
         <div class="carousel-item">
           <div class="d-flex justify-content-around">
-            <div *ngFor="let product of products.slice(5, 10)" class="product-card spacing">
+            <div
+              *ngFor="let product of products.slice(5, 10)"
+              class="product-card spacing"
+            >
               <div class="badge">Promoção</div>
               <div class="product-thumb">
                 <img [src]="product.image" alt="{{ product.name }}" />
               </div>
               <div class="product-details">
                 <span class="product-price">
-                  {{ product.price | currency: 'BRL':'symbol':'1.2-2' }}
+                  {{ product.price | currency : "BRL" : "symbol" : "1.2-2" }}
                 </span>
                 <h4>
                   <a href="#">{{ product.name }}</a>
@@ -48,7 +59,12 @@
                 <div class="product-bottom-details">
                   <button class="button">Ver Mais</button>
                   <div class="product-links">
-                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                    <a href=""
+                      ><i
+                        class="fas fa-shopping-cart"
+                        (click)="addToCart($event, product)"
+                      ></i
+                    ></a>
                   </div>
                 </div>
               </div>
@@ -57,11 +73,21 @@
         </div>
       </div>
 
-      <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+      <a
+        class="carousel-control-prev"
+        href="#productCarousel"
+        role="button"
+        data-slide="prev"
+      >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Anterior</span>
       </a>
-      <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+      <a
+        class="carousel-control-next"
+        href="#productCarousel"
+        role="button"
+        data-slide="next"
+      >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Próximo</span>
       </a>

@@ -1,97 +1,205 @@
-/* Estilização do container principal */
-.main {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: #fff;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-/* Estilização da tabela de produtos */
+body {
+  background: #f6f6f6;
+  font-family: 'Lato', sans-serif;
+}
+
+body>header {
+  background: #111;
+  color: white;
+  font-size: 24px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+body>main {
+  background: #fff;
+  padding: 0 30px 30px;
+}
+
+body>main .page-title {
+  font-size: 40px;
+  padding: 50px 0;
+  text-align: center;
+}
+
+body>main .content {
+  display: flex;
+  justify-content: space-between;
+}
+
+body>main .content section {
+  flex: 1;
+}
+
+body>main .content aside {
+  min-width: 250px;
+  margin-left: 30px;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-thead {
-  background-color: #ff6600;
-  color: white;
+table thead tr {
+  border-bottom: 3px solid #eee;
 }
 
-thead th {
-  padding: 10px;
+table thead tr th {
   text-align: left;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  color: #666;
 }
 
-tbody tr {
-  border-bottom: 1px solid #ddd;
+table tbody tr {
+  border-bottom: 3px solid #eee;
 }
 
-tbody td {
-  padding: 15px;
-  vertical-align: middle;
+table tbody tr:last-child {
+  border: 0;
 }
 
-/* Estilização dos botões de quantidade */
-.qty button {
-  background-color: #ff6600;
-  border: none;
-  color: white;
-  padding: 5px;
-  cursor: pointer;
+table tbody tr td {
+  padding: 30px 0;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+}
+
+.product img {
+  border-radius: 6px;
+}
+
+.product .info {
+  margin-left: 20px;
+}
+
+.product .info .name {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.product .info .category {
+  color: #666;
+}
+
+.qty {
+  background: #eee;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 60px;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 30px;
 }
 
 .qty span {
   margin: 0 10px;
-  font-size: 16px;
+}
+
+.qty button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  padding: 0 10px;
+  font-size: 20px;
+  height: 100%;
+}
+
+.qty button:hover {
+  background: #ddd;
 }
 
 .remove {
-  background-color: transparent;
-  border: none;
-  color: #ff6600;
-  cursor: pointer;
-}
-
-/* Estilização do resumo da compra */
-aside .box {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-}
-
-aside footer {
+  background: #eee;
+  border: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
-  font-weight: bold;
 }
 
-aside button {
-  background-color: #ff6600;
+.remove:hover {
+  background: #ddd;
+}
+
+aside .box {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  background: #eee;
+  color: #222;
+}
+
+aside .box header {
+  padding: 15px 20px;
+  font-size: 18px;
+  border-bottom: 1px solid #ccc;
+}
+
+aside .box .info {
+  padding: 20px;
+  font-size: 16px;
+}
+
+aside .box .info>div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+aside .box .info>div:last-child {
+  margin: 0;
+}
+
+aside .box .info button {
+  color: #28a745;
+  background: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+aside .box footer {
+  padding: 15px 20px;
+  background: #ddd;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+aside>button {
+  border: 0;
+  padding: 15px 0;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+  background: #28a745;
+  display: block;
   width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   font-size: 16px;
-  margin-top: 10px;
 }
 
-.product img {
-  max-width: 100px;
-  height: auto;
-  margin-right: 15px;
-}
-
-.product .info {
-  display: inline-block;
-  vertical-align: top;
-}
-
-.product .name {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.product .category {
-  font-size: 12px;
-  color: #777;
+aside>button:hover {
+  background: #3bc55b;
 }

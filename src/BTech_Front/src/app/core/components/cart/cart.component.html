@@ -1,62 +1,66 @@
-<main>
-  <div class="page-title">Seu Carrinho</div>
-  <div class="content">
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Total</th>
-            <th>-</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of cartItems">
-            <td>
-              <div class="product">
-                <img [src]="item.image" alt="{{item.nameProd}}" />
-                <div class="info">
-                  <div class="name">{{item.nameProd}}</div>
+<body>
+<app-navbar></app-navbar>
+  <main>
+    <div class="page-title">Seu Carrinho</div>
+    <div class="content">
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+              <th>Total</th>
+              <th>-</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartItems">
+              <td>
+                <div class="product">
+                  <img [src]="item.image" alt="{{item.nameProd}}" />
+                  <div class="info">
+                    <div class="name">{{item.nameProd}}</div>
+
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>R$ {{item.price}}</td>
-            <td>
-              <div class="qty">
-                <button (click)="decreaseQuantity(item)"><i class="bx bx-minus"></i></button>
-                <span>{{item.quantity}}</span>
-                <button (click)="increaseQuantity(item)"><i class="bx bx-plus"></i></button>
-              </div>
-            </td>
-            <td>R$ {{item.price * item.quantity}}</td>
-            <td>
-              <button class="remove" (click)="removeItem(item.id)"><i class="bx bx-x"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-    <aside>
-      <div class="box">
-        <header>Resumo da compra</header>
-        <div class="info">
-          <div><span>Sub-total</span><span>R$ {{subTotal}}</span></div>
-          <div><span>Frete</span><span>Gratuito</span></div>
-          <div>
-            <button>
-              Adicionar cupom de desconto
-              <i class="bx bx-right-arrow-alt"></i>
-            </button>
+              </td>
+              <td>R$ {{item.price}}</td>
+              <td>
+                <div class="qty">
+                  <button (click)="decreaseQuantity(item)"><i class="bx bx-minus"></i></button>
+                  <span>{{item.quantity}}</span>
+                  <button (click)="increaseQuantity(item)"><i class="bx bx-plus"></i></button>
+                </div>
+              </td>
+              <td>R$ {{item.price * item.quantity}}</td>
+              <td>
+                <button class="remove" (click)="removeItem(item.id)"><i class="bx bx-x"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <aside>
+        <div class="box">
+          <header>Resumo da compra</header>
+          <div class="info">
+            <div><span>Sub-total</span><span>R$ {{subTotal}}</span></div>
+            <div><span>Frete</span><span>Gratuito</span></div>
+            <div>
+              <button>
+                Adicionar cupom de desconto
+                <i class="bx bx-right-arrow-alt"></i>
+              </button>
+            </div>
           </div>
+          <footer>
+            <span>Total</span>
+            <span>R$ {{subTotal}}</span>
+          </footer>
         </div>
-        <footer>
-          <span>Total</span>
-          <span>R$ {{subTotal}}</span>
-        </footer>
-      </div>
-      <button>Finalizar Compra</button>
-    </aside>
-  </div>
-</main>
+        <button>Finalizar Compra</button>
+      </aside>
+    </div>
+  </main>
+</body>

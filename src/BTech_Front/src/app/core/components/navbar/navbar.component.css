@@ -10,7 +10,9 @@
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background-color: #767676a3;
+  background-color: #535252;
+  overflow: hidden; /* Evita que o conteúdo saia da área da header */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil */
 }
 
 .header::before {
@@ -47,11 +49,6 @@
   left: 100%;
 }
 
-ul {
-  display: flex;
-  z-index: 100;
-}
-
 .logo {
   font-size: 3rem;
   color: #fff;
@@ -67,6 +64,13 @@ img {
   z-index: 100;
 }
 
+ul {
+  display: flex;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+}
+
 .items {
   list-style: none;
 }
@@ -77,27 +81,10 @@ img {
   text-decoration: none;
   font-weight: 500;
   margin-left: 2.5rem;
-}
-
-#check {
-  display: none;
-}
-
-.icons {
-  position: absolute;
-  right: 5%;
-  font-size: 2.8rem;
-  color: #fff;
-  cursor: pointer;
-  display: none;
-}
-
-.items a {
   position: relative;
-  text-decoration: none;
 }
 
-.items a::before {
+.navbar a::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -111,13 +98,13 @@ img {
   filter: drop-shadow(rgba(255, 255, 255, 0.722) 0rem 0rem 10px);
 }
 
-.items a:hover {
+.navbar a:hover {
   color: #ff6000;
   transition: all 0.6s;
   filter: drop-shadow(rgba(255, 115, 0, 0.722) 0rem 0rem 10px);
 }
 
-.items a:hover::before {
+.navbar a:hover::before {
   visibility: visible;
   transform: scaleX(1);
 }
@@ -154,7 +141,6 @@ img {
   padding: 8px 5px;
   color: #fdfdfd;
   text-decoration: none;
-
   white-space: nowrap;
 }
 
@@ -164,6 +150,21 @@ img {
 
 .user-item:hover .dropdown-menu {
   display: block;
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
 }
 
 /* Responsividade */
@@ -209,151 +210,32 @@ img {
 
   .navbar ul {
     display: block;
-  }
-
-  .header {
-    padding: 1.3rem 5%; /* Ajuste do padding para telas menores */
-  }
-
-  nav.navbar {
-    text-align: center; /* Centraliza todo o conteúdo do menu */
-  }
-
-  .navbar ul {
-    display: inline-block; /* Exibe os itens do menu em linha */
-    padding: 0; /* Remove o padding padrão da lista */
+    padding: 0;
   }
 
   .items {
-    display: inline-block; /* Exibe os itens do menu em linha */
-    margin: 0 10px; /* Espaçamento entre os itens do menu */
+    display: inline-block;
+    margin: 0 10px;
   }
 
   ul a {
-    display: inline-block; /* Permite ajustar a largura e centralizar */
+    display: inline-block;
     font-size: 1.1rem;
-    margin: 1.5rem 0; /* Margem superior e inferior */
+    margin: 1.5rem 0;
     text-align: center;
     transform: translateY(-50px);
     opacity: 0;
     transition: 0.3s ease;
-    width: fit-content; /* Ajusta a largura do link de acordo com o conteúdo */
-    position: relative; /* Define o posicionamento relativo para que o ::before fique relativo a este elemento */
+    width: fit-content;
+    position: relative;
   }
 
   ul a::before {
     content: "";
     position: absolute;
-    width: 100%; /* Largura do sublinhado igual à largura do texto */
-    height: 1px; /* Altura reduzida do sublinhado */
-    bottom: -1px; /* Posição ajustada do sublinhado */
-    background-color: white;
-    visibility: hidden;
-    transition: width 0.3s ease-in-out;
-  }
-
-  ul a:hover::before {
-    visibility: visible;
-    width: 100%; /* Largura do sublinhado igual à largura do texto */
-  }
-
-  #check:checked ~ .navbar a {
-    transform: translateY(0);
-    opacity: 1;
-    transition-delay: calc(0.15s * var(--i));
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 320px) {
-  #check:checked ~ .navbar {
-    height: 17rem;
-  }
-}
-
-/* RESPONSIVIDADE */
-
-@media (max-width: 992px) {
-  .header {
-    padding: 1.3rem 5%;
-  }
-}
-
-@media (max-width: 904px) {
-  .icons {
-    display: inline-flex;
-  }
-
-  #check:checked ~ .icons #menu-icon {
-    display: none;
-  }
-
-  .icons #close-icon {
-    display: none;
-  }
-
-  #check:checked ~ .icons #close-icon {
-    display: block;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 85%;
-    left: 0;
     width: 100%;
-    height: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: saturate(180%) blur(50px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-  }
-
-  #check:checked ~ .navbar {
-    height: 16.2rem;
-  }
-
-  .navbar ul {
-    display: block;
-  }
-
-  .header {
-    padding: 1.3rem 5%; /* Ajuste do padding para telas menores */
-  }
-
-  nav.navbar {
-    text-align: center; /* Centraliza todo o conteúdo do menu */
-  }
-
-  .navbar ul {
-    display: inline-block; /* Exibe os itens do menu em linha */
-    padding: 0; /* Remove o padding padrão da lista */
-  }
-
-  .items {
-    display: inline-block; /* Exibe os itens do menu em linha */
-    margin: 0 10px; /* Espaçamento entre os itens do menu */
-  }
-
-  ul a {
-    display: inline-block; /* Permite ajustar a largura e centralizar */
-    font-size: 1.1rem;
-    margin: 1.5rem 0; /* Margem superior e inferior */
-    text-align: center;
-    transform: translateY(-50px);
-    opacity: 0;
-    transition: 0.3s ease;
-    width: fit-content; /* Ajusta a largura do link de acordo com o conteúdo */
-    position: relative; /* Define o posicionamento relativo para que o ::before fique relativo a este elemento */
-  }
-
-  ul a::before {
-    content: "";
-    position: absolute;
-    width: 100%; /* Largura do sublinhado igual à largura do texto */
-    height: 1px; /* Altura reduzida do sublinhado */
-    bottom: -1px; /* Posição ajustada do sublinhado */
+    height: 1px;
+    bottom: -1px;
     background-color: white;
     visibility: hidden;
     transition: width 0.3s ease-in-out;
@@ -361,7 +243,7 @@ img {
 
   ul a:hover::before {
     visibility: visible;
-    width: 100%; /* Largura do sublinhado igual à largura do texto */
+    width: 100%;
   }
 
   #check:checked ~ .navbar a {
