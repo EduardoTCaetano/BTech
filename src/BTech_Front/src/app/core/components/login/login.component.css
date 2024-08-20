@@ -9,8 +9,8 @@
   flex-direction: column;
   height: 100vh;
   background-image: url(/assets/fundologin.jpg);
-  background-size: cover; /* Ensure background covers the entire container */
-  background-position: center; /* Center the background image */
+  background-size: cover;
+  background-position: center;
 }
 
 .container {
@@ -22,7 +22,7 @@
   width: 768px;
   max-width: 100%;
   min-height: 480px;
-  padding: 20px; /* Add padding for better spacing */
+  padding: 20px;
 }
 
 .container p {
@@ -44,7 +44,7 @@
 input[type="password"] {
   width: 100%;
   padding: 10px;
-  padding-right: 50px; /* Adjust space for the enlarged eye icon */
+  padding-right: 50px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -56,8 +56,8 @@ input[type="password"] {
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 24px; /* Increased size for better visibility */
-  user-select: none; /* Prevent text selection */
+  font-size: 24px;
+  user-select: none;
 }
 
 .container a {
@@ -70,7 +70,7 @@ input[type="password"] {
 .container button {
   background-color: #ff6000;
   color: #fff;
-  font-size: 14px; /* Slightly larger font size for better readability */
+  font-size: 14px;
   padding: 12px 45px;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -139,7 +139,9 @@ input[type="password"] {
   animation: move 0.6s;
 }
 
-h1,p,span {
+h1,
+p,
+span {
   font-family: "Bungee Spice", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -164,18 +166,18 @@ h1,p,span {
 
 .social-icons a {
   border: 1px solid #ccc;
-  border-radius: 50%; /* Fully round icon */
+  border-radius: 50%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin: 0 5px; /* Adjust spacing between icons */
-  width: 50px; /* Increased size for better visibility */
-  height: 50px; /* Increased size for better visibility */
+  margin: 0 5px;
+  width: 50px;
+  height: 50px;
   transition: all 0.5s;
 }
 
 .social-icons a:hover {
-  transform: scale(1.3); /* Use transform for scaling */
+  transform: scale(1.3);
   border: 1px solid #fff;
 }
 

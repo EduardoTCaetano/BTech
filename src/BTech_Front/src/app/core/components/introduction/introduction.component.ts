@@ -40,7 +40,7 @@ export class IntroductionComponent implements OnInit {
   }
 
   addToCart(event: Event, product: ProductModel): void {
-    event.preventDefault(); 
+    event.preventDefault();
 
     if (this.userId && product.id) {
       const cartItem: CartItem = {

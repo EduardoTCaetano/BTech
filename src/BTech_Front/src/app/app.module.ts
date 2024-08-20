@@ -20,6 +20,8 @@ import { CartComponent } from './core/components/cart/cart.component';
 import { ProductPageComponent } from './core/components/product-page/product-page.component';
 import { SearchComponent } from './core/components/search/search.component';
 import { LoginComponent } from './core/components/login/login.component';
+import { AuthService } from './services/auth/auth.service';
+import { CartService } from './services/cart/cart.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import { LoginComponent } from './core/components/login/login.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AuthService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

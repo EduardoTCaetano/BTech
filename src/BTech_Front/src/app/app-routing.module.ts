@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   { path: 'sac', component: SacComponent},
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] }, 
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent},
   { path: 'login', component: LoginComponent},
 ];
@@ -20,4 +20,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
+
 export class AppRoutingModule {}

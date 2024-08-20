@@ -6,7 +6,11 @@
     <section id="contact-form">
       <h2>Precisando de ajuda? Nos envie sua duvida.</h2>
       <div class="form-group">
-        <a href="https://chat.whatsapp.com/HUYo9jWiYYdFUfva5Y3qw5" class="button-link" target="_blank">
+        <a
+          href="https://chat.whatsapp.com/HUYo9jWiYYdFUfva5Y3qw5"
+          class="button-link"
+          target="_blank"
+        >
           <button type="submit">Enviar mensagem</button>
         </a>
       </div>
@@ -16,9 +20,11 @@
       <div class="faq" *ngFor="let faq of faqs" (click)="toggleAnswer(faq)">
         <div class="faq-question-wrapper">
           <p class="faq-question">{{ faq.question }}</p>
-          <span class="arrow" [ngClass]="{'rotated': faq.showAnswer}">&#9662;</span>
+          <span class="arrow" [ngClass]="{ rotated: faq.showAnswer }"
+            >&#9662;</span
+          >
         </div>
-        <div class="faq-answer" [ngClass]="{'show': faq.showAnswer}">
+        <div class="faq-answer" [ngClass]="{ show: faq.showAnswer }">
           <p *ngFor="let answer of faq.answers">{{ answer }}</p>
         </div>
       </div>

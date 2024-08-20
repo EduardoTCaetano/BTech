@@ -11,8 +11,6 @@
   align-items: center;
   z-index: 100;
   background-color: #535252;
-  overflow: hidden; /* Evita que o conteúdo saia da área da header */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil */
 }
 
 .header::before {
@@ -49,6 +47,11 @@
   left: 100%;
 }
 
+ul {
+  display: flex;
+  z-index: 100;
+}
+
 .logo {
   font-size: 3rem;
   color: #fff;
@@ -64,13 +67,6 @@ img {
   z-index: 100;
 }
 
-ul {
-  display: flex;
-  z-index: 100;
-  margin: 0;
-  padding: 0;
-}
-
 .items {
   list-style: none;
 }
@@ -81,10 +77,27 @@ ul {
   text-decoration: none;
   font-weight: 500;
   margin-left: 2.5rem;
-  position: relative;
 }
 
-.navbar a::before {
+#check {
+  display: none;
+}
+
+.icons {
+  position: absolute;
+  right: 5%;
+  font-size: 2.8rem;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+}
+
+.items a {
+  position: relative;
+  text-decoration: none;
+}
+
+.items a::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -98,13 +111,13 @@ ul {
   filter: drop-shadow(rgba(255, 255, 255, 0.722) 0rem 0rem 10px);
 }
 
-.navbar a:hover {
+.items a:hover {
   color: #ff6000;
   transition: all 0.6s;
   filter: drop-shadow(rgba(255, 115, 0, 0.722) 0rem 0rem 10px);
 }
 
-.navbar a:hover::before {
+.items a:hover::before {
   visibility: visible;
   transform: scaleX(1);
 }
@@ -167,7 +180,6 @@ ul {
   font-size: 12px;
 }
 
-/* Responsividade */
 @media (max-width: 992px) {
   .header {
     padding: 1.3rem 5%;
@@ -210,6 +222,18 @@ ul {
 
   .navbar ul {
     display: block;
+  }
+
+  .header {
+    padding: 1.3rem 5%;
+  }
+
+  nav.navbar {
+    text-align: center;
+  }
+
+  .navbar ul {
+    display: inline-block;
     padding: 0;
   }
 

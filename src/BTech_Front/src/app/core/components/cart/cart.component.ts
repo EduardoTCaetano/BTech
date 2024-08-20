@@ -76,5 +76,4 @@ export class CartComponent implements OnInit {
       0
     );
   }
-
 }

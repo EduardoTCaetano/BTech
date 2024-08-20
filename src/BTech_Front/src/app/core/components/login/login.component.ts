@@ -7,7 +7,7 @@ import { AuthResponse } from '../../../models/authresponsemodel';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   email: string = '';
@@ -19,7 +19,8 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   togglePasswordVisibility() {
-    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
   register(form: NgForm) {
@@ -47,7 +48,8 @@ export class LoginComponent {
           this.router.navigate(['/home']);
         },
         (error: any) => {
-          this.errorMessage = 'Login failed. Check your credentials and try again.';
+          this.errorMessage =
+            'Login failed. Check your credentials and try again.';
         }
       );
     } else {

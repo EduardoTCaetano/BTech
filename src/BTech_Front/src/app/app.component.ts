@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    // Assinatura para obter o e-mail do usuário a partir do serviço de autenticação
     this.authService.userEmail$.subscribe((email: string | null) => {
       this.emailAddress = email;
     });

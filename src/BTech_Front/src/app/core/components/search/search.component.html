@@ -1,7 +1,6 @@
 <body>
   <app-navbar></app-navbar>
 
-  <!-- Botão para alternar o menu lateral -->
   <button
     class="menu-toggle"
     aria-label="Toggle menu"
@@ -10,28 +9,21 @@
     <i class="fas fa-bars"></i>
   </button>
 
-  <!-- Menu lateral -->
   <div class="sidebar" [class.active]="sidebarActive">
     <ul>
-      <!-- Botão para mostrar todos os produtos -->
       <li (click)="clearCategoryFilter()">
-        <a>
-          <i class="fas fa-th-large icon"></i> Todos 
-        </a>
+        <a> <i class="fas fa-th-large icon"></i> Todos </a>
       </li>
       <li
         *ngFor="let category of categories"
         [class.inactive]="!category.isActive"
         (click)="selectCategory(category)"
       >
-        <a>
-          <i class="fas fa-search icon"></i> {{ category.description }}
-        </a>
+        <a> <i class="fas fa-search icon"></i> {{ category.description }} </a>
       </li>
     </ul>
   </div>
 
-  <!-- Conteúdo principal -->
   <div class="content">
     <div *ngFor="let product of filteredProducts" class="product-card spacing">
       <div class="product-thumb">
@@ -39,7 +31,7 @@
       </div>
       <div class="product-details">
         <span class="product-price">
-          {{ product.price | currency: 'BRL': 'symbol': '1.2-2' }}
+          {{ product.price | currency : "BRL" : "symbol" : "1.2-2" }}
         </span>
         <h4>
           <a href="#">{{ product.name }}</a>

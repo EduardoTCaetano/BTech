@@ -5,10 +5,10 @@
 
 body {
   background: #f6f6f6;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-body>header {
+body > header {
   background: #111;
   color: white;
   font-size: 24px;
@@ -17,34 +17,34 @@ body>header {
   justify-content: center;
 }
 
-body>main {
+body > main {
   background: #fff;
   padding: 0 30px 30px;
 }
 
-body>main .page-title {
+body > main .page-title {
   font-size: 40px;
   padding: 50px 0;
   text-align: center;
 }
 
-body>main .content {
+body > main .content {
   display: flex;
   justify-content: space-between;
 }
 
-body>main .content section {
+body > main .content section {
   flex: 1;
 }
 
-body>main .content aside {
+body > main .content aside {
   min-width: 250px;
   margin-left: 30px;
 }
 
 button {
   cursor: pointer;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 table {
@@ -160,14 +160,14 @@ aside .box .info {
   font-size: 16px;
 }
 
-aside .box .info>div {
+aside .box .info > div {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
   color: #555;
 }
 
-aside .box .info>div:last-child {
+aside .box .info > div:last-child {
   margin: 0;
 }
 
@@ -188,7 +188,7 @@ aside .box footer {
   justify-content: space-between;
 }
 
-aside>button {
+aside > button {
   border: 0;
   padding: 15px 0;
   color: white;
@@ -200,6 +200,6 @@ aside>button {
   font-size: 16px;
 }
 
-aside>button:hover {
-  background: #3bc55b;
+aside > button:hover {
+  background: #3bc55b;
 }

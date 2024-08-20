@@ -21,7 +21,7 @@ h2 {
   overflow: hidden;
   padding: 50px;
   background-color: #303030;
-  box-shadow: 0 0px 10px 0 #FF6000;
+  box-shadow: 0 0px 10px 0 #ff6000;
   border-radius: 20px;
 }
 
@@ -36,11 +36,11 @@ header h1 {
 }
 
 #contact-form {
-  background: #1E1E1E;
+  background: #1e1e1e;
   padding: 30px;
   margin-top: 0px;
   border-radius: 50px;
-  box-shadow: 0 0px 8px 0 #FF6000;
+  box-shadow: 0 0px 8px 0 #ff6000;
   text-align: center;
 }
 
@@ -91,7 +91,7 @@ header h1 {
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
-  box-shadow: 0 0px 8px 0 #FF6000;
+  box-shadow: 0 0px 8px 0 #ff6000;
   cursor: pointer;
   transition: background 0.3s ease;
 }

@@ -10,11 +10,11 @@ import { ProductModel } from '../../../models/ProductModel';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  products: ProductModel[] = []; // Use o modelo de produto adequado
+  products: ProductModel[] = [];
   filteredProducts: ProductModel[] = [];
   categories: CategoryModel[] = [];
   sidebarActive: boolean = false;
-  selectedCategoryId: string | null = null; // Deve ser do tipo string para GUIDs
+  selectedCategoryId: string | null = null;
 
   constructor(
     private productService: ProductService,
@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
     this.productService.getAllProducts().subscribe(
       (data) => {
         this.products = data;
-        this.filteredProducts = data; // Inicialmente, mostra todos os produtos
+        this.filteredProducts = data;
       },
       (error) => {
         console.error('Erro ao carregar produtos', error);
@@ -48,23 +48,23 @@ export class SearchComponent implements OnInit {
 
   selectCategory(category: CategoryModel): void {
     if (category && category.id) {
-      this.selectedCategoryId = category.id; // Atualiza o ID da categoria selecionada
+      this.selectedCategoryId = category.id;
       this.filterProducts();
     }
   }
 
   clearCategoryFilter(): void {
-    this.selectedCategoryId = null; // Limpa o ID da categoria selecionada
-    this.filterProducts(); // Exibe todos os produtos
+    this.selectedCategoryId = null;
+    this.filterProducts();
   }
 
   filterProducts(): void {
     if (this.selectedCategoryId === null) {
-      this.filteredProducts = this.products; // Mostra todos os produtos se nenhuma categoria estiver selecionada
+      this.filteredProducts = this.products;
     } else {
       this.filteredProducts = this.products.filter(
-        product => product.categoryId === this.selectedCategoryId
-      ); // Filtra produtos pela categoria selecionada
+        (product) => product.categoryId === this.selectedCategoryId
+      );
     }
   }
 }

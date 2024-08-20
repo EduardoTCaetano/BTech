@@ -4,7 +4,6 @@ section {
   margin-top: 13.5vh;
 }
 
-
 aside {
   box-sizing: border-box;
   max-width: 25%;
@@ -15,7 +14,6 @@ aside {
   flex-direction: column;
   justify-content: center;
 }
-
 
 p {
   color: white;

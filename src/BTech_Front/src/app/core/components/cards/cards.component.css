@@ -21,13 +21,13 @@ div.cards section.card:hover {
 
 div.cards section.card {
   flex: 1;
-  flex-basis: calc(25% - 16px); /* Ajuste do tamanho dos cards */
+  flex-basis: calc(25% - 16px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: #1E1E1E;
-  padding: 0.5rem 1rem; /* Redução do padding */
+  background: #1e1e1e;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
   margin-right: 16px;
   margin-bottom: 16px;
@@ -38,8 +38,8 @@ div.cards section.card:last-child {
 }
 
 div.cards section.card .icon {
-  width: 80px; /* Redução do tamanho do ícone */
-  height: 80px; /* Redução do tamanho do ícone */
+  width: 80px;
+  height: 80px;
 }
 
 div.cards section.card img {
@@ -47,14 +47,14 @@ div.cards section.card img {
 }
 
 div.cards section.card h3 {
-  font-size: 90%; /* Redução do tamanho da fonte */
+  font-size: 90%;
   margin: 16px 0;
 }
 
 div.cards section.card span {
   font-weight: 400;
   max-width: 640px;
-  font-size: 75%; /* Redução do tamanho da fonte */
+  font-size: 75%; 
   margin-bottom: 16px;
 }
 

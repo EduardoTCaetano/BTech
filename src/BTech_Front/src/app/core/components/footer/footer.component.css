@@ -3,7 +3,7 @@
 footer {
   width: 100%;
   height: auto;
-  background: #1E1E1E;
+  background: #1e1e1e;
   padding-bottom: 20px;
   border-top: 5px solid #ff6000;
 }
@@ -109,13 +109,12 @@ p {
 }
 
 .youtube-icon {
-  color: #FF0000;
+  color: #ff0000;
   font-size: 24px;
 }
 
-
 .instagram-link i {
-  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 24px;
@@ -134,7 +133,7 @@ p {
 }
 
 .linkedin-icon {
-  color: #0077B5;
+  color: #0077b5;
   font-size: 24px;
 }
 
@@ -151,7 +150,7 @@ p {
 }
 
 .twitter-icon {
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 24px;
 }
 
