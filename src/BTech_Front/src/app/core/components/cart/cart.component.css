@@ -5,7 +5,6 @@
 
 body {
   background: #f6f6f6;
-  font-family: "Lato", sans-serif;
 }
 
 body > header {
@@ -18,7 +17,7 @@ body > header {
 }
 
 body > main {
-  background: #fff;
+  background: #1e1e1e;
   padding: 0 30px 30px;
 }
 
@@ -53,18 +52,18 @@ table {
 }
 
 table thead tr {
-  border-bottom: 3px solid #eee;
+  border-bottom: 3px solid #ff6000;
 }
 
 table thead tr th {
   text-align: left;
   padding-bottom: 10px;
   text-transform: uppercase;
-  color: #666;
+  color: #fff;
 }
 
 table tbody tr {
-  border-bottom: 3px solid #eee;
+  border-bottom: 3px solid #ff6000;
 }
 
 table tbody tr:last-child {
@@ -81,7 +80,20 @@ table tbody tr td {
 }
 
 .product img {
-  border-radius: 6px;
+  width: 100px;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  background-color: #ccc;
+  border-radius: 10%;
+}
+
+span{
+  color: #000;
+}
+
+td{
+  color: #fff;
 }
 
 .product .info {
@@ -91,10 +103,7 @@ table tbody tr td {
 .product .info .name {
   font-size: 20px;
   margin-bottom: 10px;
-}
-
-.product .info .category {
-  color: #666;
+  color: #fff;
 }
 
 .qty {

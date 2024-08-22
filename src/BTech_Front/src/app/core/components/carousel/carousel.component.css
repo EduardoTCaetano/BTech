@@ -1,13 +1,13 @@
 section {
   display: flex;
-  height: 35em;
+  flex-direction: column-reverse;
+  height: auto;
   margin-top: 13.5vh;
 }
 
 aside {
   box-sizing: border-box;
-  max-width: 25%;
-  height: 100%;
+  width: 100%;
   background-color: #1e1e1e;
   padding: 2em;
   display: flex;
@@ -24,13 +24,18 @@ p {
 button {
   background: none;
   border: none;
-  background-color: white;
+  background-color: #fff;
   height: 2em;
   width: 8em;
   font-weight: 800;
   font-size: 20px;
   border-radius: 3px;
   margin-top: 1em;
+}
+
+button:hover {
+  background-color: #b3b2b2;
+  transition: all 0.3s;
 }
 
 .image-display {
@@ -42,4 +47,22 @@ button {
 img {
   width: 100%;
   height: 100%;
+}
+
+@media (min-width: 768px) {
+  section {
+    flex-direction: row;
+    height: 35em;
+  }
+
+  aside {
+    max-width: 25%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    margin-top: 10vh;
+  }
 }

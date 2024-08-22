@@ -5,10 +5,10 @@
     <div id="productCarousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <div class="d-flex justify-content-around">
+          <div class="row justify-content-around">
             <div
               *ngFor="let product of products.slice(0, 5)"
-              class="product-card spacing"
+              class="col-md-2 col-sm-4 col-6 product-card spacing"
             >
               <div class="badge">Promoção</div>
               <div class="product-thumb">
@@ -39,10 +39,10 @@
         </div>
 
         <div class="carousel-item">
-          <div class="d-flex justify-content-around">
+          <div class="row justify-content-around">
             <div
               *ngFor="let product of products.slice(5, 10)"
-              class="product-card spacing"
+              class="col-md-2 col-sm-4 col-6 product-card spacing"
             >
               <div class="badge">Promoção</div>
               <div class="product-thumb">

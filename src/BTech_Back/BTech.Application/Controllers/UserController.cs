@@ -54,10 +54,19 @@ namespace BTech.Application.Controllers
                 return Ok(response);
             }
 
-            return StatusCode(500, result.Errors);
+            // Processar erros de criação de usuário
+            var errors = result.Errors.Select(e => new
+            {
+                Code = e.Code,
+                Description = e.Description
+            }).ToList();
+
+            return BadRequest(errors);
         }
 
         [HttpPost("Login")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
         {
             if (!ModelState.IsValid)
@@ -66,12 +75,12 @@ namespace BTech.Application.Controllers
             var user = await _userManager.FindByEmailAsync(loginDto.EmailAddress);
 
             if (user == null)
-                return Unauthorized("Invalid email address!");
+                return Unauthorized("E-mail inválido!");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
             if (!result.Succeeded)
-                return Unauthorized("Invalid password!");
+                return Unauthorized("Senha inválida!");
 
             var roles = await _userManager.GetRolesAsync(user);
             var token = _tokenService.CreateToken(user, roles);

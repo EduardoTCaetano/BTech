@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthResponse } from '../../models/authresponsemodel';
 
@@ -32,64 +32,50 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<AuthResponse> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
     const body = { EmailAddress: email, Password: password };
-    return this.http
-      .post<AuthResponse>(`${this.apiUrl}/login`, body, { headers })
-      .pipe(
-        tap((response) => {
-          if (response && response.token) {
-            localStorage.setItem('authToken', response.token);
-            localStorage.setItem('userEmail', response.emailAddress);
-            localStorage.setItem('userId', response.userId);
-            localStorage.setItem('userName', response.userName);
-            this.userEmailSubject.next(response.emailAddress);
-            this.userNameSubject.next(response.userName);
-          }
-        }),
-        catchError((error) => {
-          console.error('Login error', error);
-          this.userEmailSubject.next(null);
-          this.userNameSubject.next(null);
-          throw error;
-        })
-      );
+    return this.http.post<AuthResponse>(`${this.apiUrl}/Login`, body).pipe(
+      tap((response) => {
+        if (response && response.token) {
+          localStorage.setItem('authToken', response.token);
+          localStorage.setItem('userEmail', response.emailAddress);
+          localStorage.setItem('userName', response.userName);
+          localStorage.setItem('userId', response.userId);
+          this.userEmailSubject.next(response.emailAddress);
+          this.userNameSubject.next(response.userName);
+        }
+      }),
+      catchError((error) => {
+        console.error('Login error', error);
+        this.userEmailSubject.next(null);
+        this.userNameSubject.next(null);
+        throw error;
+      })
+    );
   }
 
-  register(email: string, password: string): Observable<AuthResponse> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    const body = { EmailAddress: email, Password: password };
-    return this.http
-      .post<AuthResponse>(`${this.apiUrl}/register`, body, { headers })
-      .pipe(
-        tap((response) => {
-          if (response && response.token) {
-            localStorage.setItem('authToken', response.token);
-            localStorage.setItem('userEmail', response.emailAddress);
-            localStorage.setItem('userName', response.userName);
-            this.userEmailSubject.next(response.emailAddress);
-            this.userNameSubject.next(response.userName);
-          }
-        }),
-        catchError((error) => {
-          console.error('Registration error', error);
-          this.userEmailSubject.next(null);
-          this.userNameSubject.next(null);
-          throw error;
-        })
-      );
+  register(name: string, email: string, password: string): Observable<AuthResponse> {
+    const body = { UserName: name, EmailAddress: email, PassWord: password };
+    return this.http.post<AuthResponse>(`${this.apiUrl}/Register`, body).pipe(
+      tap((response) => {
+        if (response && response.token) {
+          localStorage.setItem('authToken', response.token);
+          localStorage.setItem('userEmail', response.emailAddress);
+          localStorage.setItem('userName', response.userName);
+          this.userEmailSubject.next(response.emailAddress);
+          this.userNameSubject.next(response.userName);
+        }
+      }),
+      catchError((error) => {
+        console.error('Registration error', error);
+        this.userEmailSubject.next(null);
+        this.userNameSubject.next(null);
+        throw error;
+      })
+    );
   }
 
   logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userName');
+    localStorage.clear();
     this.userEmailSubject.next(null);
     this.userNameSubject.next(null);
   }

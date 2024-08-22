@@ -2,6 +2,6 @@
 export interface AuthResponse {
   userName: string
   emailAddress: string;
-  userId: string; 
+  userId: string;
   token?: string;
 }

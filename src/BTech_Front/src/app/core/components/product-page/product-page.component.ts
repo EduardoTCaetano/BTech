@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.css',
 })
-export class ProductPageComponent {}
+export class ProductPageComponent {
+activateCredit() {
+throw new Error('Method not implemented.');
+}
+}

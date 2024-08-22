@@ -1,37 +1,50 @@
+HTML
+<app-navbar></app-navbar>
 <body>
-  <div class="container">
-    <div class="product-images">
-      <div class="main-image">
-        <img
-          src="assets/headset-gamer-havit-removebg-preview.png"
-          alt="Microfone Frontal"
-        />
-      </div>
+  <div class="product-page">
+    <div class="image-section">
+      <img
+        src="assets/headset-gamer-havit-removebg-preview.png"
+        alt="Microfone Frontal"
+      />
     </div>
-    <div class="product-info">
+    <div class="details-section">
       <h1>Microfone Pichau Izar</h1>
-      <main>
-        <p>
-          PC Gamer T-MOBA Eagle com processador Intel i3 10100F, placa de vídeo
-          NVIDIA GeForce GT 1030, 8GB de RAM DDR4 e SSD de 240GB.
-        </p>
-        <p>De: <del>R$ 3.279,40</del></p>
-        <p>Por: <strong>R$ 2.099,99</strong></p>
-        <div class="rating">
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-          <span class="star">&#9733;</span>
-          <span class="star">&#9734;</span>
-        </div>
-        <br />
-        <br />
-        <button>Comprar com desconto</button>
-        <button>Adicionar ao carrinho</button>
-      </main>
-      <footer>
-        <p>Frete grátis e 12x sem juros no cartão!</p>
-      </footer>
+      <p class="product-price"><strong>R$ 36,98</strong></p>
+      <p class="installments">em 12x R$ 3,59 com cartões de crédito</p>
+      <div class="rating">
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9734;</span>
+        <span class="review-count">(3)</span>
+      </div>
+      <div class="payment-options">
+        <p><strong>12x sem cartão</strong></p>
+        <p>Ative o Mercado Crédito agora e pague em parcelas fixas</p>
+        <button (click)="activateCredit()">Ative agora</button>
+        <a href="#">Ver os meios de pagamento</a>
+      </div>
+      <div class="shipping-info">
+        <p><strong>Chegará amanhã por R$ 10,71</strong></p>
+        <p>Comprando dentro das próximas 13h 40min</p>
+        <a href="#">Mais formas de entrega</a>
+        <p><strong>Chegará grátis assinando o <i>meli+</i></strong></p>
+        <a href="#">Inscrever-me</a>
+      </div>
+      <button class="buy-now">Comprar agora</button>
+      <button class="add-to-cart">Adicionar ao carrinho</button>
     </div>
   </div>
+
+  <!-- Campo de Descrição -->
+  <div class="description-box">
+    <h2>Descrição do Produto</h2>
+    <p>
+      Este microfone é ideal para gamers e criadores de conteúdo, proporcionando
+      excelente qualidade de som, conforto e durabilidade. Com um design elegante
+      e moderno, ele se encaixa perfeitamente em qualquer setup.
+    </p>
+  </div>
 </body>

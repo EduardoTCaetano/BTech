@@ -30,6 +30,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 12;
+
+    // Permitir espaços no nome de usuário
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+
+    // Garantir que o e-mail seja único
+    options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<DataContext>()
 .AddDefaultTokenProviders();

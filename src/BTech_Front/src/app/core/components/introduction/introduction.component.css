@@ -6,10 +6,11 @@
   font-style: normal;
   font-size: 3rem;
   position: absolute;
-  top: 90vh;
+  top: 86vh;
   left: 5vh;
   color: #ffffff;
   z-index: 9;
+  white-space: nowrap;
 }
 
 .home-container {
@@ -17,11 +18,13 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
+  height: auto;
   background-image: url(/assets/mv_2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  padding: 20px;
+  overflow-x: hidden;
 }
 
 .product-card {
@@ -29,7 +32,7 @@
   flex: 1 1 22%;
   max-width: 280px;
   box-shadow: 0 2px 5px #333;
-  margin: 5px;
+  margin: 9px;
   background: #1e1e1e;
   box-sizing: border-box;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -230,49 +233,22 @@
 
 .carousel-control-prev,
 .carousel-control-next {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  transition: transform 0.3s, background-color 0.3s;
+  filter: invert(100%);
+  opacity: 0.5;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  width: 24px;
-  height: 24px;
-  background-color: transparent;
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 15px;
-  font-size: 24px;
-  transition: transform 0.3s, color 0.3s;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 50%;
 }
 
-.carousel-control-prev-icon {
-  transform: rotate(135deg);
-}
-
-.carousel-control-next-icon {
-  transform: rotate(-45deg);
-}
-
-.carousel-control-prev:hover .carousel-control-prev-icon,
-.carousel-control-next:hover .carousel-control-next-icon {
-  color: #ff6000;
-}
-
-.carousel-control-prev:focus,
-.carousel-control-next:focus {
-  outline: none;
-}
-
-.carousel-control-prev:active,
-.carousel-control-next:active {
-  transform: scale(0.95);
+.carousel-item {
+  flex-wrap: wrap;
 }

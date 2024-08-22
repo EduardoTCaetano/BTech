@@ -39,7 +39,7 @@
             {{ userName || "Entrar" }}
           </a>
           <ul class="dropdown-menu" *ngIf="userName">
-            <li><a href="#" (click)="logout()">Sair</a></li>
+            <li><a (click)="logout()">Sair</a></li>
           </ul>
         </li>
       </ul>

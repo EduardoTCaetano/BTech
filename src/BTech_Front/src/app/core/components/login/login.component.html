@@ -10,20 +10,38 @@
           <h1>Registrar</h1>
           <span>ou use sua senha de e-mail</span>
           <input
+            type="text"
+            name="UserName"
+            placeholder="Nome"
+            [(ngModel)]="UserName"
+            required
+          />
+          <input
             type="email"
             name="email"
             placeholder="Email"
             [(ngModel)]="email"
             required
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="Senha"
-            [(ngModel)]="password"
-            [type]="passwordFieldType"
-            required
-          />
+          <div class="password-container">
+            <input
+              type="password"
+              name="password"
+              placeholder="Senha"
+              [(ngModel)]="password"
+              [type]="passwordFieldType"
+              required
+            />
+            <span class="eye-icon" (click)="togglePasswordVisibility()">
+              <i
+                [ngClass]="
+                  passwordFieldType === 'password'
+                    ? 'fa-solid fa-eye-slash'
+                    : 'fa-solid fa-eye'
+                "
+              ></i>
+            </span>
+          </div>
           <div class="error-message" *ngIf="errorMessage">
             {{ errorMessage }}
           </div>
