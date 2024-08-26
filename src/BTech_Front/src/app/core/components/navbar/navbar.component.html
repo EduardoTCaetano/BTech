@@ -8,6 +8,19 @@
       <i class="bx bx-x" id="close-icon" aria-hidden="true"></i>
     </label>
 
+    <li class="items search-item">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <form action="/search" method="GET">
+        <input
+          type="text"
+          name="query"
+          placeholder="Pesquisar..."
+          aria-label="Search"
+          class="search-box"
+        />
+      </form>
+    </li>
+
     <nav class="navbar">
       <ul>
         <li class="items">
@@ -19,6 +32,7 @@
         <li class="items">
           <a href="/search" style="--i: 2">Navegar</a>
         </li>
+
         <li class="items">
           <a
             href="/cart"

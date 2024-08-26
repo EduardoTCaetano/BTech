@@ -1,149 +1,240 @@
-.slider {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1400px;
-  text-align: center;
-  position: relative;
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee+Spice&display=swap");
+
+.name {
+  font-family: "Bungee Spice", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+  position: absolute;
+  top: 228vh;
+  left: 5vh;
+  color: #ffffff;
+  z-index: 9;
+  white-space: nowrap;
 }
 
-.slider input[type="radio"] {
-  display: none;
-}
-
-.slider label {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.slides {
-  border: 3px solid #db7b0e;
-  position: relative;
-  z-index: 1;
-}
-
-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-#overflow {
-  width: 100%;
-  overflow: hidden;
-  border-top: 5px solid #ff6000;
-}
-
-#slides .inner {
+.home-container {
   display: flex;
-  width: 400%;
-  transition: margin-left 800ms cubic-bezier(0.77, 0, 0.175, 1);
-  animation: slideAnimation 12s infinite;
-}
-
-#slides .slide {
-  position: relative;
-  width: 100%;
-  height: 30vh;
-  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  object-fit: cover;
-}
-
-#slides .slide img {
-  position: absolute;
-  width: auto;
+  align-items: flex-start;
   height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
+  background-image: url(/assets/mv_2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: 20px;
+  overflow-x: hidden;
 }
 
-#slides .slide::before {
-  content: "";
+.products-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.product-card {
+  position: relative;
+  flex: 0 0 auto;
+  max-width: 280px;
+  box-shadow: 0 2px 5px #333;
+  margin: 0 10px;
+  background: #1e1e1e;
+  box-sizing: border-box;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border: 4px solid rgb(182, 83, 6);
+}
+
+.spacing {
+  margin-top: 80px;
+}
+
+.badge {
   position: absolute;
-  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, #303030, #ff6000);
-  filter: blur(5px);
-  z-index: 0;
+  top: 20px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+  background: #282828;
+  color: #ff0000;
+  padding: 3px 10px;
 }
 
-#controls {
-  margin: 10px 0;
-  width: 100%;
-  height: auto;
-  z-index: 3;
-  position: relative;
+.product-thumb {
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 250px;
+  padding: 50px;
+  background-image: linear-gradient(#303030, #fff);
 }
 
-#controls label {
-  transition: opacity 0.2s ease-out;
+.product-thumb img {
+  max-width: 250px;
+  max-height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.product-card:hover .product-thumb img {
+  transform: scale(1.1);
+}
+
+.product-details {
+  padding: 30px;
+}
+
+.product-category {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.product-details h4 a {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.product-details h4 a:hover {
+  color: #ea741b;
+}
+
+.product-details p {
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 18px;
+  color: #ffffff;
+  height: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-bottom-details {
+  overflow: hidden;
+  border-top: 1px solid #ffffff;
+  padding-top: 20px;
+}
+
+.product-bottom-details div {
+  float: left;
+  width: 50%;
+}
+
+.product-price {
+  font-size: 18px;
+  color: #ff6000;
+  font-weight: 600;
+}
+
+.product-links a {
   display: inline-block;
-  width: 50px;
-  height: 50px;
-  opacity: 0.4;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  line-height: 50px;
-  text-align: center;
-  color: #fff;
+  margin-left: 1px;
+  color: #ffffff;
+  transition: 0.3s;
+  font-size: 17px;
+  margin: 10px;
 }
 
-#controls label:hover {
-  opacity: 1;
+.product-links a:hover {
+  color: #ff6000;
 }
 
-@keyframes slideAnimation {
-  0%,
-  25% {
-    margin-left: 0;
+.button {
+  width: 180px;
+  height: 40px;
+  background-image: linear-gradient(#ff6000, #772e00);
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px 33c506;
+  transition-duration: 0.3s;
+}
+
+.cartIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.cartIcon path {
+  fill: white;
+}
+
+.button:active {
+  transform: translate(2px, 0px);
+  box-shadow: 0px 1px 0px #ffffff;
+  padding-bottom: 1px;
+}
+
+@media (max-width: 1200px) {
+  .name {
+    font-size: 2.5rem;
+    top: 70vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
-  30%,
-  50% {
-    margin-left: -100%;
-  }
-  55%,
-  75% {
-    margin-left: -200%;
-  }
-  80%,
-  100% {
-    margin-left: -300%;
+
+  .product-card {
+    flex: 0 0 25%;
   }
 }
 
-@media screen and (max-width: 1200px) {
-  img {
-    height: auto;
+@media (max-width: 900px) {
+  .name {
+    font-size: 2rem;
+    top: 80vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .product-card {
+    flex: 0 0 45%;
   }
 }
 
-@media screen and (max-width: 900px) {
-  #slides .slide {
-    height: 200px;
-  }
-
-  #controls label {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+@media (max-width: 600px) {
+  .name {
+    font-size: 2.5rem;
+    top: 98vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
-@media screen and (max-width: 600px) {
-  #slides .slide {
-    height: 150px;
+@media (max-width: 400px) {
+  .name {
+    font-size: 2.5rem;
+    top: 85vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
-  #controls label {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+  .product-card {
+    flex: 1 1 90%;
   }
 }

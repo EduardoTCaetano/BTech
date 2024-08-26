@@ -1,38 +1,31 @@
 <body>
-  <div id="slider">
-    <div id="slides">
-      <div id="overflow">
-        <div class="inner">
-          <div class="slide slide_1">
-            <div class="slide-content">
-              <img
-                src="https://armazenamentotcc.blob.core.windows.net/tccimagens/.net.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="slide slide_2">
-            <div class="slide-content">
-              <img
-                src="https://armazenamentotcc.blob.core.windows.net/tccimagens/angular.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="slide slide_3">
-            <div class="slide-content">
-              <img
-                src="https://armazenamentotcc.blob.core.windows.net/tccimagens/type.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="slide slide_4">
-            <div class="slide-content">
-              <img
-                src="https://armazenamentotcc.blob.core.windows.net/tccimagens/xunit.jpg"
-                alt=""
-              />
+  <div class="home-container">
+    <div class="name">Top Vendidos</div>
+    <div class="products-grid">
+      <div
+        *ngFor="let product of products"
+        class="col-md-2 col-sm-4 col-6 product-card spacing"
+      >
+        <div class="product-thumb">
+          <img [src]="product.image" alt="{{ product.name }}" />
+        </div>
+        <div class="product-details">
+          <span class="product-price">
+            {{ product.price | currency : "BRL" : "symbol" : "1.2-2" }}
+          </span>
+          <h4>
+            <a href="#">{{ product.name }}</a>
+          </h4>
+          <p>{{ product.description }}</p>
+          <div class="product-bottom-details">
+            <button class="button">Ver Mais</button>
+            <div class="product-links">
+              <a href=""
+                ><i
+                  class="fas fa-shopping-cart"
+                  (click)="addToCart($event, product)"
+                ></i
+              ></a>
             </div>
           </div>
         </div>

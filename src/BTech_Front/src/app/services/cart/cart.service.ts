@@ -17,7 +17,6 @@ export class CartService {
   cartItemCount$ = this.cartItemCountSource.asObservable();
 
   constructor(private http: HttpClient) {
-    // Atualiza a contagem de itens no início com os itens atuais do carrinho
     this.cartItems$.subscribe(items => this.cartItemCountSource.next(items.length));
   }
 
@@ -67,7 +66,7 @@ export class CartService {
         }),
         catchError((error) => {
           console.error('Erro ao atualizar item no carrinho', error);
-          return of(cartItem); // Retorna o item original em caso de erro
+          return of(cartItem);
         })
       );
   }
