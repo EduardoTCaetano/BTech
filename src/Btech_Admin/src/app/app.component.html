@@ -1,1 +1,64 @@
+<<<<<<< HEAD
 <router-outlet></router-outlet>
+=======
+<body>
+  <header class="header">
+    <a href="/" class="logo">Busca Tech</a>
+
+    <input type="checkbox" id="check" />
+    <label for="check" class="icons" aria-label="Toggle menu">
+      <i class="bx bx-menu" id="menu-icon" aria-hidden="true"></i>
+      <i class="bx bx-x" id="close-icon" aria-hidden="true"></i>
+    </label>
+
+    <li class="items search-item">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <form action="/" method="GET">
+        <input
+          type="text"
+          name="query"
+          placeholder="Pesquisar..."
+          aria-label="Search"
+          class="search-box"
+        />
+      </form>
+    </li>
+
+    <nav class="navbar">
+      <ul>
+        <li class="items">
+          <a href="/home" style="--i: 0">Home</a>
+        </li>
+        <li class="items">
+          <a href="/" style="--i: 1">Gerenciamento</a>
+        </li>
+
+
+        <li class="items">
+          <a
+            href="/cart"
+            style="--i: 3"
+            class="cart-icon"
+            aria-label="View cart"
+          >
+            <i class="bx bxs-cart" aria-hidden="true"></i>
+            <span *ngIf="cartItemCount > 0" class="cart-count">
+              {{ cartItemCount }}
+            </span>
+            Seu carrinho
+          </a>
+        </li>
+        <li class="items user-item">
+          <a href="/login" class="user-name" style="--i: 4">
+            <i class="bx bx-user" id="user-icon" aria-hidden="true"></i>
+            {{ userName || "Entrar" }}
+          </a>
+          <ul class="dropdown-menu" *ngIf="userName">
+            <li><a (click)="logout()">Sair</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</body>
+>>>>>>> 78967e9259063bee6d5a07b5d8f58e6b6e4a05bf
