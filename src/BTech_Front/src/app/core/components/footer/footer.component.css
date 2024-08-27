@@ -47,12 +47,15 @@ p {
 
 .p-list {
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
 }
-
 .p-list li {
   display: block;
   text-align: center;
-  margin: 5px 0px;
+  margin: 0 8px;
   color: white;
 }
 
