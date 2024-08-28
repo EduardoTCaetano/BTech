@@ -1,13 +1,11 @@
 <div class="container-login">
   <div class="img-box">
-    <img src="assets/login.svg" />
+    <img
+      src="https://armazenamentotcc.blob.core.windows.net/tccimagens/Login-Security.svg"
+    />
   </div>
   <div class="content-box">
     <div class="form-box">
-      <h2>
-        <a class="button" routerLink="/" routerLinkActive="selected">Loja Combo</a>
-      </h2>
-      <br />
       <h2>Entrar</h2>
       <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
         <div class="input-box">
@@ -31,36 +29,13 @@
             [type]="passwordFieldType"
             required
           />
-          <span class="eye-icon" (click)="togglePasswordVisibility()">
-            <i
-              [ngClass]="
-                passwordFieldType === 'password'
-                  ? 'fa-solid fa-eye-slash'
-                  : 'fa-solid fa-eye'
-              "
-            ></i>
-          </span>
         </div>
 
         <div class="error-message" *ngIf="errorMessage">
           {{ errorMessage }}
         </div>
-
-        <div class="remember">
-          <label><input type="checkbox" /> Lembre-Me </label>
-          <a>Esqueceu a Senha?</a>
-        </div>
-
         <div class="input-box">
-          <input
-            type="submit"
-            class="btn btn-primary mt-3"
-            value="Entrar"
-          />
-        </div>
-
-        <div class="input-box">
-          <p>Não Tem Uma Conta?<a routerLink="/singup" routerLinkActive="selected"> Inscrever-se</a></p>
+          <input type="submit" class="btn btn-primary mt-3" value="Entrar" />
         </div>
       </form>
     </div>

@@ -1,1 +1,32 @@
-<p>navbar works!</p>
+<body>
+  <header class="header">
+    <a href="/" class="logo">Busca Tech</a>
+
+    <input type="checkbox" id="check" />
+    <label for="check" class="icons" aria-label="Toggle menu">
+      <i class="bx bx-menu" id="menu-icon" aria-hidden="true"></i>
+      <i class="bx bx-x" id="close-icon" aria-hidden="true"></i>
+    </label>
+
+    <nav class="navbar">
+      <ul>
+        <li class="items">
+          <a href="/home" style="--i: 0">Home</a>
+        </li>
+        <li class="items">
+          <a href="/" style="--i: 1">Gerenciamento</a>
+        </li>
+
+        <li class="items user-item">
+          <a href="/login" class="user-name" style="--i: 4">
+            <i class="bx bx-user" id="user-icon" aria-hidden="true"></i>
+            {{ userName || "Entrar" }}
+          </a>
+          <ul class="dropdown-menu" *ngIf="userName">
+            <li><a (click)="logout()">Sair</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</body>
