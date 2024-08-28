@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth/auth.service';  // Adjust the path as needed
+import { AuthService } from '../../../services/auth/auth.service';  // Ajuste o caminho conforme necessário
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit {
   userName: string | null = null;
   showLogoutButton = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.authService.userName$.subscribe((name) => {
@@ -36,6 +37,7 @@ export class NavbarComponent implements OnInit {
         this.authService.logout();
         this.userName = null;
         this.showLogoutButton = false;
+        this.router.navigate(['/login']);
       }
     });
   }

@@ -8,8 +8,9 @@
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background-color: #535252;
+  background-color: #67666685;
 }
+
 
 .header::before {
   content: "";
@@ -17,7 +18,7 @@
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: saturate(180%) blur(50px);
+  backdrop-filter: blur(10px);
   width: 100%;
   height: 100%;
   z-index: -1;
@@ -52,6 +53,7 @@ ul {
 
 .logo {
   font-size: 3rem;
+  margin-top: -5px;
   color: #fff;
   text-decoration: none;
   font-family: "Bungee Spice", sans-serif;
@@ -75,6 +77,7 @@ img {
   text-decoration: none;
   font-weight: 500;
   margin-left: 2.5rem;
+  top: 5px;
 }
 
 #check {
@@ -178,6 +181,53 @@ img {
   padding: 4px 8px;
   font-size: 12px;
 }
+
+.searchBox {
+  display: flex;
+  max-width: 230px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #303030;
+  border-radius: 50px;
+  position: relative;
+}
+
+.searchButton {
+  color: white;
+  position: absolute;
+  right: 8px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--gradient-2, linear-gradient(90deg, #ff6000 0%, #303030 100%));
+  border: 0;
+  display: inline-block;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+/*hover effect*/
+button:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+  transform: translateY(-3px);
+}
+/*button pressing effect*/
+button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.searchInput {
+  border: none;
+  background: none;
+  outline: none;
+  color: white;
+  font-size: 15px;
+  padding: 24px 46px 24px 26px;
+}
+
+
 
 @media (max-width: 992px) {
   .header {
@@ -294,7 +344,7 @@ img {
 .search-box {
   padding: 0.5rem 2rem 0.5rem 0.5rem;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #dddd;
   width: 250px;
 }
 
@@ -303,3 +353,4 @@ img {
     display: none;
   }
 }
+

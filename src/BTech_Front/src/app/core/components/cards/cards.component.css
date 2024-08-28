@@ -16,7 +16,7 @@ div.cards section.card:hover {
   border-radius: 20px;
   background-color: #303030;
   border: 4px solid rgb(224, 123, 7);
-  transition: all 0.5s;
+  transition: .5s ease;
 }
 
 div.cards section.card {
@@ -54,7 +54,7 @@ div.cards section.card h3 {
 div.cards section.card span {
   font-weight: 400;
   max-width: 640px;
-  font-size: 75%; 
+  font-size: 75%;
   margin-bottom: 16px;
 }
 

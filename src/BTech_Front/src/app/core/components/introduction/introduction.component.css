@@ -35,7 +35,8 @@
   margin: 9px;
   background: #1e1e1e;
   box-sizing: border-box;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: .5s ease;
+
 }
 
 .product-card:hover {

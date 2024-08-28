@@ -5,7 +5,7 @@ import { SacComponent } from './core/components/sac/sac.component';
 import { CartComponent } from './core/components/cart/cart.component';
 import { SearchComponent } from './core/components/search/search.component';
 import { LoginComponent } from './core/components/login/login.component';
-import { AuthGuard } from './Guard/AuthGuard';
+import { AuthGuard } from './guard/authGuard';
 import { ProductPageComponent } from './core/components/product-page/product-page.component';
 
 const routes: Routes = [

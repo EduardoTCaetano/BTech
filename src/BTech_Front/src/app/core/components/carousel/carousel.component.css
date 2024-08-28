@@ -35,7 +35,7 @@ button {
 
 button:hover {
   background-color: #b3b2b2;
-  transition: all 0.3s;
+  transition: .5s ease;
 }
 
 .image-display {

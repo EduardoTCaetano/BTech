@@ -105,6 +105,16 @@ input[type="password"] {
   border-radius: 8px;
   width: 100%;
   outline: none;
+  transition: .5s ease;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+
+.container input:hover {
+  outline: none;
+  border-color: #ff6000;
+  background-color: #fff;
+  box-shadow: 0 0 0 5px rgba(213, 88, 10, 0.282);
 }
 
 .form-container {

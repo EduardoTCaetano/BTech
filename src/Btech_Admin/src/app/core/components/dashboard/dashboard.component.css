@@ -1,0 +1,23 @@
+.product-list-container {
+  padding: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.product-thumb img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-details {
+  margin-top: 10px;
+}
+
+.product-price {
+  color: #28a745;
+  font-weight: bold;
+}

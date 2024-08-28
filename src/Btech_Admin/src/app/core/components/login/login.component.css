@@ -29,9 +29,6 @@ a {
   align-items: center;
   width: 50%;
   height: 100%;
-
-  /* background-color: white; Adiciona fundo branco para contraste */
-
 }
 
 .content-box .form-box {
@@ -67,10 +64,6 @@ a {
   text-decoration: none;
 }
 
-.button{
-  color: #4aa4ee;
-  cursor: pointer;
- }
 
 .content-box .form-box .input-box input {
   width: 100%;
@@ -80,8 +73,19 @@ a {
   border: none;
   font-size: 17px;
   color: #32324f;
-  background-color: #ecf2f7;
+  background-color: #dddd;
   border-radius: 5px;
+  transition: .5s ease;
+  border-radius: 10px;
+  border: 2px solid transparent;
+
+}
+
+.content-box .form-box .input-box input:hover {
+  outline: none;
+  border-color: #ff6000;
+  background-color: #fff;
+  box-shadow: 0 0 0 5px rgba(213, 88, 10, 0.282);
 }
 
 .content-box .form-box .input-box span {
@@ -97,18 +101,18 @@ a {
 }
 
 .content-box .form-box .input-box input[type=submit] {
-  background: #000000;
+  background: #424242;
   color: #fff;
   outline: none;
   border: none;
   font-weight: 500;
   cursor: pointer;
   font-size: 20px;
-  transition: 0.3s;
+  transition: .5s ease;
 }
 
 .content-box .form-box .input-box input[type=submit]:hover {
-  background: #797979;
+  background: #1e1e1e;
 }
 
 .content-box .form-box .remember{
@@ -121,33 +125,7 @@ a {
   justify-content: space-between;
 }
 
-.content-box .form-box .remember a{
-  text-decoration: none;
-  color: #4aa4ee;
-}
-.content-box .form-box .remember a:hover{
-  color: #3286ca;
-}
 
-.content-box .form-box .input-box p {
-  color: #32324f;
-}
-.content-box .form-box .input-box p a{
-  color: #4aa4ee;
-}
-
-.content-box .form-box .input-box p a:hover{
-  color: #3286ca;
-}
-.content-box .form-box h3
-{
-  color: #607d8b;
-  text-decoration: none;
-  margin: 40px 0 15px;
-  font-weight: 500;
-  text-align: center;
-  font-size: 22px;
-}
 @media (max-width:868px) {
   .container-login .img-box{
       display: none;

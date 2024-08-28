@@ -1,1 +1,60 @@
 <app-navbar></app-navbar>
+
+<div class="product-list-container">
+  <h2>Lista de Produtos</h2>
+  <button class="btn btn-primary" (click)="openModal()">Adicionar Produto</button>
+
+  <div class="product-list">
+    <div *ngFor="let product of products" class="product-card">
+      <div class="product-thumb">
+        <img [src]="product.image" alt="{{ product.name }}" />
+      </div>
+      <div class="product-details">
+        <span class="product-price">
+          {{ product.price | currency: 'BRL' : 'symbol' : '1.2-2' }}
+        </span>
+        <h4>{{ product.name }}</h4>
+        <p>{{ product.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProductModalLabel">Adicionar Produto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" id="name" class="form-control" formControlName="name">
+            </div>
+            <div class="form-group">
+              <label for="description">Descrição</label>
+              <textarea id="description" class="form-control" formControlName="description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="price">Preço</label>
+              <input type="number" id="price" class="form-control" formControlName="price">
+            </div>
+            <div class="form-group">
+              <label for="image">URL da Imagem</label>
+              <input type="text" id="image" class="form-control" formControlName="image">
+            </div>
+            <div class="form-group">
+              <label for="categoryId">Categoria</label>
+              <input type="text" id="categoryId" class="form-control" formControlName="categoryId">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
