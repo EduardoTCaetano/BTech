@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import emailjs from '@emailjs/browser';
 
 interface FAQ {
   question: string;
@@ -12,6 +14,37 @@ interface FAQ {
   styleUrls: ['./sac.component.css'],
 })
 export class SacComponent {
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      to_name: '',
+      from_name: '',
+      from_email: '',
+      message: '',
+    });
+
+    
+  }
+
+  async send() {
+    emailjs.init('ipEEfm5fDU1GgnoVa');
+    let response = await emailjs.send('service_ngo4usw', 'template_ce2lfm3', {
+      to_name: this.form.value.to_name,
+      from_name: this.form.value.from_name,
+      from_email: this.form.value.from_email,
+      message: this.form.value.message,
+    });
+
+    alert('Mensagem Enviada com Sucesso');
+    this.form.reset();
+  }
+
+  onSubmit() {
+    throw new Error('Method not implemented.');
+  }
+
+
   faqs: FAQ[] = [
     {
       question: 'Como posso entrar em contato com o suporte?',
