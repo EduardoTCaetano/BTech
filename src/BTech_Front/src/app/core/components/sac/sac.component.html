@@ -2,27 +2,73 @@
   <header>
     <app-navbar></app-navbar>
   </header>
+
   <div class="container">
+    <!-- Seção de Contato -->
     <section id="contact-form">
-      <h2>Precisando de ajuda? Nos envie sua duvida.</h2>
+      <h2>Precisando de ajuda? Nos envie sua dúvida.</h2>
+
+      <!-- Formulário de Contato -->
+      <div [formGroup]="form" class="contact-form-container">
+        <h3>Contato</h3>
+        <form action="javascript:void(0)" (submit)="send()">
+          <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input
+              formControlName="from_name"
+              type="text"
+              id="nome"
+              name="nome"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              formControlName="from_email"
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="mensagem">Mensagem:</label>
+            <textarea
+              formControlName="message"
+              id="mensagem"
+              name="mensagem"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="formbold-btn">Enviar</button>
+        </form>
+      </div>
+
+      <!-- Link para WhatsApp -->
       <div class="form-group">
         <a
           href="https://chat.whatsapp.com/HUYo9jWiYYdFUfva5Y3qw5"
           class="button-link"
           target="_blank"
         >
-          <button type="submit">Enviar mensagem</button>
+          <button type="button">Enviar mensagem via WhatsApp</button>
         </a>
       </div>
     </section>
+
+    <!-- Seção de FAQs -->
     <section class="faq-section">
       <h2>FAQs</h2>
       <div class="faq" *ngFor="let faq of faqs" (click)="toggleAnswer(faq)">
         <div class="faq-question-wrapper">
           <p class="faq-question">{{ faq.question }}</p>
-          <span class="arrow" [ngClass]="{ rotated: faq.showAnswer }"
-            >&#9662;</span
-          >
+          <span class="arrow" [ngClass]="{ rotated: faq.showAnswer }">
+            &#9662;
+          </span>
         </div>
         <div class="faq-answer" [ngClass]="{ show: faq.showAnswer }">
           <p *ngFor="let answer of faq.answers">{{ answer }}</p>

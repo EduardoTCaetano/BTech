@@ -1,6 +1,6 @@
 {
   "name": "blitz-tech-front",
-  "version": "0.0.0",
+  "veyrsion": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
