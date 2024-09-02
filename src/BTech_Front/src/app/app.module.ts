@@ -46,6 +46,7 @@ import { CartService } from './services/cart/cart.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService, CartService],
   bootstrap: [AppComponent],

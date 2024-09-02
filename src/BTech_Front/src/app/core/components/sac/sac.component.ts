@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 
 interface FAQ {
@@ -14,31 +14,24 @@ interface FAQ {
   styleUrls: ['./sac.component.css'],
 })
 export class SacComponent {
-  form: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      to_name: '',
-      from_name: '',
-      from_email: '',
-      message: '',
-    });
-
-    
-  }
+  from_name: string = '';
+  from_email: string = '';
+  message: string = '';
 
   async send() {
     emailjs.init('ipEEfm5fDU1GgnoVa');
     let response = await emailjs.send('service_ngo4usw', 'template_ce2lfm3', {
-      to_name: this.form.value.to_name,
-      from_name: this.form.value.from_name,
-      from_email: this.form.value.from_email,
-      message: this.form.value.message,
+      from_name: this.from_name,
+      from_email: this.from_email,
+      message: this.message,
     });
 
     alert('Mensagem Enviada com Sucesso');
-    this.form.reset();
+    this.from_name = '';
+    this.from_email = '';
+    this.message = '';
   }
+  
 
   onSubmit() {
     throw new Error('Method not implemented.');

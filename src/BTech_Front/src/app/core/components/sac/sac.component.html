@@ -9,16 +9,15 @@
       <h2>Precisando de ajuda? Nos envie sua dúvida.</h2>
 
       <!-- Formulário de Contato -->
-      <div [formGroup]="form" class="contact-form-container">
-        <h3>Contato</h3>
+      <div class="contact-form-container">
         <form action="javascript:void(0)" (submit)="send()">
           <div class="form-group">
             <label for="nome">Nome:</label>
             <input
-              formControlName="from_name"
+              [(ngModel)]="from_name"
               type="text"
               id="nome"
-              name="nome"
+              name="from_name"
               class="form-control"
               required
             />
@@ -26,10 +25,10 @@
           <div class="form-group">
             <label for="email">Email:</label>
             <input
-              formControlName="from_email"
+              [(ngModel)]="from_email"
               type="email"
               id="email"
-              name="email"
+              name="from_email"
               class="form-control"
               required
             />
@@ -37,9 +36,9 @@
           <div class="form-group">
             <label for="mensagem">Mensagem:</label>
             <textarea
-              formControlName="message"
+              [(ngModel)]="message"
               id="mensagem"
-              name="mensagem"
+              name="message"
               class="form-control"
               required
             ></textarea>
