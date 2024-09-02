@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@emailjs/browser": "^4.4.1",
     "bootstrap": "^5.3.3",
     "firebase": "^10.12.2",
     "rxjs": "~7.8.0",
