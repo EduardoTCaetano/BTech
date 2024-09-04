@@ -4,19 +4,19 @@ body {
   position: relative;
   overflow: hidden;
   background-image: url(/assets/fundologin.jpg);
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  color: #ffffff; /* Garante que o texto seja branco para melhor contraste */
+  color: #ffffff;
 }
 
 h2 {
   font-family: "Bungee Spice", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: #ff6000; /* Cor do título */
+  color: #ff6000;
   text-align: center;
 }
+
 .container {
   width: 100%;
   margin: 0 auto;
@@ -35,7 +35,6 @@ h2 {
   box-shadow: 0 0px 8px 0 #ff6000;
   text-align: center;
 }
-
 
 header {
   min-height: 100px;
@@ -64,17 +63,17 @@ header h1 {
   display: block;
   margin-bottom: 5px;
   font-size: 1.2em;
-  color: #ff6000; /* Cor dos rótulos para destacar */
+  color: #ff6000;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 15px; /* Aumenta o padding para um espaço mais confortável */
-  border: 2px solid #ff6000; /* Destaque das bordas */
-  border-radius: 10px; /* Bordas mais arredondadas */
-  background-color: #303030; /* Fundo dos campos de entrada */
-  color: #ffffff; /* Cor do texto dentro dos campos */
+  padding: 15px;
+  border: 2px solid #ff6000;
+  border-radius: 10px;
+  background-color: #303030;
+  color: #ffffff;
 }
 .form-group input:focus,
 .form-group textarea:focus {
@@ -166,33 +165,38 @@ header h1 {
   margin-bottom: 1em;
 }
 
-.formbold-btn{
-    background: linear-gradient(45deg, #ff6000, #e8491d);
-    border: none;
-    color: white;
-    padding: 15px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.2em;
-    font-weight: bold;
-    border-radius: 30px;
-    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    outline: none;
-    margin: 10px auto;
-    display: block; /* Centra o botão */
-  }
-  
-  .formbold-btn:hover {
-    background: linear-gradient(45deg, #e8491d, #ff6000);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
-  }
-  
-  .formbold-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  }
-  
+.formbold-btn {
+  background: linear-gradient(45deg, #ff6000, #e8491d);
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  outline: none;
+  margin: 10px auto;
+  display: block;
+}
+
+.formbold-btn:hover {
+  background: linear-gradient(45deg, #e8491d, #ff6000);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
+.formbold-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#zap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

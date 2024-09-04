@@ -23,7 +23,7 @@
                 </h4>
                 <p>{{ product.description }}</p>
                 <div class="product-bottom-details">
-                  <button class="button">Ver Mais</button>
+                  <button class="button" [routerLink]="['/page', product.id]">Ver Mais</button>
                   <div class="product-links">
                     <a href=""
                       ><i
@@ -57,7 +57,7 @@
                 </h4>
                 <p>{{ product.description }}</p>
                 <div class="product-bottom-details">
-                  <button class="button">Ver Mais</button>
+                  <button class="button" [routerLink]="['/page', product.id]">Ver Mais</button>
                   <div class="product-links">
                     <a href=""
                       ><i

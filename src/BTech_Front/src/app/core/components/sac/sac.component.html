@@ -4,11 +4,9 @@
   </header>
 
   <div class="container">
-    <!-- Seção de Contato -->
     <section id="contact-form">
       <h2>Precisando de ajuda? Nos envie sua dúvida.</h2>
 
-      <!-- Formulário de Contato -->
       <div class="contact-form-container">
         <form action="javascript:void(0)" (submit)="send()">
           <div class="form-group">
@@ -47,19 +45,9 @@
         </form>
       </div>
 
-      <!-- Link para WhatsApp -->
-      <div class="form-group">
-        <a
-          href="https://chat.whatsapp.com/HUYo9jWiYYdFUfva5Y3qw5"
-          class="button-link"
-          target="_blank"
-        >
-          <button type="button">Enviar mensagem via WhatsApp</button>
-        </a>
-      </div>
+
     </section>
 
-    <!-- Seção de FAQs -->
     <section class="faq-section">
       <h2>FAQs</h2>
       <div class="faq" *ngFor="let faq of faqs" (click)="toggleAnswer(faq)">
@@ -73,6 +61,16 @@
           <p *ngFor="let answer of faq.answers">{{ answer }}</p>
         </div>
       </div>
+
+      <!-- <div class="form-group" id="zap">
+        <a
+          href="https://chat.whatsapp.com/HUYo9jWiYYdFUfva5Y3qw5"
+          class="button-link"
+          target="_blank"
+        >
+          <button type="button">Enviar mensagem via WhatsApp</button>
+        </a>
+      </div> -->
     </section>
   </div>
 </body>

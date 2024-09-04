@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 
 <div class="product-list-container">
-  <h2>Lista de Produtos</h2>
   <button class="btn btn-primary" (click)="openModal()">Adicionar Produto</button>
 
   <div class="product-list">
@@ -15,11 +14,14 @@
         </span>
         <h4>{{ product.name }}</h4>
         <p>{{ product.description }}</p>
+        <div class="button-group">
+          <button class="btn btn-secondary" (click)="openEditModal(product)">Editar</button>
+          <button class="btn btn-danger" (click)="confirmDelete(product)">Excluir</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
   <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -49,9 +51,55 @@
             </div>
             <div class="form-group">
               <label for="categoryId">Categoria</label>
-              <input type="text" id="categoryId" class="form-control" formControlName="categoryId">
+              <select id="categoryId" class="form-control" formControlName="categoryId">
+                <option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.description }}
+                </option>
+              </select>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary" id="submit">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProductModalLabel">Editar Produto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editProductForm" (ngSubmit)="onEditSubmit()">
+            <div class="form-group">
+              <label for="editName">Nome</label>
+              <input type="text" id="editName" class="form-control" formControlName="name">
+            </div>
+            <div class="form-group">
+              <label for="editDescription">Descrição</label>
+              <textarea id="editDescription" class="form-control" formControlName="description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editPrice">Preço</label>
+              <input type="number" id="editPrice" class="form-control" formControlName="price">
+            </div>
+            <div class="form-group">
+              <label for="editImage">URL da Imagem</label>
+              <input type="text" id="editImage" class="form-control" formControlName="image">
+            </div>
+            <div class="form-group">
+              <label for="editCategoryId">Categoria</label>
+              <select id="editCategoryId" class="form-control" formControlName="categoryId">
+                <option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.description }}
+                </option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
           </form>
         </div>
       </div>

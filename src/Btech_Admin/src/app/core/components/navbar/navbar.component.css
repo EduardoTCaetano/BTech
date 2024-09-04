@@ -348,6 +348,53 @@ button:active {
   width: 250px;
 }
 
+.items {
+  position: relative;
+}
+
+.items .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 150px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.items .dropdown-menu li {
+  list-style: none;
+}
+
+.items .dropdown-menu a {
+  display: block;
+  padding: 8px 16px;
+  color: #fdfdfd;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.items .dropdown-menu a:hover {
+  background-color: #303030;
+}
+
+.items:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+.items a:hover {
+  color: #ff6000;
+  transition: all 0.6s;
+}
+
+
 @media (max-width: 904px) {
   .search-item {
     display: none;

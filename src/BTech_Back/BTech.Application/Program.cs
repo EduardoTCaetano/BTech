@@ -17,12 +17,10 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar o contexto do banco de dados
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-// Configurar Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;
@@ -31,10 +29,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 12;
 
-    // Permitir espaços no nome de usuário
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 
-    // Garantir que o e-mail seja único
     options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<DataContext>()
@@ -87,7 +83,7 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
     {
-        policy.RequireRole("Admin"); // Somente usuários com a role "Admin" poderão acessar as rotas protegidas
+        policy.RequireRole("Admin"); 
     });
 });
 

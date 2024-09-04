@@ -25,20 +25,31 @@ body > main .page-title {
   font-size: 40px;
   padding: 50px 0;
   text-align: center;
+  color: white;
 }
 
 body > main .content {
   display: flex;
   justify-content: space-between;
+  gap: 30px;
 }
 
 body > main .content section {
-  flex: 1;
+  flex: 2;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 15px 0;
 }
 
 body > main .content aside {
+  flex: 1;
   min-width: 250px;
   margin-left: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 15px 0;
 }
 
 button {
@@ -59,7 +70,7 @@ table thead tr th {
   text-align: left;
   padding-bottom: 10px;
   text-transform: uppercase;
-  color: #fff;
+  color: #000;
 }
 
 table tbody tr {
@@ -71,7 +82,8 @@ table tbody tr:last-child {
 }
 
 table tbody tr td {
-  padding: 30px 0;
+  padding: 15px 10px;
+  color: #000;
 }
 
 .product {
@@ -88,28 +100,20 @@ table tbody tr td {
   border-radius: 10%;
 }
 
-span{
-  color: #000;
-}
-
-td{
-  color: #fff;
-}
-
 .product .info {
   margin-left: 20px;
 }
 
 .product .info .name {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 10px;
-  color: #fff;
+  color: #000;
 }
 
 .qty {
   background: #eee;
   display: inline-flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   min-width: 60px;
   border-radius: 20px;
@@ -211,4 +215,17 @@ aside > button {
 
 aside > button:hover {
   background: #3bc55b;
+}
+
+.bg {
+  background-image: url(/assets/mv_2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.paypal-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
 
 interface FAQ {
   question: string;
@@ -19,24 +20,45 @@ export class SacComponent {
   message: string = '';
 
   async send() {
-    emailjs.init('ipEEfm5fDU1GgnoVa');
-    let response = await emailjs.send('service_ngo4usw', 'template_ce2lfm3', {
-      from_name: this.from_name,
-      from_email: this.from_email,
-      message: this.message,
-    });
+    if (this.from_name.trim() === '' || this.from_email.trim() === '' || this.message.trim() === '') {
+      Swal.fire({
+        title: 'Atenção!',
+        text: 'Por favor, preencha todos os campos obrigatórios.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
 
-    alert('Mensagem Enviada com Sucesso');
-    this.from_name = '';
-    this.from_email = '';
-    this.message = '';
+    try {
+      emailjs.init('ipEEfm5fDU1GgnoVa');
+
+      let response = await emailjs.send('service_ngo4usw', 'template_ce2lfm3', {
+        from_name: this.from_name,
+        from_email: this.from_email,
+        message: this.message
+      });
+
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Mensagem Enviada com Sucesso',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+      this.from_name = '';
+      this.from_email = '';
+      this.message = '';
+
+    } catch (error) {
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
   }
-  
-
-  onSubmit() {
-    throw new Error('Method not implemented.');
-  }
-
 
   faqs: FAQ[] = [
     {

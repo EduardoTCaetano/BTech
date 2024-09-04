@@ -9,8 +9,8 @@
   align-items: center;
   z-index: 100;
   background-color: #67666685;
+  box-shadow: 8px 8px 16px #585757, -8px -8px 16px #767575;
 }
-
 
 .header::before {
   content: "";
@@ -191,6 +191,9 @@ img {
   background: #303030;
   border-radius: 50px;
   position: relative;
+  border-radius: 50px;
+  background: #303030;
+  box-shadow: 8px 8px 4px #181818, 0px 0px 6px #181818;
 }
 
 .searchButton {
@@ -200,15 +203,18 @@ img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: var(--gradient-2, linear-gradient(90deg, #ff6000 0%, #303030 100%));
+  background: var(
+    --gradient-2,
+    linear-gradient(90deg, #ff6000 0%, #303030 100%)
+  );
   border: 0;
   display: inline-block;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 /*hover effect*/
 button:hover {
   color: #fff;
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
   box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
   transform: translateY(-3px);
 }
@@ -226,8 +232,6 @@ button:active {
   font-size: 15px;
   padding: 24px 46px 24px 26px;
 }
-
-
 
 @media (max-width: 992px) {
   .header {
@@ -353,4 +357,3 @@ button:active {
     display: none;
   }
 }
-

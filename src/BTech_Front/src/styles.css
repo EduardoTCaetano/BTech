@@ -10,11 +10,10 @@
 html,
 body {
   scroll-behavior: smooth;
-  background-color: #f4f4f4;
+  background-color: #1e1e1e;
 }
 
-/* https://static.vecteezy.com/ti/vetor-gratis/p1/1849553-fundo-ouro-moderno-vetor.jpg */
-/* https://image.freepik.com/free-vector/orange-binary-cyber-circuit-future-technology-concept-background_42077-3783.jpg */
+
 
 ::-webkit-scrollbar {
   width: 0.7rem;
