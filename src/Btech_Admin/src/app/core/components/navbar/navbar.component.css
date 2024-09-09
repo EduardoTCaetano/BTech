@@ -139,13 +139,24 @@ img {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #1e1e1e;
+  background-color: rgba(0, 0, 0, 0); /* Começa transparente */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
   z-index: 1000;
   min-width: 150px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
+
+.user-item:hover .dropdown-menu {
+  display: block;
+  background-color: rgba(0, 0, 0, 1); /* Fica preto */
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 .user-item .dropdown-menu li {
   list-style: none;

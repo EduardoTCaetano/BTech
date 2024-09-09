@@ -22,6 +22,8 @@ import { LoginComponent } from './core/components/login/login.component';
 
 import { AuthService } from './services/auth/auth.service';
 import { CartService } from './services/cart/cart.service';
+import { TechweekComponent } from './core/components/techweek/techweek.component';
+import { AnnouncementComponent } from './core/components/announcement/announcement.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { CartService } from './services/cart/cart.service';
     ProductPageComponent,
     SearchComponent,
     LoginComponent,
+    TechweekComponent,
+    AnnouncementComponent,
   ],
   imports: [
     BrowserModule,

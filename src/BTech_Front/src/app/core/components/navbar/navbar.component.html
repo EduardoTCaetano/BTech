@@ -93,20 +93,25 @@
           <a href="/sac" style="--i: 1">Ajuda</a>
         </li>
         <li class="items">
-          <a href="/search" style="--i: 2">Navegar</a>
+          <a href="/search" style="--i: 2" class="navegar">Navegar</a>
+          <!-- Coluna lateral que será exibida ao passar o mouse -->
+          <div class="sidebar">
+            <ul>
+              <li><a href="#">Todos</a></li>
+              <li><a href="#">Notebooks</a></li>
+              <li><a href="#">Fones</a></li>
+              <li><a href="#">Promoção</a></li>
+              <li><a href="#">Celulares</a></li>
+              <li><a href="#">Teclados</a></li>
+              <li><a href="#">Mais Vendidos</a></li>
+              <li><a href="#">TechWeek</a></li>
+            </ul>
+          </div>
         </li>
 
         <li class="items">
-          <a
-            href="/cart"
-            style="--i: 3"
-            class="cart-icon"
-            aria-label="View cart"
-          >
+          <a href="/cart" style="--i: 3" class="cart-icon" aria-label="View cart">
             <i class="bx bxs-cart" aria-hidden="true"></i>
-            <span *ngIf="cartItemCount > 0" class="cart-count">
-              {{ cartItemCount }}
-            </span>
             Meu carrinho
           </a>
         </li>

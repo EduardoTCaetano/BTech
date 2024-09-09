@@ -99,8 +99,25 @@ namespace BlitzTech.Application.Controllers
             {
                 return NotFound("Nenhum produto encontrado para esta categoria.");
             }
+
             var productDtos = products.Select(p => p.ToProductDto());
             return Ok(productDtos);
         }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string searchTerm)
+        {
+            var queryObject = new QueryObject { SearchTerm = searchTerm };
+            var products = await _productRepo.GetAllAsync(queryObject);
+
+            if (!products.Any())
+            {
+                return NotFound("Nenhum produto encontrado.");
+            }
+
+            var productDtos = products.Select(p => p.ToProductDto());
+            return Ok(productDtos);
+        }
+
     }
 }

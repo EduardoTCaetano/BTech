@@ -134,6 +134,7 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
+  font-family: "Bungee Spice", sans-serif;
 }
 
 .btn-primary:hover {

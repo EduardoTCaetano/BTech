@@ -211,14 +211,12 @@ img {
   display: inline-block;
   transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-/*hover effect*/
 button:hover {
   color: #fff;
   background-color: #1a1a1a;
   box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
   transform: translateY(-3px);
 }
-/*button pressing effect*/
 button:active {
   box-shadow: none;
   transform: translateY(0);
@@ -356,4 +354,55 @@ button:active {
   .search-item {
     display: none;
   }
+}
+
+
+
+/* Estilo básico para a sidebar */
+.sidebar {
+  display: none;
+  position: absolute;
+  left: 0; /* Alinhamento inicial */
+  top: 130%; /* Mantém o submenu logo abaixo do item "Navegar" */
+  background-color: #303030;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 200px;
+}
+
+/* Posicionar o submenu logo abaixo do item "Navegar" */
+.items {
+  position: relative; /* Necessário para que a sidebar seja posicionada em relação a este item */
+}
+
+/* Mostrar a sidebar quando o mouse estiver sobre o item "Navegar" ou sobre o submenu */
+.navegar:hover + .sidebar,
+.sidebar:hover {
+  display: block;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Itens um abaixo do outro */
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  display: block;
+  padding: 5px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #ff6000;
+  transition: 0.3s;
 }

@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../services/product/product.service';
+import { Component } from '@angular/core';
 import { ProductModel } from '../../../models/ProductModel';
+import { Router } from '@angular/router';
 import { CartItem } from '../../../models/cartmodel';
-import { CartService } from '../../../services/cart/cart.service';
 import { AuthService } from '../../../services/auth/auth.service';
+import { CartService } from '../../../services/cart/cart.service';
+import { ProductService } from '../../../services/product/product.service';
 
 @Component({
-  selector: 'app-product-page',
-  templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.css'],
+  selector: 'app-techweek',
+  templateUrl: './techweek.component.html',
+  styleUrl: './techweek.component.css'
 })
-export class ProductPageComponent implements OnInit {
-  product: any;
+export class TechweekComponent {
   products: ProductModel[] = [];
   userId: string | undefined;
 
@@ -20,31 +19,24 @@ export class ProductPageComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    const productId = this.route.snapshot.paramMap.get('id');
-    if (productId) {
-      this.productService.getProductById(productId).subscribe(data => {
-        this.product = data;
+    const categoryId = '218e1211-760b-4449-9839-7e14fc94cd4b';
+    this.productService.getProductsByCategory(categoryId).subscribe(
+      (data) => {
+        this.products = data;
+      },
+      (error) => {
+        console.error('Erro ao carregar produtos', error);
+      }
+    );
 
-        if (!this.product.imageUrl) {
-          this.product.imageUrl = 'https://exemplo.com/imagem-da-pagina-home.jpg';
-        }
-
-        console.log('Image URL:', this.product.imageUrl);
-      });
-      this.authService.getUserId().subscribe(
-        (id) => (this.userId = id),
-        (error) => console.error('Erro ao obter userId', error)
-      );
-    }
-  }
-
-  activateCredit() {
-    console.log('Credit activated!');
+    this.authService.getUserId().subscribe(
+      (id) => (this.userId = id),
+      (error) => console.error('Erro ao obter userId', error)
+    );
   }
 
   addToCart(event: Event, product: ProductModel): void {

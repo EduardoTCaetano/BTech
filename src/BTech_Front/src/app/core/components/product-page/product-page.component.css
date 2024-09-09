@@ -6,7 +6,6 @@ html, body {
   color: #ffffff;
   height: 100%;
   width: 100%;
-
 }
 
 body {
@@ -16,13 +15,11 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+  padding: 20px;
   background-color: #181818;
   color: #ffffff;
-  margin-top: 100px ;
+  margin-top: 100px;
 }
-
 
 .product-page {
   display: flex;
@@ -33,43 +30,80 @@ body {
   padding: 20px;
   width: 90%;
   max-width: 100%;
-  justify-content: center; /* Adiciona esta linha para centralizar horizontalmente os itens dentro do produto */
-  flex-direction: row; /* Mantém o layout horizontal dos itens */
-}
-
-
-.image-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .image-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px; /* Define uma largura fixa para a seção da imagem */
+  width: 400px;
 }
 
 .image-section img {
-  width: 550px; /* Define a largura fixa da imagem */
-  height: 550px; /* Define a altura fixa da imagem */
-  object-fit: cover; /* Garante que a imagem se ajuste ao tamanho sem distorcer */
+  width: 550px;
+  height: 550px;
+  object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0px 30px 60px -12px rgba(255, 255, 255, 0.2),
-    0px 18px 36px -18px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 30px 60px -12px rgba(255, 255, 255, 0.2), 0px 18px 36px -18px rgba(0, 0, 0, 0.8);
+  margin-left: 25vh;
 }
 
+/* Nova classe para alinhar as três seções horizontalmente */
+.info-sections {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente os cards */
+  align-items: center; /* Centraliza verticalmente os cards */
+  gap: 30px; /* Espaçamento entre os cards */
+  margin-top: 20px;
+  width: 100%; /* Define a largura total do container */
+  padding: 0 20px; /* Margem interna para as bordas */
+}
 
+.payment-options, .shipping-info, .extra-info {
+  flex-basis: 300px; /* Define uma largura base de 300px para cada card */
+  width: 40%; /* Aumenta a largura dos cards */
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4),
+    0px 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  color: #d3d3d3;
+}
+
+/* Ajuste para garantir que as seções ocupem o mesmo espaço */
+.payment-options, .shipping-info, .extra-info {
+  flex: 1; /* Cada card terá a mesma proporção de largura */
+}
+
+/* Estilos de texto e links */
+.payment-options p, .shipping-info p, .extra-info p {
+  margin: 10px 0;
+}
+
+.payment-options a, .shipping-info a, .extra-info a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+.payment-options a:hover, .shipping-info a:hover, .extra-info a:hover {
+  text-decoration: underline;
+}
+.extra-info {
+  background-color: #333333; /* Um tom diferente para destacar a nova seção */
+}
 
 .details-section {
   display: flex;
   flex-direction: column;
   gap: 15px;
   max-width: 600px;
-  justify-content: center; /* Adiciona esta linha para centralizar horizontalmente os itens dentro do produto */
-  margin-left: 200px;
+  justify-content: center;
+  margin-right: 150px;
 }
 
 h1 {
@@ -81,7 +115,6 @@ h1 {
 .product-price {
   font-size: 28px;
   color: #ffffff;
-
 }
 
 .installments {
@@ -105,15 +138,8 @@ h1 {
   margin-left: 5px;
 }
 
-.payment-options, .shipping-info, .stock-info {
-  background-color: #2a2a2a;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4),
-    0px 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.payment-options button, .buy-now, .add-to-cart {
+.button, .buy-now, .add-to-cart {
+  border-radius: 20px;
   align-items: center;
   appearance: none;
   background-color: #ffffff;
@@ -128,22 +154,14 @@ h1 {
   text-align: left;
   transition: background-color 0.15s, transform 0.15s;
   font-size: 18px;
-  margin-top: 10px;
   width: 100%;
-}
-
-.payment-options button:hover, .buy-now:hover, .add-to-cart:hover {
-  background-color: #1c1c1c;
-  color: #ffffff;
+  margin-bottom: 20px;
 }
 
 .description-box {
-  max-width: 90%;
-  margin-top: 30px;
   padding: 20px;
   background-color: #1c1c1c;
   border-radius: 10px;
-  box-shadow: 0px 20px 30px -10px rgba(0, 0, 0, 0.8);
   color: #d3d3d3;
   text-align: left;
 }
