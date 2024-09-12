@@ -32,6 +32,11 @@ namespace BlitzTech.Data.Context
                     Name = "User",
                     NormalizedName = "USER"
                 },
+                 new IdentityRole
+                {
+                    Name = "Order",
+                    NormalizedName = "ORDER"
+                },
             };
             builder.Entity<IdentityRole>().HasData(roles);
         }

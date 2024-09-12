@@ -112,6 +112,9 @@
         <li class="items">
           <a href="/cart" style="--i: 3" class="cart-icon" aria-label="View cart">
             <i class="bx bxs-cart" aria-hidden="true"></i>
+            <span *ngIf="cartItemCount > 0" class="cart-count">
+              {{ cartItemCount }}
+            </span>
             Meu carrinho
           </a>
         </li>

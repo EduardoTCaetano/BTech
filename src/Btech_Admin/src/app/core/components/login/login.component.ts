@@ -33,7 +33,7 @@ export class LoginComponent {
         (response: AuthResponse) => {
           // Get the user role from the AuthService
           this.authService.userRole$.subscribe((userRole) => {
-            if (userRole === 'Admin') {
+            if (userRole === 'Admin' || userRole === 'Order') {
               form.reset();
               this.errorMessage = null;
               Swal.fire({
@@ -44,15 +44,15 @@ export class LoginComponent {
                 showConfirmButton: false,
                 timer: 1500,
               }).then(() => {
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/home']);
               });
             } else {
-              this.errorMessage = 'Acesso negado. Apenas administradores podem logar.';
+              this.errorMessage = 'Acesso negado. Apenas administradores ou responsáveis por pedidos podem logar.';
               Swal.fire({
                 position: 'top-end',
                 icon: 'error',
                 title: 'Acesso Negado',
-                text: 'Apenas administradores podem logar.',
+                text: 'Apenas administradores ou responsáveis por pedidos podem logar.',
                 showConfirmButton: false,
                 timer: 1500,
               });

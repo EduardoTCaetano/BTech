@@ -3,13 +3,15 @@
   <div class="product-page" *ngIf="product">
     <div class="image-section">
       <img [src]="product.image" [alt]="product.name" />
-
-
     </div>
 
     <div class="details-section">
       <h1>{{ product.name }}</h1>
-      <p class="product-price"><strong>{{ product.price | currency:'BRL':'symbol':'1.2-2' }}</strong></p>
+      <p class="product-price">
+        <strong>{{
+          product.price | currency : "BRL" : "symbol" : "1.2-2"
+        }}</strong>
+      </p>
       <p class="installments">em 12x R$ 3,59 com cartões de crédito</p>
       <div class="rating">
         <span class="star">&#9733;</span>
@@ -26,7 +28,10 @@
       </div>
 
       <button class="buy-now">Comprar agora</button>
-      <button class="add-to-cart">Adicionar ao carrinho</button>
+      <button class="add-to-cart" (click)="addToCart($event, product)">
+        Adicionar ao carrinho
+      </button>
     </div>
-  </div>
+      
+  </div>
 </body>

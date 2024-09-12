@@ -13,7 +13,9 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
   userName: string | null = null;
+  userRole: string | null = null;
   showLogoutButton = false;
+  isPedidoUser = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -21,6 +23,11 @@ export class NavbarComponent implements OnInit {
     this.authService.userName$.subscribe((name) => {
       this.userName = name;
       this.showLogoutButton = !!name;
+    });
+
+    this.authService.userRole$.subscribe((role) => {
+      this.userRole = role;
+      this.isPedidoUser = role === 'Order';
     });
   }
 
@@ -36,7 +43,8 @@ export class NavbarComponent implements OnInit {
       if (result.isConfirmed) {
         this.authService.logout();
         this.userName = null;
-        this.showLogoutButton = false;
+        this.userRole = null;
+        this.isPedidoUser = false;
         this.router.navigate(['/login']);
       }
     });

@@ -14,12 +14,18 @@ namespace api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ITokenService _tokenService;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, ITokenService tokenService, SignInManager<IdentityUser> signInManager)
+        public AccountController(
+            UserManager<IdentityUser> userManager, 
+            RoleManager<IdentityRole> roleManager,
+            ITokenService tokenService, 
+            SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _tokenService = tokenService;
             _signInManager = signInManager;
         }
@@ -54,7 +60,7 @@ namespace api.Controllers
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> GetAdminData()
         {
-            var users = _userManager.Users.Select(u => new {u.Id, u.UserName, u.Email }).ToList();
+            var users = _userManager.Users.Select(u => new { u.Id, u.UserName, u.Email }).ToList();
             return Ok(users);
         }
 
@@ -97,6 +103,56 @@ namespace api.Controllers
             }
         }
 
+        [HttpPost("Register-Order")]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> RegisterOrder([FromBody] RegisterDTO registerDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Verifica se a role "Order" existe, e cria se não existir
+            var roleExists = await _roleManager.RoleExistsAsync("Order");
+            if (!roleExists)
+            {
+                var roleResult = await _roleManager.CreateAsync(new IdentityRole("Order"));
+                if (!roleResult.Succeeded)
+                {
+                    return StatusCode(500, "Erro ao criar a role 'Order'.");
+                }
+            }
+
+            var user = new IdentityUser
+            {
+                UserName = registerDto.UserName,
+                Email = registerDto.EmailAddress
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDto.PassWord);
+
+            if (result.Succeeded)
+            {
+                var roleAssignResult = await _userManager.AddToRoleAsync(user, "Order");
+                if (roleAssignResult.Succeeded)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    return Ok(new NewUserDTO
+                    {
+                        UserName = user.UserName,
+                        EmailAddress = user.Email,
+                        Token = _tokenService.CreateToken(user, roles),
+                    });
+                }
+                else
+                {
+                    return StatusCode(500, roleAssignResult.Errors);
+                }
+            }
+            else
+            {
+                return StatusCode(500, result.Errors);
+            }
+        }
+
         [HttpPost("Test")]
         [Authorize]
         public async Task<IActionResult> SomeOtherAction()
@@ -108,21 +164,21 @@ namespace api.Controllers
             }
             return Ok("Action executed successfully!");
         }
-        
-        // [HttpDelete("Delete/{userName}")]
-        // public async Task<IActionResult> DeleteUser(string userName)
-        // {
-        //     var user = await _userManager.FindByNameAsync(userName.ToLower());
 
-        //     if (user == null)
-        //         return NotFound("User not found!");
+        [HttpDelete("Delete/{userName}")]
+        public async Task<IActionResult> DeleteUser(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName.ToLower());
 
-        //     var result = await _userManager.DeleteAsync(user);
+            if (user == null)
+                return NotFound("User not found!");
 
-        //     if (result.Succeeded)
-        //         return Ok("User deleted successfully!");
+            var result = await _userManager.DeleteAsync(user);
 
-        //     return StatusCode(500, result.Errors);
-        // }
+            if (result.Succeeded)
+                return Ok("User deleted successfully!");
+
+            return StatusCode(500, result.Errors);
+        }
     }
 }

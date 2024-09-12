@@ -7,7 +7,6 @@ namespace BlitzTech.Domain.DTOs.RegisterDTO
         [Required]
         [RegularExpression(@"^[\p{L}\s]+$", ErrorMessage = "O nome de usuário pode conter apenas letras e espaços.")]
         public string UserName { get; set; }
-
         [Required]
         [EmailAddress]
         public string EmailAddress { get; set; }

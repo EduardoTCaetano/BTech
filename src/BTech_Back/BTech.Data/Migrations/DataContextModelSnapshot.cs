@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlitzTech.Data.Migrations
+namespace BTech.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -130,15 +130,21 @@ namespace BlitzTech.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fe848c55-6417-43e9-bd45-d93d0003ec50",
+                            Id = "ab4bb500-67c3-470e-b343-e14f2e5679da",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a574ca7f-f91b-4359-89ba-87b38f7d3dfb",
+                            Id = "c3533cda-572e-4355-a0c4-c65aacbacacb",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "74465722-0203-4038-bb53-cf1b486e93b0",
+                            Name = "Order",
+                            NormalizedName = "ORDER"
                         });
                 });
 

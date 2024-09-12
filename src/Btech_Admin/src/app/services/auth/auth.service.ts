@@ -43,7 +43,7 @@ export class AuthService {
     if (decodedToken) {
       console.log('Saving token with decoded data:', decodedToken);
 
-      if (decodedToken.email && decodedToken.given_name) {
+      if (decodedToken.email && decodedToken.given_name && decodedToken.role) {
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('userEmail', decodedToken.email);
         localStorage.setItem('userName', decodedToken.given_name);
@@ -71,22 +71,23 @@ export class AuthService {
           const decodedToken = this.decodeToken(response.token);
           console.log('Decoded token:', decodedToken);
 
-          if (decodedToken && decodedToken.role === 'Admin') {
-            this.saveToken(response);
+          if (decodedToken && (decodedToken.role === 'Admin' || decodedToken.role === 'Order')) {
+            this.saveToken(response); // Agora aceita tanto 'Admin' quanto 'Order'
           } else {
-            console.error('Acesso negado: Role não é Admin');
+            console.error('Acesso negado: Role não é Admin ou Order');
             Swal.fire({
               position: 'top-end',
               icon: 'error',
               title: 'Acesso Negado',
-              text: 'Somente administradores podem acessar.',
+              text: 'Somente administradores ou responsáveis por pedidos podem acessar.',
               showConfirmButton: false,
               timer: 1500,
             });
-            throw new Error('Acesso negado. Somente Administradores podem acessar.');
+            throw new Error('Acesso negado. Somente Administradores ou responsáveis por pedidos podem acessar.');
           }
         } else {
           console.error('Erro: Resposta de login inválida ou token ausente');
+          throw new Error('Resposta de login inválida ou token ausente');
         }
       }),
       catchError((error) => {
@@ -107,7 +108,7 @@ export class AuthService {
           emailAddress: '',
           userName: '',
           userId: '',
-          roles: []
+          roles: [],
         } as AuthResponse);
       })
     );
@@ -136,17 +137,8 @@ export class AuthService {
     this.userRoleSubject.next(null);
   }
 
-  getUserId(): Observable<string | null> {
-    const userId = localStorage.getItem('userId');
-    return of(userId);
-  }
-
   isLoggedIn(): boolean {
     const token = localStorage.getItem('authToken');
     return !!token;
-  }
-
-  getUserRole(): string | null {
-    return localStorage.getItem('userRole');
   }
 }

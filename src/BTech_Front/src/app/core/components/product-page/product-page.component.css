@@ -6,7 +6,12 @@ html, body {
   color: #ffffff;
   height: 100%;
   width: 100%;
+  background-image: url(/assets/fundologin.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
+
 
 body {
   display: flex;
@@ -18,7 +23,7 @@ body {
   padding: 20px;
   background-color: #181818;
   color: #ffffff;
-  margin-top: 100px;
+  margin-top: 30px;
 }
 
 .product-page {
@@ -33,77 +38,30 @@ body {
   justify-content: space-between;
   flex-direction: row;
   align-items: flex-start;
-  gap: 20px;
 }
 
 .image-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  max-width: 100%;
 }
 
 .image-section img {
-  width: 550px;
-  height: 550px;
+  width: 100%;
+  max-width: 550px;
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0px 30px 60px -12px rgba(255, 255, 255, 0.2), 0px 18px 36px -18px rgba(0, 0, 0, 0.8);
-  margin-left: 25vh;
-}
-
-/* Nova classe para alinhar as três seções horizontalmente */
-.info-sections {
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente os cards */
-  align-items: center; /* Centraliza verticalmente os cards */
-  gap: 30px; /* Espaçamento entre os cards */
-  margin-top: 20px;
-  width: 100%; /* Define a largura total do container */
-  padding: 0 20px; /* Margem interna para as bordas */
-}
-
-.payment-options, .shipping-info, .extra-info {
-  flex-basis: 300px; /* Define uma largura base de 300px para cada card */
-  width: 40%; /* Aumenta a largura dos cards */
-  padding: 20px;
-  background-color: #2a2a2a;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4),
-    0px 8px 16px rgba(0, 0, 0, 0.3);
-  text-align: left;
-  color: #d3d3d3;
-}
-
-/* Ajuste para garantir que as seções ocupem o mesmo espaço */
-.payment-options, .shipping-info, .extra-info {
-  flex: 1; /* Cada card terá a mesma proporção de largura */
-}
-
-/* Estilos de texto e links */
-.payment-options p, .shipping-info p, .extra-info p {
-  margin: 10px 0;
-}
-
-.payment-options a, .shipping-info a, .extra-info a {
-  color: #00aaff;
-  text-decoration: none;
-}
-
-.payment-options a:hover, .shipping-info a:hover, .extra-info a:hover {
-  text-decoration: underline;
-}
-.extra-info {
-  background-color: #333333; /* Um tom diferente para destacar a nova seção */
+  box-shadow: 0px 30px 60px -12px rgba(255, 255, 255, 0.2),
+    0px 18px 36px -18px rgba(0, 0, 0, 0.8);
 }
 
 .details-section {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-width: 600px;
-  justify-content: center;
-  margin-right: 150px;
+  max-width: 100%;
 }
 
 h1 {
@@ -175,5 +133,56 @@ h1 {
 .description-box p {
   margin-top: 10px;
   color: #d3d3d3;
-  line-height: 1.6;
+  line-height: 1.6;
+}
+
+/* Media Queries para telas menores */
+@media (max-width: 1024px) {
+  .product-page {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .details-section {
+    margin-top: 20px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .image-section img {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-price {
+    font-size: 24px;
+  }
+
+  .description-box h2 {
+    font-size: 20px;
+  }
+
+  .buy-now, .add-to-cart {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-page {
+    padding: 10px;
+  }
+
+  .image-section img {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-price {
+    font-size: 20px;
+  }
+
+  .description-box p {
+    font-size: 14px;
+}
 }
