@@ -1,0 +1,186 @@
+body {
+  background: #f6f6f6;
+}
+
+main {
+  background: #1e1e1e;
+  padding: 0 30px 30px;
+}
+
+.page-title {
+  font-size: 40px;
+  padding: 50px 0;
+  text-align: center;
+  color: white;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+section {
+  flex: 2;
+}
+
+aside {
+  flex: 1;
+}
+
+section, aside {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead tr {
+  border-bottom: 3px solid #ff6000;
+}
+
+table thead tr th {
+  text-align: left;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  color: #000;
+}
+
+table tbody tr {
+  border-bottom: 3px solid #ff6000;
+}
+
+table tbody tr:last-child {
+  border: 0;
+}
+
+table tbody tr td {
+  padding: 15px 10px;
+  color: #000;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+}
+
+.product img {
+  width: 100px;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  background-color: #ccc;
+  border-radius: 10%;
+}
+
+.product .info {
+  margin-left: 20px;
+}
+
+.product .info .name {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.qty {
+  background: #eee;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 60px;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 30px;
+}
+
+.qty span {
+  margin: 0 10px;
+}
+
+.qty button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  padding: 0 10px;
+  font-size: 20px;
+  height: 100%;
+}
+
+.qty button:hover {
+  background: #ddd;
+}
+
+aside .box {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  background: #eee;
+  color: #222;
+}
+
+aside .box header {
+  padding: 15px 20px;
+  font-size: 18px;
+  border-bottom: 1px solid #ccc;
+}
+
+aside .box .info {
+  padding: 20px;
+  font-size: 16px;
+}
+
+aside .box .info > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+aside .box .info > div:last-child {
+  margin: 0;
+}
+
+aside .box .info button {
+  color: #28a745;
+  background: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+aside .box footer {
+  padding: 15px 20px;
+  background: #ddd;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+aside > button {
+  border: 0;
+  padding: 15px 0;
+  color: white;
+  background: #28a745;
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+aside > button:hover {
+  background: #3bc55b;
+}
+
+.paypal-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
