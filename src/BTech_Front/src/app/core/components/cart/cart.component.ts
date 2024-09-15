@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // Importação adicionada
 import { CartItem } from '../../../models/cartmodel';
 import { AuthService } from '../../../services/auth/auth.service';
 import { CartService } from '../../../services/cart/cart.service';
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class CartComponent implements OnInit {
       }
     );
   }
+
   increaseQuantity(item: CartItem): void {
     item.quantity += 1;
     this.updateQuantity(item);
@@ -75,5 +78,9 @@ export class CartComponent implements OnInit {
       (total, item) => total + item.price * item.quantity,
       0
     );
+  }
+
+  finalizePurchase(): void {
+    this.router.navigate(['/payment']);
   }
 }
