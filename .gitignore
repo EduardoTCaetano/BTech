@@ -402,3 +402,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+src/BTech_Back/BTech.Application/BTech.db-shm
+src/BTech_Back/BTech.Application/BTech.db-wal
