@@ -1,0 +1,53 @@
+<body>
+  <app-navbar></app-navbar>
+  <main>
+    <div class="page-title">Resumo da Compra</div>
+    <div class="content">
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartItems">
+              <td>
+                <div class="product">
+                  <img [src]="item.image" alt="{{ item.nameProd }}" />
+                  <div class="info">
+                    <div class="name">{{ item.nameProd }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>R$ {{ item.price | number:'1.2-2' }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>R$ {{ item.price * item.quantity | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <aside class="payment-summary">
+        <div class="box">
+          <header>Resumo da Compra</header>
+          <div class="info">
+            <div>
+              <span>Sub-total</span><span>R$ {{ subTotal | number:'1.2-2' }}</span>
+            </div>
+            <div><span>Frete</span><span>Gratuito</span></div>
+          </div>
+          <footer>
+            <span>Total</span>
+            <span>R$ {{ subTotal | number:'1.2-2' }}</span>
+          </footer>
+        </div>
+        <div class="paypal-container">
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>

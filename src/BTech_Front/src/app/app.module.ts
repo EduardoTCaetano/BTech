@@ -24,6 +24,9 @@ import { AuthService } from './services/auth/auth.service';
 import { CartService } from './services/cart/cart.service';
 import { TechweekComponent } from './core/components/techweek/techweek.component';
 import { AnnouncementComponent } from './core/components/announcement/announcement.component';
+import { PaymentComponent } from './core/components/payment/payment.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { SuccessComponent } from './core/components/success/success.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,8 @@ import { AnnouncementComponent } from './core/components/announcement/announceme
     LoginComponent,
     TechweekComponent,
     AnnouncementComponent,
+    PaymentComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ import { AnnouncementComponent } from './core/components/announcement/announceme
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
+    NgxPayPalModule
   ],
   providers: [AuthService, CartService],
   bootstrap: [AppComponent],
