@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'page/:id', component: ProductPageComponent},
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
-  { path: 'sucess', component: SuccessComponent },
+  { path: 'success', component: SuccessComponent },
 ];
 
 @NgModule({
