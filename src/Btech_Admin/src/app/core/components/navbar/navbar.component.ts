@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth/auth.service';  // Ajuste o caminho conforme necessário
+import { AuthService } from '../../../services/auth/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   userRole: string | null = null;
   showLogoutButton = false;
   isPedidoUser = false;
+  isMaster = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
     this.authService.userRole$.subscribe((role) => {
       this.userRole = role;
       this.isPedidoUser = role === 'Order';
+      this.isMaster = role === 'Master';
     });
   }
 
@@ -45,6 +47,7 @@ export class NavbarComponent implements OnInit {
         this.userName = null;
         this.userRole = null;
         this.isPedidoUser = false;
+        this.isMaster = false;
         this.router.navigate(['/login']);
       }
     });

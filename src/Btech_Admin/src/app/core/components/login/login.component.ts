@@ -31,9 +31,8 @@ export class LoginComponent {
     if (form.valid) {
       this.authService.login(this.email, this.password).subscribe(
         (response: AuthResponse) => {
-          // Get the user role from the AuthService
           this.authService.userRole$.subscribe((userRole) => {
-            if (userRole === 'Admin' || userRole === 'Order') {
+            if (userRole === 'Admin' || userRole === 'Order' || userRole === 'Master') {
               form.reset();
               this.errorMessage = null;
               Swal.fire({

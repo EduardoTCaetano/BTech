@@ -47,7 +47,7 @@ export class AuthService {
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('userEmail', decodedToken.email);
         localStorage.setItem('userName', decodedToken.given_name);
-        localStorage.setItem('userRole', decodedToken.role); // Ensure role is saved
+        localStorage.setItem('userRole', decodedToken.role);
         this.userEmailSubject.next(decodedToken.email);
         this.userNameSubject.next(decodedToken.given_name);
         this.userRoleSubject.next(decodedToken.role);
@@ -71,8 +71,8 @@ export class AuthService {
           const decodedToken = this.decodeToken(response.token);
           console.log('Decoded token:', decodedToken);
 
-          if (decodedToken && (decodedToken.role === 'Admin' || decodedToken.role === 'Order')) {
-            this.saveToken(response); // Agora aceita tanto 'Admin' quanto 'Order'
+          if (decodedToken && (decodedToken.role === 'Admin' || decodedToken.role === 'Order' || decodedToken.role === 'Master')) {
+            this.saveToken(response);
           } else {
             console.error('Acesso negado: Role não é Admin ou Order');
             Swal.fire({

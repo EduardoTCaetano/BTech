@@ -11,18 +11,23 @@
     <nav class="navbar">
       <ul>
         <li class="items">
-          <!-- Verifique se o usuário é 'Pedido' para alterar os links -->
-          <a href="/" style="--i: 1">
-            {{ isPedidoUser ? 'Order' : 'Gerenciamento' }}
+          <a href="/home" style="--i: 1">
+            {{ isPedidoUser ? 'Order' : isMaster ? 'Gerenciamento' : 'Gerenciamento' }}
           </a>
           <ul class="dropdown-menu">
-            <li *ngIf="!isPedidoUser"><a href="/dashboard">Dashboard</a></li>
-            <li *ngIf="!isPedidoUser"><a href="/category">Category</a></li>
+            <li *ngIf="!isPedidoUser && !isMaster"><a href="/dashboard">Dashboard</a></li>
+            <li *ngIf="!isPedidoUser && !isMaster"><a href="/category">Category</a></li>
 
-            <!-- Itens para o usuário 'Pedido' -->
             <li *ngIf="isPedidoUser"><a href="/pedido">Pedido</a></li>
             <li *ngIf="isPedidoUser"><a href="/entrega">Entrega</a></li>
             <li *ngIf="isPedidoUser"><a href="/historico">Histórico</a></li>
+
+            <li *ngIf="isMaster"><a href="/aprovacoes">Aprovações</a></li>
+            <li *ngIf="isMaster"><a href="/dashboard">Dashboard</a></li>
+            <li *ngIf="isMaster"><a href="/category">Category</a></li>
+            <li *ngIf="isMaster"><a href="/pedido">Pedido</a></li>
+            <li *ngIf="isMaster"><a href="/entrega">Entrega</a></li>
+            <li *ngIf="isMaster"><a href="/historico">Histórico</a></li>
           </ul>
         </li>
 

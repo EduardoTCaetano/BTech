@@ -16,14 +16,14 @@
   margin: 0 auto;
   max-width: 600px;
   margin-top: 100px;
-  font-family: 'Bungee Spice', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .success-container h1 {
   font-size: 2.5rem;
   color: #28a745;
   margin-bottom: 15px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .success-container p {
@@ -41,7 +41,7 @@
   border-radius: 4px;
   transition: background-color 0.3s;
   margin-top: 20px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .success-container button:hover {

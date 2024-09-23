@@ -19,9 +19,9 @@ namespace api.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
 
         public AccountController(
-            UserManager<IdentityUser> userManager, 
+            UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            ITokenService tokenService, 
+            ITokenService tokenService,
             SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
@@ -103,6 +103,45 @@ namespace api.Controllers
             }
         }
 
+        [HttpPost("Register-Master")]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> RegisterMaster([FromBody] RegisterDTO registerDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = new IdentityUser
+            {
+                UserName = registerDto.UserName,
+                Email = registerDto.EmailAddress
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDto.PassWord);
+
+            if (result.Succeeded)
+            {
+                var roleResult = await _userManager.AddToRoleAsync(user, "Master");
+                if (roleResult.Succeeded)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    return Ok(new NewUserDTO
+                    {
+                        UserName = user.UserName,
+                        EmailAddress = user.Email,
+                        Token = _tokenService.CreateToken(user, roles)
+                    });
+                }
+                else
+                {
+                    return StatusCode(500, roleResult.Errors);
+                }
+            }
+            else
+            {
+                return StatusCode(500, result.Errors);
+            }
+        }
+
         [HttpPost("Register-Order")]
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> RegisterOrder([FromBody] RegisterDTO registerDto)
@@ -110,7 +149,6 @@ namespace api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // Verifica se a role "Order" existe, e cria se não existir
             var roleExists = await _roleManager.RoleExistsAsync("Order");
             if (!roleExists)
             {

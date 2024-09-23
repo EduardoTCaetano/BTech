@@ -54,7 +54,6 @@ namespace BTech.Application.Controllers
                 return Ok(response);
             }
 
-            // Processar erros de criação de usuário
             var errors = result.Errors.Select(e => new
             {
                 Code = e.Code,

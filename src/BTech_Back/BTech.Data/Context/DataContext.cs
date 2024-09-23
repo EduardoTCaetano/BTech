@@ -12,7 +12,7 @@ namespace BlitzTech.Data.Context
         {
         }
 
-        public DbSet<CartItem> CartItem {get; set;}
+        public DbSet<CartItem> CartItem { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
 
@@ -22,6 +22,11 @@ namespace BlitzTech.Data.Context
 
             List<IdentityRole> roles = new List<IdentityRole>
             {
+                new IdentityRole
+                {
+                    Name = "Master",
+                    NormalizedName = "Master"
+                },
                 new IdentityRole
                 {
                     Name = "Admin",

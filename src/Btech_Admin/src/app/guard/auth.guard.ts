@@ -14,31 +14,27 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    // Verifica se o usuário está logado
     if (this.authService.isLoggedIn()) {
-      // Obtém o papel esperado da rota
       const expectedRole = route.data['role'];
       if (expectedRole) {
-        // Obtém o papel do usuário e verifica se corresponde ao esperado
         return this.authService.userRole$.pipe(
           map(userRole => {
-            if (userRole === expectedRole) {
+            if (userRole === 'Master' || userRole === expectedRole) {
               return true;
             } else {
-              this.router.navigate(['/access-denied']); // Roteia para uma página de acesso negado
+              this.router.navigate(['/access-denied']);
               return false;
             }
           }),
           tap(isAuthorized => {
             if (!isAuthorized) {
-              // Pode adicionar lógica adicional para lidar com não autorização
             }
           })
         );
       }
-      return true; // Permite acesso se não houver papel esperado
+      return true;
     } else {
-      this.router.navigate(['/login']); // Roteia para a página de login se não estiver logado
+      this.router.navigate(['/login']);
       return false;
     }
   }
