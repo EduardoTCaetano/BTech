@@ -96,10 +96,6 @@ header h1 {
   background: #e8491d;
 }
 
-.faq-section {
-  margin-top: 50px;
-}
-
 .faq {
   background: #1e1e1e;
   padding: 20px;
@@ -195,8 +191,4 @@ header h1 {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-#zap {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
+

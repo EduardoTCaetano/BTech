@@ -1,15 +1,13 @@
 using BTech.Domain.Entities;
-using System.Collections.Generic;
 
-namespace BTech.Domain.Interfaces
+
+namespace BlitzTech.Domain.Interfaces
 {
     public interface IOrderRepository
     {
-        IEnumerable<Order> GetAllOrders();
-        Order GetOrderById(int orderId);
-        void CreateOrder(Order order);
-        void DeleteOrder(int orderId);
-        void UpdateOrder(Order order);
-        void Save();
+        Task<IEnumerable<Order>> GetAllAsync(Guid userId);
+        Task<Order> GetByIdAsync(Guid userId, Guid orderId);
+        Task CreateAsync(Order order);
+        Task<bool> DeleteAsync(Guid userId, Guid orderId);
     }
 }

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+/* Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -12,10 +13,12 @@ app-navbar {
   margin-bottom: 20px;
 }
 
-.title{
+/* Title */
+.title {
   font-family: "Bungee Spice", sans-serif;
   font-weight: 400;
   font-size: 1.8rem;
+  margin-bottom: 20px;
 }
 
 /* Botão Add Category */
@@ -26,6 +29,7 @@ app-navbar {
   border-radius: 5px;
   transition: background-color 0.3s ease;
   font-family: "Bungee Spice", sans-serif;
+  padding: 10px 20px;
 }
 
 .btn-primary:hover {
@@ -36,6 +40,7 @@ app-navbar {
 .table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
 .table th,
@@ -83,6 +88,7 @@ app-navbar {
   padding: 20px;
 }
 
+/* Formulários */
 .form-group {
   margin-bottom: 15px;
 }
@@ -124,11 +130,12 @@ app-navbar {
   margin-left: 0.1rem;
 }
 
-/* Estilo de Botões de Ações */
+/* Botões de Ações */
 .btn-warning {
   background-color: #ffca2c;
   color: #333;
   border: none;
+  margin-right: 10px;
 }
 
 .btn-warning:hover {
@@ -143,4 +150,21 @@ app-navbar {
 
 .btn-danger:hover {
   background-color: #c82333;
+}
+
+/* Espaçamento */
+.d-flex {
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  text-align: left;
+}
+
+.table th {
+  font-size: 1rem;
+}
+
+.table td {
+  font-size: 0.9rem;
 }

@@ -1,126 +1,79 @@
-using BTech.Domain.Entities;
-using BTech.Domain.Interfaces;
-using BTech.Application.Services;
-using BTech.Application.DTOs;
-using Microsoft.AspNetCore.Mvc;
+
+using BlitzTech.Data.Mapping;
+using BlitzTech.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization; // Autorização
+using Microsoft.AspNetCore.Mvc; // Controlador MVC
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks; // Suporte assíncrono
 
-namespace BTech.Application.Controllers
+namespace BlitzTech.Application.Controllers
 {
-    [Route("api/orders")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly ICartService _cartService;
+        private readonly IOrderRepository _orderRepo; // Interface do repositório de pedidos
 
-        public OrdersController(IOrderRepository orderRepository, ICartService cartService)
+        public OrderController(IOrderRepository orderRepo)
         {
-            _orderRepository = orderRepository;
-            _cartService = cartService;
+            _orderRepo = orderRepo; // Injeta o repositório de pedidos
         }
 
-        // GET: api/orders
-        [HttpGet]
-        public ActionResult<IEnumerable<OrderDTO>> GetOrders()
+        // Método para obter todos os pedidos de um usuário
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetAll([FromRoute] Guid userId)
         {
-            var orders = _orderRepository.GetAllOrders();
-
-            var orderDtos = orders.Select(order => new OrderDTO
+            var orders = await _orderRepo.GetAllAsync(userId); // Recupera os pedidos do usuário
+            if (orders == null || !orders.Any())
             {
-                UserId = order.UserId,
-                Total = order.Total,
-                OrderDate = order.OrderDate,
-                Items = order.Items.Select(item => new OrderItemDTO
-                {
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    UnitPrice = item.UnitPrice
-                }).ToList()
-            }).ToList();
+                return NotFound("Nenhum pedido encontrado para este usuário."); // Retorna erro se não houver pedidos
+            }
 
-            return Ok(orderDtos);
+            var orderDtos = orders.Select(o => o.ToOrderDto()); // Converte os pedidos em DTOs
+            return Ok(orderDtos); // Retorna os pedidos em DTO
         }
 
-        // GET: api/orders/5
-        [HttpGet("{id:guid}")]
-        public ActionResult<OrderDTO> GetOrder(int id)
+        // Método para obter um pedido específico pelo ID
+        [HttpGet("{userId}/order/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid userId, [FromRoute] Guid id)
         {
-            var order = _orderRepository.GetOrderById(id);
+            var order = await _orderRepo.GetByIdAsync(userId, id); // Recupera o pedido pelo ID e ID do usuário
+
             if (order == null)
             {
-                return NotFound();
+                return NotFound("Pedido não encontrado."); // Retorna erro se o pedido não for encontrado
             }
 
-            var orderDto = new OrderDTO
-            {
-                UserId = order.UserId,
-                Total = order.Total,
-                OrderDate = order.OrderDate,
-                Items = order.Items.Select(item => new OrderItemDTO
-                {
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    UnitPrice = item.UnitPrice 
-                }).ToList()
-            };
-
-            return Ok(orderDto);
+            return Ok(order.ToOrderDto()); // Retorna o pedido em DTO
         }
 
-        // POST: api/orders/create
-        [HttpPost("create")]
-        public IActionResult CreateOrder(CreateOrderDTO createOrderDto)
+        // Método para criar um novo pedido
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateOrderRequestDto orderDto)
         {
-            // Obtém os itens do carrinho do usuário
-            var cartItems = _cartService.GetCartItemsByUserId(createOrderDto.UserId);
-            if (cartItems == null || cartItems.Count == 0)
-            {
-                return BadRequest("O carrinho está vazio.");
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // Retorna erro se o modelo não for válido
 
-            // Calcula o total do pedido com base nos itens do carrinho
-            var total = cartItems.Sum(item => item.Quantity * item.Price);
-
-            // Cria um novo pedido
-            var order = new Order
-            {
-                UserId = createOrderDto.UserId,
-                OrderDate = DateTime.Now,
-                Total = total,
-                Items = cartItems.Select(cartItem => new OrderItem
-                {
-                    ProductId = cartItem.ProductId,
-                    Quantity = cartItem.Quantity,
-                    UnitPrice = cartItem.Price 
-                }).ToList()
-            };
-
-            // Salva o pedido no banco de dados
-            _orderRepository.CreateOrder(order);
-            _orderRepository.Save();
-
-            // Limpa o carrinho do usuário
-            _cartService.ClearCart(createOrderDto.UserId);
-
-            return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, order.OrderId);
+            var order = orderDto.ToOrder(); // Converte o DTO em um objeto de pedido
+            await _orderRepo.CreateAsync(order); // Cria o pedido no repositório
+            return CreatedAtAction(nameof(GetById), new { userId = order.UserId, id = order.Id }, order.ToOrderDto()); // Retorna o pedido criado
         }
 
-        // DELETE: api/orders/5
-        [HttpDelete("{id:int}")]
-        public IActionResult DeleteOrder(int id)
+        // Método para excluir um pedido
+        [Authorize(Roles = "User,Admin")]
+        [HttpDelete("{userId}/order/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid userId, [FromRoute] Guid id)
         {
-            var order = _orderRepository.GetOrderById(id);
-            if (order == null)
+            bool isDeleted = await _orderRepo.DeleteAsync(userId, id); // Tenta excluir o pedido
+
+            if (!isDeleted)
             {
-                return NotFound();
+                return NotFound("Pedido não encontrado."); // Retorna erro se o pedido não for encontrado
             }
 
-            _orderRepository.DeleteOrder(id);
-            _orderRepository.Save();
-            return Ok();
+            return NoContent(); // Retorna NoContent se a exclusão foi bem-sucedida
         }
     }
 }

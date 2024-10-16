@@ -23,4 +23,8 @@ export class ProductService {
   getProductsByCategory(categoryId: string): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(`${this.apiUrl}/category/${categoryId}`);
   }
+
+  requestApproval(product: ProductModel): Observable<any> {
+    return this.http.post('/aprovacao', product);
+  }
 }
