@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BlitzTech.Model;
 using Microsoft.AspNetCore.Identity;
-using BTech.Domain.Entities;
 
 namespace BlitzTech.Data.Context
 {
@@ -17,7 +16,6 @@ namespace BlitzTech.Data.Context
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
 
-        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
