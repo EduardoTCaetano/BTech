@@ -11,7 +11,6 @@ namespace BlitzTech.Data.Context
             : base(options)
         {
         }
-
         public DbSet<CartItem> CartItem { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }

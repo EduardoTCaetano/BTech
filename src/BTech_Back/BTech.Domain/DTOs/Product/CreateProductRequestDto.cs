@@ -11,6 +11,6 @@ namespace BlitzTech.Domain.Dtos.Product
         public int Stock { get; set; }
         public string Image { get; set; }
         public bool IsActive { get; set; } = true;
-        public Guid CategoryId { get; set; }  
+        public Guid CategoryId { get; set; }
     }
 }

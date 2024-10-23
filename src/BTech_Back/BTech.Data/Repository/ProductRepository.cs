@@ -85,7 +85,6 @@ namespace BlitzTech.Data.Repository
             return existingProduct;
         }
 
-        // Implement the correct DeleteAsync method from the interface
         async Task<Product> IProductRepository.DeleteAsync(Guid id)
         {
             var productModel = await _context.Product.FirstOrDefaultAsync(x => x.Id == id);
@@ -99,6 +98,5 @@ namespace BlitzTech.Data.Repository
             await _context.SaveChangesAsync();
             return productModel;
         }
-
     }
 }

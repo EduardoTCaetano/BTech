@@ -5,13 +5,11 @@
   font-weight: 400;
   font-style: normal;
   font-size: 3rem;
-  position: absolute;
-  top: 195vh;
-  left: 5vh;
+  position: relative;
+  top: 10vh;
   color: #ffffff;
-  z-index: 9;
+  z-index: 1;
   white-space: nowrap;
-
 }
 
 .home-container {
@@ -193,12 +191,6 @@
 }
 
 @media (max-width: 1200px) {
-  .name {
-    font-size: 2.5rem;
-    top: 70vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 
   .product-card {
     flex: 0 0 25%;
@@ -206,36 +198,16 @@
 }
 
 @media (max-width: 900px) {
-  .name {
-    font-size: 2rem;
-    top: 80vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
   .product-card {
     flex: 0 0 45%;
   }
 }
 
 @media (max-width: 600px) {
-  .name {
-    font-size: 2.5rem;
-    top: 98vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
 
-@media (max-width: 400px) {
-  .name {
-    font-size: 2.5rem;
-    top: 85vh;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+}
 
   .product-card {
     flex: 1 1 90%;
   }
-}
+

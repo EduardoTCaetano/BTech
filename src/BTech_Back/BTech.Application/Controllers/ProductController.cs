@@ -1,4 +1,3 @@
-using BlitzTech.Data.Context;
 using BlitzTech.Domain.Dtos.Product;
 using BlitzTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +43,6 @@ namespace BlitzTech.Application.Controllers
             return Ok(productModel.ToProductDto());
         }
 
-        // Restringe o acesso apenas para administradores
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProductRequestDto productDto)
@@ -57,7 +55,6 @@ namespace BlitzTech.Application.Controllers
             return CreatedAtAction(nameof(GetById), new { id = productModel.Id }, productModel.ToProductDto());
         }
 
-        // Restringe o acesso apenas para administradores
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateProductRequestDto updateDto)
@@ -75,7 +72,6 @@ namespace BlitzTech.Application.Controllers
             return Ok(productModel.ToProductDto());
         }
 
-        // Restringe o acesso apenas para administradores
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
@@ -118,6 +114,5 @@ namespace BlitzTech.Application.Controllers
             var productDtos = products.Select(p => p.ToProductDto());
             return Ok(productDtos);
         }
-
     }
 }

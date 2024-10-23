@@ -64,8 +64,6 @@ namespace BlitzTech.Infrastructure.Repositories
             {
                 return null;
             }
-
-            // Update product properties here
             product.Name = updateDto.Name;
             product.Description = updateDto.Description;
             product.Price = updateDto.Price;
@@ -83,7 +81,6 @@ namespace BlitzTech.Infrastructure.Repositories
             {
                 return null;
             }
-
             _context.Set<Product>().Remove(product);
             await _context.SaveChangesAsync();
             return product;
