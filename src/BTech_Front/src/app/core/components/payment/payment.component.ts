@@ -1,43 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CartService } from '../../../services/cart/cart.service';
-import { CartItem } from '../../../models/cartmodel';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { CartService } from '../../../services/cart/cart.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { OrderService } from '../../../services/order/order.service';
 import { environment } from '../../../../enviroments/enviroments';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrl: './payment.component.css'
+  styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  cartItems: CartItem[] = [];
-  subTotal: number = 0;
-  payPalConfig?: IPayPalConfig;
-  showSuccess = false;
+  public payPalConfig?: IPayPalConfig;
+  public totalValue: number = 0;
+  public cartItems: any[] = [];
+  public subTotal: number = 0;
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService,
+    private orderService: OrderService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.loadCartItems();
-    this.initPayPalConfig();
-  }
-
-  loadCartItems(): void {
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items;
-      this.calculateSubTotal();
+    this.initConfig();
+    this.authService.getUserId().subscribe((userId) => {
+      this.cartService.getCartItems(userId).subscribe((items) => {
+        this.cartItems = items;
+        this.totalValue = this.cartItems.reduce(
+          (acc, item) => acc + item.price * item.quantity,
+          0
+        );
+        this.subTotal = this.totalValue;
+      });
     });
   }
 
-  calculateSubTotal(): void {
-    this.subTotal = this.cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  }
-
-  private initPayPalConfig(): void {
+  private initConfig(): void {
     this.payPalConfig = {
       currency: 'BRL',
       clientId: environment.paypalClientId,
@@ -48,18 +49,17 @@ export class PaymentComponent implements OnInit {
             {
               amount: {
                 currency_code: 'BRL',
-                value: this.subTotal.toFixed(2),
+                value: this.totalValue.toFixed(2),
                 breakdown: {
                   item_total: {
                     currency_code: 'BRL',
-                    value: this.subTotal.toFixed(2),
+                    value: this.totalValue.toFixed(2),
                   },
                 },
               },
-              items: this.cartItems.map(item => ({
+              items: this.cartItems.map((item) => ({
                 name: item.nameProd,
                 quantity: item.quantity.toString(),
-                category: 'PHYSICAL_GOODS',
                 unit_amount: {
                   currency_code: 'BRL',
                   value: item.price.toFixed(2),
@@ -72,38 +72,48 @@ export class PaymentComponent implements OnInit {
         commit: 'true',
       },
       style: {
-        label: 'paypal',
         layout: 'vertical',
       },
       onApprove: (data, actions) => {
-        console.log('onApprove - transaction was approved, but not authorized', data, actions);
         actions.order.get().then((details: any) => {
-          console.log('onApprove - you can get full order details inside onApprove: ', details);
+          console.log('Order approved, transaction details:', details);
+          this.createOrder();
         });
       },
       onClientAuthorization: (data) => {
-        console.log('onClientAuthorization - transaction completed', data);
-        if (data.status === 'COMPLETED') {
-          this.handlePaymentSuccess();
-        }
-      },
-      onCancel: (data, actions) => {
-        console.log('onCancel', data, actions);
+        console.log('Payment authorized:', data);
       },
       onError: (err) => {
-        console.log('onError', err);
+        console.error('Error during PayPal payment:', err);
       },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
+      onCancel: (data, actions) => {
+        console.log('Payment cancelled:', data, actions);
       },
     };
   }
 
-  private handlePaymentSuccess(): void {
-    this.cartService.clearCart('user-id').subscribe(() => {
-      this.router.navigate(['/success']);
-    }, (error) => {
-      console.error('Erro ao limpar o carrinho:', error);
+  private createOrder(): void {
+    const orderItems = this.cartItems.map((item) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+      unitPrice: item.price,
+    }));
+
+    this.authService.getUserId().subscribe((userId) => {
+      const order = {
+        userId,
+        totalValue: this.totalValue,
+        orderItems,
+      };
+
+      this.orderService.createOrder(order).subscribe(() => {
+        this.cartService.clearCart(userId).subscribe(() => {
+          console.log('Carrinho limpo após pagamento');
+          this.cartItems = [];
+          this.totalValue = 0;
+          this.router.navigate(['/success']);
+        });
+      });
     });
   }
 }
