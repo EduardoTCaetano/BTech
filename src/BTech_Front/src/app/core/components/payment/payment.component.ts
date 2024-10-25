@@ -100,19 +100,18 @@ export class PaymentComponent implements OnInit {
     }));
 
     this.authService.getUserId().subscribe((userId) => {
-      const order = {
-        userId,
-        totalValue: this.totalValue,
-        orderItems,
-      };
-
-      this.orderService.createOrder(order).subscribe(() => {
-        this.cartService.clearCart(userId).subscribe(() => {
-          console.log('Carrinho limpo após pagamento');
-          this.cartItems = [];
-          this.totalValue = 0;
-          this.router.navigate(['/success']);
-        });
+      this.orderService.createOrder(userId, orderItems).subscribe({
+        next: (response) => {
+          console.log('Order created successfully', response);
+          this.cartService.clearCart(userId).subscribe(() => {
+            this.cartItems = [];
+            this.totalValue = 0;
+            this.router.navigate(['/success']);
+          });
+        },
+        error: (error) => {
+          console.error('Error creating order', error);
+        },
       });
     });
   }

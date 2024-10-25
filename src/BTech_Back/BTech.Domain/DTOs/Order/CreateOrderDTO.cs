@@ -4,12 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlitzTech.Domain.Dtos.Order
 {
-    public class OrderDto
+    public class CreateOrderRequestDTO
     {
-        [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "The total value must be greater than zero.")]
-        public decimal TotalValue { get; set; }
-
         [Required]
         public Guid UserId { get; set; }
 

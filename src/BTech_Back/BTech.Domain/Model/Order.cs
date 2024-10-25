@@ -1,20 +1,34 @@
-public class Order
+using System;
+using System.Collections.Generic;
+
+namespace BlitzTech.Model
 {
-    public Guid Id { get; set; }
-    public Guid UserId { get; set; }
-    public decimal TotalValue { get; set; }
-    public List<OrderItem> OrderItems { get; set; }
-
-    public Order(Guid userId, decimal totalValue, List<OrderItem> orderItems)
+    public class Order
     {
-        Id = Guid.NewGuid();
-        UserId = userId;
-        TotalValue = totalValue;
-        OrderItems = orderItems ?? new List<OrderItem>();
-    }
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public decimal TotalValue { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string Status { get; set; }
 
-    public Order()
-    {
-        OrderItems = new List<OrderItem>();
+        public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>(); 
+
+        public Order() 
+        {
+            OrderDate = DateTime.UtcNow;
+            Status = "Pending";
+        }
+
+        public Order(Guid userId, decimal totalValue) : this()
+        {
+            Id = Guid.NewGuid();
+            UserId = userId;
+            TotalValue = totalValue;
+        }
+
+        public Order(Guid userId, decimal totalValue, List<OrderItem> orderItems) : this(userId, totalValue)
+        {
+            OrderItems = orderItems;
+        }
     }
 }

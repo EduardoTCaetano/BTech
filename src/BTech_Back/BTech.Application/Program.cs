@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using BlitzTech.Application.Services;
 using BlitzTech.Data.Context;
+using BlitzTech.Data.Interfaces;
 using BlitzTech.Data.Repository;
 using BlitzTech.Domain.Interfaces;
 using BTech.Domain.Interfaces;
@@ -66,6 +67,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 // Configurar CORS
 builder.Services.AddCors(options =>

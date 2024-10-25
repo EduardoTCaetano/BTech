@@ -1,9 +1,8 @@
-using BlitzTech.Model;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BlitzTech.Model;
 
-namespace BlitzTech.Data.Repository
+namespace BlitzTech.Data.Interfaces
 {
     public interface IOrderItemRepository
     {

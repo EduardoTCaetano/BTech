@@ -1,5 +1,5 @@
 export interface ProductModel {
-  id?: string;  
+  id?: string;
   name: string;
   description: string;
   price: number;

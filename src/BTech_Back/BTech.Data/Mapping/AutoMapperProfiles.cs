@@ -3,6 +3,7 @@ using BlitzTech.Domain.Dtos.Product;
 using BlitzTech.Domain.DTOs.Product;
 using BlitzTech.Model;
 using BTech.Domain.DTOs.Cart;
+using BlitzTech.Domain.Dtos.Order;
 
 namespace BlitzTech.Data.Mapping
 {
@@ -56,6 +57,7 @@ namespace BlitzTech.Data.Mapping
                 IsActive = productDto.IsActive
             };
         }
+
         public static CartItemDto ToCartItemDto(this CartItem cartItem)
         {
             return new CartItemDto(
@@ -97,6 +99,28 @@ namespace BlitzTech.Data.Mapping
             existingCartItem.Quantity = cartItemDto.Quantity;
 
             return existingCartItem;
+        }
+
+        public static OrderDto ToOrderDto(this Order order)
+        {
+            return new OrderDto
+            {
+                TotalValue = order.TotalValue,
+                UserId = order.UserId,
+                OrderItems = order.OrderItems.Select(oi => new OrderItemDto
+                {
+                    ProductId = oi.ProductId,
+                    Quantity = oi.Quantity,
+                    UnitPrice = oi.UnitPrice
+                }).ToList()
+            };
+        }
+
+        public static Order ToOrderFromDto(this OrderDto orderDto)
+        {
+            var order = new Order(orderDto.UserId, orderDto.TotalValue);
+            order.OrderItems = orderDto.OrderItems.Select(oi => new OrderItem(oi.ProductId, oi.Quantity, oi.UnitPrice)).ToList();
+            return order;
         }
     }
 }

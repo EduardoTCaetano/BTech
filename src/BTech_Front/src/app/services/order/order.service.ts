@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, tap, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { Order } from '../../models/ordermodel';
+import { OrderItem } from '../../models/orderitemmodel';
 
 @Injectable({
   providedIn: 'root',
@@ -11,28 +13,19 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  createOrder(order: Order): Observable<Order | null> {
+  createOrder(userId: string, orderItems: OrderItem[]): Observable<Order | null> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const orderData = {
+      userId,
+      items: orderItems,
+      totalAmount: orderItems.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0),
+    };
 
-    return this.http.post<Order>(`${this.apiUrl}/CreateOrder`, order, { headers }).pipe(
-      tap((newOrder) => {
-        console.log('Pedido criado:', newOrder);
-      }),
+    return this.http.post<Order>(`${this.apiUrl}/CreateOrder`, orderData, { headers }).pipe(
+      tap((newOrder) => console.log('Order created:', newOrder)),
       catchError((error) => {
-        console.error('Erro ao criar pedido', error);
+        console.error('Error creating order', error);
         return of(null);
-      })
-    );
-  }
-
-  getOrders(userId: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.apiUrl}/GetOrders/${userId}`).pipe(
-      tap((orders) => {
-        console.log('Pedidos obtidos:', orders);
-      }),
-      catchError((error) => {
-        console.error('Erro ao obter pedidos', error);
-        return of([]);
       })
     );
   }

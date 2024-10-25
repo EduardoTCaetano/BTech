@@ -11,35 +11,37 @@ namespace BlitzTech.Data.Context
             : base(options)
         {
         }
+
         public DbSet<CartItem> CartItem { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; } 
 
-        
-
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-             builder.Entity<Product>()
+            builder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
+
+            builder.Entity<Product>()
                 .HasMany(p => p.OrderItems)
                 .WithOne(oi => oi.Product)
-                .HasForeignKey(oi => oi.ProductId);
+                .HasForeignKey(oi => oi.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Order>()
                 .HasMany(o => o.OrderItems)
                 .WithOne(oi => oi.Order)
-                .HasForeignKey(oi => oi.OrderId);
-
+                .HasForeignKey(oi => oi.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
                 {
                     Name = "Master",
-                    NormalizedName = "Master"
+                    NormalizedName = "MASTER"
                 },
                 new IdentityRole
                 {
@@ -51,7 +53,7 @@ namespace BlitzTech.Data.Context
                     Name = "User",
                     NormalizedName = "USER"
                 },
-                 new IdentityRole
+                new IdentityRole
                 {
                     Name = "Order",
                     NormalizedName = "ORDER"

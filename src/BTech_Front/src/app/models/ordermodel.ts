@@ -1,7 +1,9 @@
 import { OrderItem } from "./orderitemmodel";
 
 export interface Order {
+  id?: string;
   userId: string;
-  totalValue: number;
-  orderItems: OrderItem[];
+  items: OrderItem[];
+  totalAmount: number;
+  createdAt?: Date;
 }

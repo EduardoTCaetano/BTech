@@ -1,9 +1,7 @@
 using BlitzTech.Data.Context;
 using BlitzTech.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using BlitzTech.Data.Interfaces;
 
 namespace BlitzTech.Data.Repository
 {
@@ -24,7 +22,7 @@ namespace BlitzTech.Data.Repository
                 .ToListAsync();
         }
 
-        public async Task<OrderItem> GetOrderItemByIdAsync(Guid id)
+        public async Task<OrderItem?> GetOrderItemByIdAsync(Guid id)
         {
             return await _context.OrderItems
                 .Include(oi => oi.Product)
