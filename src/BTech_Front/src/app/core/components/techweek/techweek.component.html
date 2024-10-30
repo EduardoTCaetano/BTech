@@ -1,11 +1,15 @@
 <body>
   <div class="home-container">
     <div class="name">Tech Week</div>
-    <div class="products-grid">
-      <div
-        *ngFor="let product of products"
-        class="col-md-2 col-sm-4 col-6 product-card spacing"
-      >
+    <div
+  class="products-grid"
+  #containerRef
+  (mousedown)="onDragStart($event)"
+  (mousemove)="onDragging($event)"
+  (mouseup)="onDragEnd()"
+  (mouseleave)="onDragEnd()"
+>
+      <div *ngFor="let product of products" class="col-md-2 col-sm-4 col-6 product-card spacing">
         <div class="product-thumb">
           <img [src]="product.image" alt="{{ product.name }}" />
         </div>
@@ -20,12 +24,12 @@
           <div class="product-bottom-details">
             <button class="button" [routerLink]="['/page', product.id]">Ver Mais</button>
             <div class="product-links">
-              <a href=""
-                ><i
+              <a href="">
+                <i
                   class="fas fa-shopping-cart"
-                  (click)="addToCart($event, product)"
-                ></i
-              ></a>
+                  (click)="addToCart($event, product)">
+                </i>
+              </a>
             </div>
           </div>
         </div>

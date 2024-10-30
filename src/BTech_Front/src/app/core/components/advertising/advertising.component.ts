@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ProductModel } from "../../../models/ProductModel";
 import { ProductService } from "../../../services/product/product.service";
 import { CartService } from "../../../services/cart/cart.service";
@@ -12,8 +12,13 @@ import { CartItem } from "../../../models/cartmodel";
   styleUrls: ['./advertising.component.css'],
 })
 export class AdvertisingComponent implements OnInit {
+  @ViewChild('containerRef') containerRef!: ElementRef;
+
   products: ProductModel[] = [];
   userId: string | undefined;
+  private isDragging = false;
+  private startX = 0;
+  private scrollLeft = 0;
 
   constructor(
     private productService: ProductService,
@@ -69,5 +74,23 @@ export class AdvertisingComponent implements OnInit {
       console.error('Usuário não autenticado ou produto sem ID');
       this.router.navigate(['/login']);
     }
+  }
+
+  onDragStart(event: MouseEvent): void {
+    this.isDragging = true;
+    this.startX = event.pageX - this.containerRef.nativeElement.offsetLeft;
+    this.scrollLeft = this.containerRef.nativeElement.scrollLeft;
+  }
+
+  onDragging(event: MouseEvent): void {
+    if (!this.isDragging) return;
+    event.preventDefault();
+    const x = event.pageX - this.containerRef.nativeElement.offsetLeft;
+    const walk = (x - this.startX) * 2; // Ajuste a velocidade do scroll multiplicando
+    this.containerRef.nativeElement.scrollLeft = this.scrollLeft - walk;
+  }
+
+  onDragEnd(): void {
+    this.isDragging = false;
   }
 }
