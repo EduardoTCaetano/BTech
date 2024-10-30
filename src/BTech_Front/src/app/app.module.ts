@@ -27,6 +27,7 @@ import { AnnouncementComponent } from './core/components/announcement/announceme
 import { PaymentComponent } from './core/components/payment/payment.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { SuccessComponent } from './core/components/success/success.component';
+import { EmAltaComponent } from './core/components/em-alta/em-alta.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { SuccessComponent } from './core/components/success/success.component';
     AnnouncementComponent,
     PaymentComponent,
     SuccessComponent,
+    EmAltaComponent,
   ],
   imports: [
     BrowserModule,

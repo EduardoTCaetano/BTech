@@ -6,24 +6,23 @@ html, body {
   color: #ffffff;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: url(/assets/fundologin.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
 }
-
 
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin: 0;
   padding: 20px;
-  background-color: #181818;
   color: #ffffff;
-  margin-top: 30px;
+  margin-top: 15vh;
 }
 
 .product-page {
@@ -34,30 +33,27 @@ body {
   box-shadow: 0px 20px 30px -10px rgba(0, 0, 0, 0.8);
   padding: 20px;
   width: 90%;
-  max-width: 100%;
-  justify-content: space-between;
+  max-width: 1200px;
   flex-direction: row;
   align-items: flex-start;
 }
 
 .image-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 100%;
+  flex: 1;
+  max-width: 600px;
 }
 
 .image-section img {
   width: 100%;
-  max-width: 550px;
   height: auto;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0px 30px 60px -12px rgba(255, 255, 255, 0.2),
-    0px 18px 36px -18px rgba(0, 0, 0, 0.8);
+              0px 18px 36px -18px rgba(0, 0, 0, 0.8);
 }
 
 .details-section {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -65,18 +61,17 @@ body {
 }
 
 h1 {
-  margin-top: 0;
-  font-size: 24px;
-  color: #ffffff;
-}
-
-.product-price {
   font-size: 28px;
   color: #ffffff;
 }
 
+.product-price {
+  font-size: 32px;
+  color: #ffffff;
+}
+
 .installments {
-  font-size: 14px;
+  font-size: 16px;
   color: #b5b5b5;
 }
 
@@ -96,24 +91,20 @@ h1 {
   margin-left: 5px;
 }
 
-.button, .buy-now, .add-to-cart {
+.buy-now, .add-to-cart {
   border-radius: 20px;
-  align-items: center;
-  appearance: none;
   background-color: #ffffff;
-  border-radius: 4px;
-  border: none;
   color: #000000;
   cursor: pointer;
-  display: inline-flex;
-  height: 48px;
-  justify-content: center;
-  padding: 0 16px;
-  text-align: left;
-  transition: background-color 0.15s, transform 0.15s;
   font-size: 18px;
-  width: 100%;
-  margin-bottom: 20px;
+  padding: 12px 20px;
+  text-align: center;
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.buy-now:hover, .add-to-cart:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
 }
 
 .description-box {
@@ -125,7 +116,6 @@ h1 {
 }
 
 .description-box h2 {
-  margin: 0;
   font-size: 22px;
   color: #ffffff;
 }
@@ -136,7 +126,6 @@ h1 {
   line-height: 1.6;
 }
 
-/* Media Queries para telas menores */
 @media (max-width: 1024px) {
   .product-page {
     flex-direction: column;
@@ -145,12 +134,7 @@ h1 {
 
   .details-section {
     margin-top: 20px;
-    max-width: 100%;
     text-align: center;
-  }
-
-  .image-section img {
-    margin: 0;
   }
 }
 
@@ -173,16 +157,11 @@ h1 {
     padding: 10px;
   }
 
-  .image-section img {
-    width: 100%;
-    height: auto;
-  }
-
   .product-price {
     font-size: 20px;
   }
 
   .description-box p {
-    font-size: 14px;
-}
+    font-size: 14px;
+  }
 }
