@@ -1,5 +1,7 @@
 <body>
   <div class="home-container">
+    <div class="name">Top Vendas</div>
+    <div class="products-grid">
     <div class="name">Top Vendidos</div>
     <div
   class="products-grid"
@@ -7,8 +9,8 @@
   (mousedown)="onDragStart($event)"
   (mousemove)="onDragging($event)"
   (mouseup)="onDragEnd()"
-  (mouseleave)="onDragEnd()"
->
+  (mouseleave)="onDragEnd()"></div>
+
       <div
         *ngFor="let product of products"
         class="col-md-2 col-sm-4 col-6 product-card spacing"
