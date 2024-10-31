@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { OrderService } from '../../../services/order/order.service';
 import { environment } from '../../../../enviroments/enviroments';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-payment',
@@ -21,11 +22,12 @@ export class PaymentComponent implements OnInit {
     private cartService: CartService,
     private authService: AuthService,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    this.initConfig();
+    this.initPayPalConfig();
     this.authService.getUserId().subscribe((userId) => {
       this.cartService.getCartItems(userId).subscribe((items) => {
         this.cartItems = items;
@@ -38,7 +40,7 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  private initConfig(): void {
+  private initPayPalConfig(): void {
     this.payPalConfig = {
       currency: 'BRL',
       clientId: environment.paypalClientId,
@@ -92,6 +94,38 @@ export class PaymentComponent implements OnInit {
     };
   }
 
+  private initMercadoPagoConfig(): void {
+    const preference = {
+      items: this.cartItems.map((item) => ({
+        title: item.nameProd,
+        quantity: item.quantity,
+        currency_id: 'BRL',
+        unit_price: item.price,
+      })),
+      payer: {
+        email: 'gabrielhenriquesantanagg@gmail.com' // Exemplo de email do comprador
+      },
+      back_urls: {
+        success: `${window.location.origin}/success`,
+        failure: `${window.location.origin}/failure`,
+        pending: `${window.location.origin}/pending`
+      },
+      auto_return: 'approved',
+      payment_methods: {
+        excluded_payment_types: [], // Deixe vazio para permitir todos os tipos
+        included_payment_methods: [{ id: 'pix' }] // Adiciona apenas Pix como método de pagamento
+      }
+    };
+
+    this.http.post('https://api.mercadopago.com/checkout/preferences', preference, {
+      headers: {
+        Authorization: `Bearer ${environment.mercadoPagoAccessToken}`
+      }
+    }).subscribe((response: any) => {
+      window.location.href = response.init_point;
+    });
+  }
+
   private createOrder(): void {
     const orderItems = this.cartItems.map((item) => ({
       productId: item.productId,
@@ -115,5 +149,13 @@ export class PaymentComponent implements OnInit {
         });
       });
     });
+  }
+
+  public initiatePayment(paymentMethod: 'paypal' | 'mercadoPago'): void {
+    if (paymentMethod === 'paypal') {
+      this.initPayPalConfig();
+    } else if (paymentMethod === 'mercadoPago') {
+      this.initMercadoPagoConfig();
+    }
   }
 }

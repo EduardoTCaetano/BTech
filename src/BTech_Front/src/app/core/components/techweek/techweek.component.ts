@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductModel } from '../../../models/ProductModel';
 import { Router } from '@angular/router';
 import { CartItem } from '../../../models/cartmodel';
@@ -9,11 +9,16 @@ import { ProductService } from '../../../services/product/product.service';
 @Component({
   selector: 'app-techweek',
   templateUrl: './techweek.component.html',
-  styleUrl: './techweek.component.css'
+  styleUrls: ['./techweek.component.css']
 })
 export class TechweekComponent {
+  @ViewChild('containerRef') containerRef!: ElementRef;
+
   products: ProductModel[] = [];
   userId: string | undefined;
+  private isDragging = false;
+  private startX = 0;
+  private scrollLeft = 0;
 
   constructor(
     private productService: ProductService,
@@ -69,5 +74,23 @@ export class TechweekComponent {
       console.error('Usuário não autenticado ou produto sem ID');
       this.router.navigate(['/login']);
     }
+  }
+
+  onDragStart(event: MouseEvent): void {
+    this.isDragging = true;
+    this.startX = event.pageX - this.containerRef.nativeElement.offsetLeft;
+    this.scrollLeft = this.containerRef.nativeElement.scrollLeft;
+  }
+
+  onDragging(event: MouseEvent): void {
+    if (!this.isDragging) return;
+    event.preventDefault();
+    const x = event.pageX - this.containerRef.nativeElement.offsetLeft;
+    const walk = (x - this.startX) * 2; // Ajuste a velocidade do scroll multiplicando
+    this.containerRef.nativeElement.scrollLeft = this.scrollLeft - walk;
+  }
+
+  onDragEnd(): void {
+    this.isDragging = false;
   }
 }
