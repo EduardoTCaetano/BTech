@@ -47,8 +47,14 @@ namespace BlitzTech.Data.Repository
                 products = products.Where(p => p.Description.Contains(query.Description));
             }
 
+            if (!string.IsNullOrWhiteSpace(query.Name))
+            {
+                products = products.Where(p => p.Name.Contains(query.Name));
+            }
+
             return await products.ToListAsync();
         }
+
 
         public async Task<List<Model.Product>> GetByCategoryAsync(Guid categoryId)
         {
@@ -60,7 +66,7 @@ namespace BlitzTech.Data.Repository
         public async Task<Model.Product?> GetByIdAsync(Guid id)
         {
             return await _context.Product
-                .Include(p => p.Category) 
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 

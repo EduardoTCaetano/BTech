@@ -101,9 +101,9 @@ namespace BlitzTech.Application.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> SearchProducts([FromQuery] string searchTerm)
+        public async Task<IActionResult> SearchProducts([FromQuery] string name)
         {
-            var queryObject = new QueryObject { SearchTerm = searchTerm };
+            var queryObject = new QueryObject { Name = name }; // Certifique-se de que está passando o nome
             var products = await _productRepo.GetAllAsync(queryObject);
 
             if (!products.Any())
@@ -114,5 +114,6 @@ namespace BlitzTech.Application.Controllers
             var productDtos = products.Select(p => p.ToProductDto());
             return Ok(productDtos);
         }
+
     }
 }

@@ -1,39 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, tap, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../enviroments/enviroments';
 import { Order } from '../../models/ordermodel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:5246/api/Order';
+  private apiUrl = 'https://api.mercadopago.com/merchant_orders';
 
   constructor(private http: HttpClient) {}
 
-  createOrder(order: Order): Observable<Order | null> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.http.post<Order>(`${this.apiUrl}/CreateOrder`, order, { headers }).pipe(
-      tap((newOrder) => {
-        console.log('Pedido criado:', newOrder);
-      }),
-      catchError((error) => {
-        console.error('Erro ao criar pedido', error);
-        return of(null);
-      })
-    );
+  getMerchantOrder(orderId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${environment.mercadoPagoAccessToken}`,
+      },
+    });
   }
 
-  getOrders(userId: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.apiUrl}/GetOrders/${userId}`).pipe(
-      tap((orders) => {
-        console.log('Pedidos obtidos:', orders);
-      }),
-      catchError((error) => {
-        console.error('Erro ao obter pedidos', error);
-        return of([]);
-      })
-    );
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(`${this.apiUrl}`, order, {
+      headers: {
+        Authorization: `Bearer ${environment.mercadoPagoAccessToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }

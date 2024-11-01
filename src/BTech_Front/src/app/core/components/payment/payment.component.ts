@@ -3,9 +3,10 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { CartService } from '../../../services/cart/cart.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { OrderService } from '../../../services/order/order.service';
-import { environment } from '../../../../enviroments/enviroments';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Order } from '../../../models/ordermodel';
+import { environment } from '../../../../enviroments/enviroments';
 
 @Component({
   selector: 'app-payment',
@@ -17,6 +18,7 @@ export class PaymentComponent implements OnInit {
   public totalValue: number = 0;
   public cartItems: any[] = [];
   public subTotal: number = 0;
+  merchantOrderId: string | undefined;
 
   constructor(
     private cartService: CartService,
@@ -44,7 +46,7 @@ export class PaymentComponent implements OnInit {
     this.payPalConfig = {
       currency: 'BRL',
       clientId: environment.paypalClientId,
-      createOrderOnClient: (data) =>
+      createOrderOnClient: () =>
         <ICreateOrderRequest>{
           intent: 'CAPTURE',
           purchase_units: [
@@ -79,7 +81,7 @@ export class PaymentComponent implements OnInit {
       onApprove: (data, actions) => {
         actions.order.get().then((details: any) => {
           console.log('Order approved, transaction details:', details);
-          this.createOrder();
+          this.createOrder(details.id);
         });
       },
       onClientAuthorization: (data) => {
@@ -103,7 +105,7 @@ export class PaymentComponent implements OnInit {
         unit_price: item.price,
       })),
       payer: {
-        email: 'gabrielhenriquesantanagg@gmail.com' // Exemplo de email do comprador
+        email: 'gabrielhenriquesantanagg@gmail.com'
       },
       back_urls: {
         success: `${window.location.origin}/success`,
@@ -112,8 +114,8 @@ export class PaymentComponent implements OnInit {
       },
       auto_return: 'approved',
       payment_methods: {
-        excluded_payment_types: [], // Deixe vazio para permitir todos os tipos
-        included_payment_methods: [{ id: 'pix' }] // Adiciona apenas Pix como método de pagamento
+        excluded_payment_types: [],
+        included_payment_methods: [{ id: 'pix' }]
       }
     };
 
@@ -122,11 +124,14 @@ export class PaymentComponent implements OnInit {
         Authorization: `Bearer ${environment.mercadoPagoAccessToken}`
       }
     }).subscribe((response: any) => {
-      window.location.href = response.init_point;
+      this.merchantOrderId = response.id;
+      window.location.href = response.init_point; // Redirecionamento aqui
+    }, (error) => {
+      console.error('Erro ao criar preferência no Mercado Pago:', error);
     });
   }
 
-  private createOrder(): void {
+  private createOrder(paymentId: string): void {
     const orderItems = this.cartItems.map((item) => ({
       productId: item.productId,
       quantity: item.quantity,
@@ -134,19 +139,28 @@ export class PaymentComponent implements OnInit {
     }));
 
     this.authService.getUserId().subscribe((userId) => {
-      const order = {
+      const order: Order = {
         userId,
         totalValue: this.totalValue,
         orderItems,
+        merchantOrderId: this.merchantOrderId || '', // Garantir que seja uma string
       };
 
-      this.orderService.createOrder(order).subscribe(() => {
-        this.cartService.clearCart(userId).subscribe(() => {
-          console.log('Carrinho limpo após pagamento');
-          this.cartItems = [];
-          this.totalValue = 0;
-          this.router.navigate(['/success']);
-        });
+      this.orderService.createOrder(order).subscribe((response: Order) => {
+        console.log('Resposta da criação do pedido:', response);
+        if (response && response.merchantOrderId) {
+          this.merchantOrderId = response.merchantOrderId;
+          this.cartService.clearCart(userId).subscribe(() => {
+            console.log('Carrinho limpo após pagamento');
+            this.cartItems = [];
+            this.totalValue = 0;
+            this.router.navigate(['/success', this.merchantOrderId]); // Redireciona apenas após sucesso
+          });
+        } else {
+          console.error('ID do pedido não disponível na resposta da API');
+        }
+      }, (error) => {
+        console.error('Erro ao criar pedido:', error);
       });
     });
   }

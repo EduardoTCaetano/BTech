@@ -17,9 +17,10 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'search', component: SearchComponent },
   { path: 'page/:id', component: ProductPageComponent},
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
-  { path: 'success', component: SuccessComponent },
+  { path: 'success', component: SuccessComponent }
 ];
 
 @NgModule({

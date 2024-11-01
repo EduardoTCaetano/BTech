@@ -25,6 +25,15 @@
   </div>
 
   <div class="content">
+    <div class="search-container">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="search(searchTerm)"
+        placeholder="Buscar produtos..."
+      />
+    </div>
+
     <div *ngFor="let product of filteredProducts" class="product-card spacing">
       <div class="product-thumb">
         <img [src]="product.image" alt="{{ product.name }}" />
@@ -43,8 +52,7 @@
             <a href=""
               ><i
                 class="fas fa-shopping-cart"
-                (click)="addToCart($event, product)"
-              ></i
+                (click)="addToCart($event, product)"></i
             ></a>
           </div>
         </div>
