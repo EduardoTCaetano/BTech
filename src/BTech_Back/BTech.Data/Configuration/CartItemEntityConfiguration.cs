@@ -40,7 +40,5 @@ namespace BTech.Data.Configuration
         builder.HasOne<CartItem>() 
             .WithMany() 
             .HasForeignKey(ci => ci.ProductId);
-
-       
     }
 }}

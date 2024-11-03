@@ -22,7 +22,7 @@ namespace BlitzTech.Model
             Id = id;
             Description = description;
             IsActive = isActive;
-            Products = new HashSet<Product>(); 
+            Products = new HashSet<Product>();
         }
 
         public void ValidateDescription(string description)

@@ -31,11 +31,10 @@ namespace BlitzTech.Application.Services
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName)
             };
 
-            // Adicionando os roles aos claims
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var creds = new SigningCredentials(
-                _key, // Use a chave já definida no construtor
+                _key, 
                 SecurityAlgorithms.HmacSha512
             );
 

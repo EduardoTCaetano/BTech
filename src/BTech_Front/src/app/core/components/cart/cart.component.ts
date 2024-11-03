@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Importação adicionada
-import { CartItem } from '../../../models/cartmodel';
-import { AuthService } from '../../../services/auth/auth.service';
 import { CartService } from '../../../services/cart/cart.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { CartItem } from '../../../models/cartmodel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -11,8 +11,9 @@ import { CartService } from '../../../services/cart/cart.service';
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
-  userId: string = '';
+  totalValue: number = 0;
   subTotal: number = 0;
+  userId: string | null = null;
 
   constructor(
     private cartService: CartService,
@@ -21,66 +22,73 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getUserId().subscribe((userId) => {
-      this.userId = userId;
-      this.loadCartItems();
-    });
-  }
-
-  loadCartItems(): void {
-    this.cartService.getCartItems(this.userId).subscribe((items) => {
-      this.cartItems = items;
-      this.calculateSubTotal();
-    });
-  }
-
-  removeItem(id: string): void {
-    const userId = this.userId;
-    console.log(`Removendo item com id: ${id} para o usuário: ${userId}`);
-
-    this.cartService.removeCartItem(userId, id).subscribe(
-      () => {
-        console.log('Item removido com sucesso.');
-        this.cartItems = this.cartItems.filter((item) => item.id !== id);
-        this.calculateSubTotal();
+    this.authService.getUserId().subscribe({
+      next: (userId) => {
+        this.userId = userId;
+        this.loadCartItems(userId);
       },
-      (error) => {
-        console.error('Erro ao remover o item:', error);
-      }
-    );
+      error: () => this.router.navigate(['/login']),
+    });
   }
 
-  increaseQuantity(item: CartItem): void {
-    item.quantity += 1;
-    this.updateQuantity(item);
+  private loadCartItems(userId: string): void {
+    this.cartService.getCartItems(userId).subscribe((items) => {
+      this.cartItems = items;
+      this.calculateTotal();
+    });
   }
 
-  decreaseQuantity(item: CartItem): void {
-    if (item.quantity > 1) {
-      item.quantity -= 1;
-      this.updateQuantity(item);
+  private calculateTotal(): void {
+    this.subTotal = this.cartItems.reduce((sum, item) => sum + item.total, 0);
+    this.totalValue = this.subTotal;
+  }
+
+  public removeItem(itemId: string): void {
+    if (this.userId) {
+      this.cartService.removeCartItem(this.userId, itemId).subscribe(() => {
+        this.cartItems = this.cartItems.filter(item => item.id !== itemId);
+        this.calculateTotal();
+      });
     }
   }
 
-  updateQuantity(item: CartItem): void {
-    const updatedItem: CartItem = { ...item };
-    this.cartService.updateCartItem(updatedItem).subscribe((updated) => {
-      const index = this.cartItems.findIndex((i) => i.id === item.id);
-      if (index > -1) {
-        this.cartItems[index] = updated;
-        this.calculateSubTotal();
-      }
-    });
+  public clearCart(): void {
+    if (this.userId) {
+      this.cartService.clearCart(this.userId).subscribe(() => {
+        this.cartItems = [];
+        this.subTotal = 0;
+        this.totalValue = 0;
+      });
+    }
   }
 
-  calculateSubTotal(): void {
-    this.subTotal = this.cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+  public proceedToPayment(): void {
+    if (this.cartItems.length === 0) {
+      alert('Carrinho está vazio!');
+    } else {
+      this.router.navigate(['/payment']);
+    }
   }
 
-  finalizePurchase(): void {
+  public increaseQuantity(item: CartItem): void {
+    item.quantity += 1;
+    item.total = item.price * item.quantity;
+    this.calculateTotal();
+  }
+
+  public decreaseQuantity(item: CartItem): void {
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+      item.total = item.price * item.quantity;
+      this.calculateTotal();
+    }
+  }
+
+  public finalizePurchase(): void {
+    if (this.cartItems.length === 0) {
+      alert('Carrinho está vazio!');
+      return;
+    }
     this.router.navigate(['/payment']);
   }
 }

@@ -12,8 +12,10 @@ namespace BlitzTech.Model
         public int Stock { get; set; }
         public string Image { get; set; }
         public bool IsActive { get; set; } = true;
+
         public Guid CategoryId { get; set; }  
         public Category Category { get; set; }  
+        public ICollection<OrderItem> OrderItems { get; set; }
 
         public Product(string name, string description, decimal price, int stock, string image, Guid categoryId)
         {

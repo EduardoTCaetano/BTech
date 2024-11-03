@@ -1,9 +1,7 @@
 using BTech.Domain.DTOs.Cart;
-using BlitzTech.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BTech.Domain.Interfaces;
@@ -88,7 +86,6 @@ namespace BlitzTech.Application.Controllers
             return NoContent();
         }
 
-
         [Authorize(Roles = "User,Admin")]
         [HttpDelete("user/{userId}")]
         public async Task<IActionResult> ClearCart([FromRoute] Guid userId)
@@ -99,7 +96,6 @@ namespace BlitzTech.Application.Controllers
             {
                 return NotFound("Nenhum item no carrinho encontrado para este usuário.");
             }
-
             await _cartItemRepo.ClearCartAsync(userId);
             return NoContent();
         }

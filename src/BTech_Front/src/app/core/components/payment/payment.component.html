@@ -30,6 +30,7 @@
           </tbody>
         </table>
       </section>
+
       <aside class="payment-summary">
         <div class="box">
           <header>Resumo da Compra</header>
@@ -44,7 +45,12 @@
             <span>R$ {{ subTotal | number:'1.2-2' }}</span>
           </footer>
         </div>
-        <div class="paypal-container">
+
+        <div class="payment-buttons">
+          <button (click)="initiatePayment('mercadoPago')" class="button mercadoPago-button">Pagar com Mercado Pago</button>
+        </div>
+
+        <div class="paypal-container" *ngIf="payPalConfig">
           <ngx-paypal [config]="payPalConfig"></ngx-paypal>
         </div>
       </aside>

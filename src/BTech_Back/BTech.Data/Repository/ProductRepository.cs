@@ -38,17 +38,26 @@ namespace BlitzTech.Data.Repository
             return productModel;
         }
 
-        public async Task<List<Model.Product>> GetAllAsync(QueryObject query)
-        {
-            var products = _context.Product.AsQueryable();
+     public async Task<List<Model.Product>> GetAllAsync(QueryObject query)
+{
+    var products = _context.Product.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(query.Description))
-            {
-                products = products.Where(p => p.Description.Contains(query.Description));
-            }
+    // Filtro pela descrição se fornecida
+    if (!string.IsNullOrWhiteSpace(query.Description))
+    {
+        products = products.Where(p => EF.Functions.Like(p.Description.ToLower(), $"%{query.Description.ToLower()}%"));
+    }
 
-            return await products.ToListAsync();
-        }
+    // Filtro pelo nome se fornecido
+    if (!string.IsNullOrWhiteSpace(query.Name))
+    {
+        products = products.Where(p => EF.Functions.Like(p.Name.ToLower(), $"%{query.Name.ToLower()}%"));
+    }
+
+    return await products.ToListAsync();
+}
+
+
 
         public async Task<List<Model.Product>> GetByCategoryAsync(Guid categoryId)
         {
@@ -60,7 +69,7 @@ namespace BlitzTech.Data.Repository
         public async Task<Model.Product?> GetByIdAsync(Guid id)
         {
             return await _context.Product
-                .Include(p => p.Category) 
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
@@ -85,7 +94,6 @@ namespace BlitzTech.Data.Repository
             return existingProduct;
         }
 
-        // Implement the correct DeleteAsync method from the interface
         async Task<Product> IProductRepository.DeleteAsync(Guid id)
         {
             var productModel = await _context.Product.FirstOrDefaultAsync(x => x.Id == id);
@@ -99,6 +107,5 @@ namespace BlitzTech.Data.Repository
             await _context.SaveChangesAsync();
             return productModel;
         }
-
     }
 }

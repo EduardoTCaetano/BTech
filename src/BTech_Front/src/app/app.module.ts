@@ -29,6 +29,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { SuccessComponent } from './core/components/success/success.component';
 import { ProfileComponent } from './core/components/profile/profile.component';
 import { ProfileHistoryComponent } from './core/components/profile-history/profile-history.component';
+import { EmAltaComponent } from './core/components/em-alta/em-alta.component';
+import { SearchResultsComponent } from './core/components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { ProfileHistoryComponent } from './core/components/profile-history/profi
     SuccessComponent,
     ProfileComponent,
     ProfileHistoryComponent,
+    EmAltaComponent,
+    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,

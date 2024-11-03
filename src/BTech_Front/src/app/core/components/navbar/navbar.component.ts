@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { CartService } from '../../../services/cart/cart.service';
+import { ProductService } from '../../../services/product/product.service';
 import { CartItem } from '../../../models/cartmodel';
+import { ProductModel } from '../../../models/ProductModel';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -17,10 +19,13 @@ export class NavbarComponent implements OnInit {
   cartItemCount = 0;
   cartItems: CartItem[] = [];
   userId: string = '';
+  searchTerm: string = ''; // Campo para armazenar o termo de busca
+  searchResults: ProductModel[] = []; // Array para armazenar resultados da busca
 
   constructor(
     private authService: AuthService,
     private cartService: CartService,
+    private productService: ProductService,
     private router: Router
   ) {}
 
@@ -68,5 +73,11 @@ export class NavbarComponent implements OnInit {
 
   toggleLogoutButton(show: boolean) {
     this.showLogoutButton = show;
+  }
+
+  searchProducts() {
+    if (this.searchTerm.trim()) {
+      this.router.navigate(['/search'], { queryParams: { term: this.searchTerm } });
+    }
   }
 }

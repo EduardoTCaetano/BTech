@@ -27,7 +27,6 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
-        // Mapeamento para Product
         public static ProductDto ToProductDto(this Product product)
         {
             return new ProductDto(

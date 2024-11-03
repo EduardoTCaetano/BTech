@@ -65,7 +65,6 @@ namespace BTech.Application.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
         {
             if (!ModelState.IsValid)
@@ -145,6 +144,5 @@ namespace BTech.Application.Controllers
 
             return Ok(response);
         }
-
     }
 }

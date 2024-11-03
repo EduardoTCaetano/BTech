@@ -4,7 +4,7 @@ import { CategoryService } from '../../../services/category/category.service';
 import { CategoryModel } from '../../../models/categorymodel';
 import { ProductModel } from '../../../models/ProductModel';
 import { CartItem } from '../../../models/cartmodel';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { CartService } from '../../../services/cart/cart.service';
 
@@ -20,11 +20,13 @@ export class SearchComponent implements OnInit {
   sidebarActive: boolean = false;
   selectedCategoryId: string | null = null;
   userId: string | undefined;
+  searchTerm: string = ''; // To hold the search term
 
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
     private router: Router,
+    private route: ActivatedRoute, // Inject ActivatedRoute
     private authService: AuthService,
     private cartService: CartService,
   ) {}
@@ -48,10 +50,19 @@ export class SearchComponent implements OnInit {
         console.error('Erro ao carregar categorias', error);
       }
     );
+
     this.authService.getUserId().subscribe(
       (id) => (this.userId = id),
       (error) => console.error('Erro ao obter userId', error)
     );
+
+    // Subscribe to query parameters
+    this.route.queryParams.subscribe(params => {
+      const term = params['term'];
+      if (term) {
+        this.search(term); // Call search method with the query parameter
+      }
+    });
   }
 
   toggleSidebar(): void {
@@ -111,4 +122,24 @@ export class SearchComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  // New method to handle search
+  search(term: string): void {
+    this.searchTerm = term;
+    if (this.searchTerm.trim()) {
+      // Call the API to search for products
+      this.productService.searchProducts(this.searchTerm).subscribe(
+        (results) => {
+          this.filteredProducts = results; // Set filtered products to search results
+        },
+        (error) => {
+          console.error('Erro ao buscar produtos', error);
+        }
+      );
+    } else {
+      this.filteredProducts = this.products; // Reset to all products if the search term is empty
+    }
+  }
+
+
 }

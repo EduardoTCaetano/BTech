@@ -65,7 +65,6 @@ namespace BlitzTech.Data.Repository
 
             await _context.SaveChangesAsync();
             return exitingCategory;
-
         }
     }
 }

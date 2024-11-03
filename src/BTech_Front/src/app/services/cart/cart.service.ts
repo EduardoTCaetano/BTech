@@ -24,6 +24,14 @@ export class CartService {
     return !!localStorage.getItem('authToken');
   }
 
+  private getAuthHeaders() {
+    const token = localStorage.getItem('authToken');
+    return {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
+  }
+
   getCartItems(userId: string): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.apiUrl}/${userId}`).pipe(
       tap((items) => {
@@ -73,7 +81,6 @@ export class CartService {
 
   addCartItem(userId: string, cartItem: CartItem): Observable<CartItem> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
     return this.http.post<CartItem>(`${this.apiUrl}/user/${userId}/items`, cartItem, { headers }).pipe(
       tap((response) => {
         const updatedItems = [...this.cartItemsSource.value, response];
@@ -88,7 +95,9 @@ export class CartService {
   }
 
   clearCart(userId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/user/${userId}`).pipe(
+    return this.http.delete<void>(`${this.apiUrl}/user/${userId}`, {
+      headers: this.getAuthHeaders(),
+    }).pipe(
       tap(() => {
         this.cartItemsSource.next([]);
         this.cartItemCountSource.next(0);
@@ -99,5 +108,4 @@ export class CartService {
       })
     );
   }
-
 }

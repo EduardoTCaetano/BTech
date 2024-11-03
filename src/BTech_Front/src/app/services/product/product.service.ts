@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { ProductModel } from '../../models/ProductModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
 
   private apiUrl = 'http://localhost:5246/api/Product';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(this.apiUrl);
@@ -21,10 +21,18 @@ export class ProductService {
   }
 
   getProductsByCategory(categoryId: string): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(`${this.apiUrl}/category/${categoryId}`);
+    return this.http.get<ProductModel[]>(
+      `${this.apiUrl}/category/${categoryId}`
+    );
   }
 
   requestApproval(product: ProductModel): Observable<any> {
     return this.http.post('/aprovacao', product);
   }
+
+  searchProducts(name: string): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${this.apiUrl}/search?name=${name}`);
+}
+
+
 }
