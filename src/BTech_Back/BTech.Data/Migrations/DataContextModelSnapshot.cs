@@ -36,6 +36,57 @@ namespace BTech.Data.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("BlitzTech.Model.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BlitzTech.Model.OrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("BlitzTech.Model.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -130,19 +181,25 @@ namespace BTech.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ab4bb500-67c3-470e-b343-e14f2e5679da",
+                            Id = "a6dfd124-c7dc-412b-886e-c8e966fe67ef",
+                            Name = "Master",
+                            NormalizedName = "Master"
+                        },
+                        new
+                        {
+                            Id = "94366daa-1b8e-455b-a272-7e29663ee87a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c3533cda-572e-4355-a0c4-c65aacbacacb",
+                            Id = "c24c4bee-c6e2-4867-bfa8-c6aa5b25ef1a",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "74465722-0203-4038-bb53-cf1b486e93b0",
+                            Id = "fd706c7a-8e0e-45d7-a1e1-eed043271c47",
                             Name = "Order",
                             NormalizedName = "ORDER"
                         });
@@ -314,6 +371,17 @@ namespace BTech.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BlitzTech.Model.OrderItem", b =>
+                {
+                    b.HasOne("BlitzTech.Model.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("BlitzTech.Model.Product", b =>
                 {
                     b.HasOne("BlitzTech.Model.Category", "Category")
@@ -379,6 +447,11 @@ namespace BTech.Data.Migrations
             modelBuilder.Entity("BlitzTech.Model.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BlitzTech.Model.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

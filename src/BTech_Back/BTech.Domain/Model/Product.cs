@@ -15,7 +15,6 @@ namespace BlitzTech.Model
 
         public Guid CategoryId { get; set; }  
         public Category Category { get; set; }  
-        public ICollection<OrderItem> OrderItems { get; set; }
 
         public Product(string name, string description, decimal price, int stock, string image, Guid categoryId)
         {
