@@ -30,8 +30,9 @@ export class ProductService {
     return this.http.post('/aprovacao', product);
   }
 
-  searchProducts(term: string): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(`${this.apiUrl}/search?name=${term}`);
-  }
+  searchProducts(name: string): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${this.apiUrl}/search?name=${name}`);
+}
+
 
 }

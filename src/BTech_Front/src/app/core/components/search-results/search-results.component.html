@@ -1,0 +1,11 @@
+<div *ngIf="searchResults.length > 0; else noResults">
+  <h2>Resultados da Busca para "{{ searchTerm }}"</h2>
+  <ul>
+    <li *ngFor="let product of searchResults">
+      {{ product.name }} - {{ product.price | currency }}
+    </li>
+  </ul>
+</div>
+<ng-template #noResults>
+  <p>Nenhum produto encontrado para "{{ searchTerm }}"</p>
+</ng-template>

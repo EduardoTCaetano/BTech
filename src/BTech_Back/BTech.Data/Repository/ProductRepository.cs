@@ -38,22 +38,25 @@ namespace BlitzTech.Data.Repository
             return productModel;
         }
 
-        public async Task<List<Model.Product>> GetAllAsync(QueryObject query)
-        {
-            var products = _context.Product.AsQueryable();
+     public async Task<List<Model.Product>> GetAllAsync(QueryObject query)
+{
+    var products = _context.Product.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(query.Description))
-            {
-                products = products.Where(p => p.Description.Contains(query.Description));
-            }
+    // Filtro pela descrição se fornecida
+    if (!string.IsNullOrWhiteSpace(query.Description))
+    {
+        products = products.Where(p => EF.Functions.Like(p.Description.ToLower(), $"%{query.Description.ToLower()}%"));
+    }
 
-            if (!string.IsNullOrWhiteSpace(query.Name))
-            {
-                products = products.Where(p => p.Name.Contains(query.Name));
-            }
+    // Filtro pelo nome se fornecido
+    if (!string.IsNullOrWhiteSpace(query.Name))
+    {
+        products = products.Where(p => EF.Functions.Like(p.Name.ToLower(), $"%{query.Name.ToLower()}%"));
+    }
 
-            return await products.ToListAsync();
-        }
+    return await products.ToListAsync();
+}
+
 
 
         public async Task<List<Model.Product>> GetByCategoryAsync(Guid categoryId)
