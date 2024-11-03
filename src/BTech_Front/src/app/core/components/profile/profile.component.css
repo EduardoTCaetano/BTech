@@ -1,0 +1,189 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo Global */
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('imagens/FundoPri.png'); /* Caminho da imagem de fundo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Grid Container Responsivo */
+.grid-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os elementos se ajustem em várias linhas se necessário */
+  width: 100%;
+}
+
+/* Menu lateral (sidebar) */
+.sidebar {
+  background-color: #fc7303;
+  padding: 20px;
+  width: 250px;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar h2 {
+  font-size: 1.5rem; /* Usa rem para tamanhos dinâmicos */
+  margin-bottom: 100px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 30px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.25rem; /* Usa rem para responsividade */
+}
+
+.sidebar ul li a:hover {
+  color: #2600ff;
+}
+
+/* Conteúdo principal */
+.main-content {
+  padding: 30px;
+  margin-left: 430px; /* Espaço suficiente para a sidebar */
+  width: calc(100% - 270px); /* Ajuste da largura com base no menu lateral */
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Para se ajustar em telas pequenas */
+}
+
+.profile-picture img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profile-info h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.profile-info p {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Seções da Conta */
+.account-sections {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-item {
+  background-color: #fc7303;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 3px solid #000000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.section-item h4 {
+  font-size: 1.25rem;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+/* Estilização da imagem + texto com Flexbox */
+.icon-text {
+  display: flex;
+  align-items: center;
+}
+
+.icon-text img {
+  width: 24px;  /* Tamanho da imagem pequena */
+  height: 24px;
+  margin-right: 10px;
+}
+
+.section-item p {
+  font-size: 1rem;
+  color: #000000;
+}
+
+/* Media Queries para tornar a página responsiva */
+@media (max-width: 1024px) {
+  .main-content {
+      margin-left: 220px; /* Ajuste o espaço do menu lateral */
+      width: calc(100% - 220px);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Para telas menores, o menu lateral se torna um menu "mobile" */
+  .sidebar {
+      width: 100%;
+      position: relative;
+      min-height: auto;
+  }
+
+  .main-content {
+      margin-left: 0;
+      width: 100%;
+      padding: 15px;
+  }
+
+  .profile-header {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .section-item h4 {
+      font-size: 1.1rem;
+  }
+
+  .sidebar ul li {
+      margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar h2 {
+      font-size: 1.2rem;
+  }
+
+  .sidebar ul li a {
+      font-size: 1rem;
+  }
+
+  .profile-info h3 {
+      font-size: 1.2rem;
+  }
+
+  .section-item h4 {
+      font-size: 1rem;
+  }
+
+  .icon-text img {
+      width: 20px;
+      height: 20px;
+  }
+}

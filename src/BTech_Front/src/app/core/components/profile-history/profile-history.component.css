@@ -1,0 +1,163 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #7c7c7c;
+  background-image: url('img/FundoPri.png'); /* Caminho para sua imagem */
+  background-size: cover; /* Ajusta a imagem para cobrir toda a área */
+  background-position: center; /* Centraliza a imagem no fundo */
+  background-repeat: no-repeat; /* Evita que a imagem se repita */
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* Estrutura da página */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #000000; /* Cor de fundo do container */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Barra superior de busca */
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #fc7303;
+}
+
+.search-bar input {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 250px;
+}
+
+.search-bar button {
+  padding: 10px;
+  background-color: #fc7303;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Filtros */
+.filters {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
+
+/* Seção de opinião */
+.opinion-section {
+  background-color: #fc7303;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.opinion-section p {
+  margin: 0;
+}
+
+.opinion-section button {
+  padding: 10px;
+  background-color: #000;
+  color: #fc7303;
+  border: 2px solid #fc7303;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Lista de compras */
+.purchase-list {
+  background-color: #000000;
+  border-radius: 8px;
+}
+
+.purchase-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fc7303;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.purchase-date {
+  width: 150px;
+  color: #000;
+  text-align: center;
+}
+
+.purchase-date img {
+  margin-top: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+}
+
+.purchase-details {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.purchase-status {
+  color: #2600ff;
+  font-weight: bold;
+}
+
+.purchase-details p {
+  margin-top: 10px;
+}
+
+.purchase-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.purchase-actions button {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border: none;
+  background-color: #000;
+  color: #fc7303;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.purchase-actions button img.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.purchase-actions button:hover {
+  background-color: #2600ff;
+}
+
+/* Imagem dos produtos */
+.product-image {
+  margin-top: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+}
