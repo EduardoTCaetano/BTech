@@ -1,91 +1,98 @@
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlitzTech.Model;
-using BlitzTech.Data.Context;
-using Microsoft.EntityFrameworkCore;
+using BlitzTech.Data.Mapping;
+using BlitzTech.Domain.DTOs.OrderDTO;
+using BlitzTech.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
-[ApiController]
-[Route("api/[controller]")]
-public class OrderController : ControllerBase
+namespace BTech.Application.Controllers
 {
-    private readonly IOrderRepository _orderRepository;
-
-    public OrderController(IOrderRepository orderRepository)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class OrderController : ControllerBase
     {
-        _orderRepository = orderRepository;
-    }
+        private readonly IOrderRepository _orderRepository;
 
-    [HttpPost]
-    [Route("CreateOrder")]
-    public async Task<IActionResult> CreateOrder([FromBody] OrderDto orderDto)
-    {
-        if (!ModelState.IsValid)
+        public OrderController(IOrderRepository orderRepository)
         {
-            return BadRequest(ModelState);
+            _orderRepository = orderRepository;
         }
 
-        var orderItems = orderDto.OrderItems.Select(i => new OrderItem(i.ProductId, i.Quantity, i.UnitPrice)).ToList();
-        var order = new Order(orderDto.UserId, orderDto.TotalValue, orderItems);
-
-        await _orderRepository.AddAsync(order);
-
-        return Ok(order);
-    }
-
-    [HttpGet]
-    [Route("GetOrder/{id}")]
-    public async Task<IActionResult> GetOrder(Guid id)
-    {
-        var order = await _orderRepository.GetByIdAsync(id);
-
-        if (order == null)
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequestDTO orderDto)
         {
-            return NotFound("Order not found.");
+            var order = orderDto.ToOrder();
+            await _orderRepository.CreateAsync(order);
+            return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order.ToOrderDto());
         }
 
-        return Ok(order);
-    }
-
-    [HttpPut]
-    [Route("UpdateOrder/{id}")]
-    public async Task<IActionResult> UpdateOrder(Guid id, [FromBody] OrderDto orderDto)
-    {
-        if (!ModelState.IsValid)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrderById(Guid id)
         {
-            return BadRequest(ModelState);
+            var order = await _orderRepository.GetByIdAsync(id);
+            if (order == null) return NotFound();
+
+            return Ok(order.ToOrderDto());
         }
 
-        var order = await _orderRepository.GetByIdAsync(id);
-
-        if (order == null)
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetOrdersByUserId(Guid userId)
         {
-            return NotFound("Order not found.");
+            var orders = await _orderRepository.GetByUserIdAsync(userId);
+            return Ok(orders.Select(o => o.ToOrderDto()));
         }
 
-        order.TotalValue = orderDto.TotalValue;
-        order.OrderItems = orderDto.OrderItems.Select(i => new OrderItem(i.ProductId, i.Quantity, i.UnitPrice)).ToList();
-
-        await _orderRepository.UpdateAsync(order);
-
-        return Ok(order);
-    }
-
-    [HttpDelete]
-    [Route("DeleteOrder/{id}")]
-    public async Task<IActionResult> DeleteOrder(Guid id)
-    {
-        var order = await _orderRepository.GetByIdAsync(id);
-
-        if (order == null)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateOrderStatus(Guid id, [FromBody] string status)
         {
-            return NotFound("Order not found.");
+            var order = await _orderRepository.GetByIdAsync(id);
+            if (order == null) return NotFound();
+
+            await _orderRepository.UpdateStatusAsync(id, status);
+            return NoContent();
         }
 
-        await _orderRepository.DeleteAsync(id);
+        [HttpPatch("{orderId}/items/{itemId}")]
+        public async Task<IActionResult> UpdateOrderItem(Guid orderId, Guid itemId, [FromBody] CreateOrderItemDTO orderItemDto)
+        {
+            var order = await _orderRepository.GetByIdAsync(orderId);
+            if (order == null) return NotFound();
 
-        return Ok("Order deleted successfully.");
+            var orderItem = await _orderRepository.GetOrderItemByIdAsync(itemId);
+            if (orderItem == null) return NotFound();
+
+            orderItem.ProductId = orderItemDto.ProductId;
+            orderItem.ProductName = orderItemDto.ProductName;
+            orderItem.UnitPrice = orderItemDto.UnitPrice;
+            orderItem.Quantity = orderItemDto.Quantity;
+
+            await _orderRepository.UpdateOrderItemAsync(orderItem);
+            return NoContent();
+        }
+
+        [HttpDelete("{orderId}/items/{itemId}")]
+        public async Task<IActionResult> DeleteOrderItem(Guid orderId, Guid itemId)
+        {
+            var order = await _orderRepository.GetByIdAsync(orderId);
+            if (order == null) return NotFound();
+
+            var orderItem = await _orderRepository.GetOrderItemByIdAsync(itemId);
+            if (orderItem == null) return NotFound();
+
+            await _orderRepository.DeleteOrderItemAsync(itemId);
+            return NoContent();
+        }
+
+        [HttpGet("{id}/total")]
+        public async Task<IActionResult> CalculateOrderTotal(Guid id)
+        {
+            var order = await _orderRepository.GetByIdAsync(id);
+            if (order == null) return NotFound();
+
+            var total = order.OrderItems.Sum(item => item.UnitPrice * item.Quantity);
+            return Ok(new { Total = total });
+        }
     }
 }

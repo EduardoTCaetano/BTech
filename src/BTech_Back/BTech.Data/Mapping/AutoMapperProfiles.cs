@@ -1,5 +1,6 @@
 using BlitzTech.Domain.Dtos.Category;
 using BlitzTech.Domain.Dtos.Product;
+using BlitzTech.Domain.DTOs.OrderDTO;
 using BlitzTech.Domain.DTOs.Product;
 using BlitzTech.Model;
 using BTech.Domain.DTOs.Cart;
@@ -97,6 +98,56 @@ namespace BlitzTech.Data.Mapping
             existingCartItem.Quantity = cartItemDto.Quantity;
 
             return existingCartItem;
+        }
+
+        public static OrderDTO ToOrderDto(this Order order)
+        {
+            return new OrderDTO
+            (
+                order.Id,
+                order.UserId,
+                order.OrderDate,
+                order.TotalAmount,
+                order.Status,
+                order.OrderItems.Select(oi => oi.ToOrderItemDto()).ToList()
+            );
+        }
+
+        public static OrderItemDTO ToOrderItemDto(this OrderItem orderItem)
+        {
+            return new OrderItemDTO
+            (
+                orderItem.Id,
+                orderItem.ProductId,
+                orderItem.ProductName,
+                orderItem.UnitPrice,
+                orderItem.Quantity
+            );
+        }
+
+        public static Order ToOrderFromCreateDTO(this CreateOrderRequestDTO orderRequestDto)
+        {
+            return new Order
+            {
+                UserId = orderRequestDto.UserId,
+                OrderDate = DateTime.Now,
+                TotalAmount = orderRequestDto.TotalAmount,
+                Status = "Pending",
+                OrderItems = orderRequestDto.OrderItems.Select(oi => oi.ToOrderItem()).ToList()
+            };
+        }
+        
+        public static OrderItem ToOrderItem(this CreateOrderItemDTO orderItemDto)
+        {
+            if (orderItemDto == null) throw new ArgumentNullException(nameof(orderItemDto));
+            
+            return new OrderItem
+            {
+                ProductId = orderItemDto.ProductId,
+                ProductName = orderItemDto.ProductName,
+                UnitPrice = orderItemDto.UnitPrice,
+                Quantity = orderItemDto.Quantity
+            };
         }
     }
 }

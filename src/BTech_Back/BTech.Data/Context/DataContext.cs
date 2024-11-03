@@ -15,24 +15,13 @@ namespace BlitzTech.Data.Context
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; } 
-
+        public DbSet<OrderItem> OrderItems { get; set; }
         
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-             builder.Entity<Product>()
-                .HasMany(p => p.OrderItems)
-                .WithOne(oi => oi.Product)
-                .HasForeignKey(oi => oi.ProductId);
-
-            builder.Entity<Order>()
-                .HasMany(o => o.OrderItems)
-                .WithOne(oi => oi.Order)
-                .HasForeignKey(oi => oi.OrderId);
 
             List<IdentityRole> roles = new List<IdentityRole>
             {

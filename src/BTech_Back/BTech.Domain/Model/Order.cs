@@ -1,20 +1,18 @@
-public class Order
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BlitzTech.Domain.Entities;
+
+namespace BlitzTech.Model
 {
-    public Guid Id { get; set; }
-    public Guid UserId { get; set; }
-    public decimal TotalValue { get; set; }
-    public List<OrderItem> OrderItems { get; set; }
-
-    public Order(Guid userId, decimal totalValue, List<OrderItem> orderItems)
+    public class Order : EntityBase
     {
-        Id = Guid.NewGuid();
-        UserId = userId;
-        TotalValue = totalValue;
-        OrderItems = orderItems ?? new List<OrderItem>();
-    }
+        public Guid UserId { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Status { get; set; }
 
-    public Order()
-    {
-        OrderItems = new List<OrderItem>();
+        public virtual ICollection<OrderItem> OrderItems { get; set; } 
     }
 }

@@ -1,8 +1,19 @@
-public interface IOrderRepository
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BlitzTech.Model;
+
+namespace BlitzTech.Domain.Interfaces
 {
-    Task<IEnumerable<Order>> GetAllAsync();
-    Task<Order> GetByIdAsync(Guid id);
-    Task AddAsync(Order order);
-    Task UpdateAsync(Order order);
-    Task DeleteAsync(Guid id);
+    public interface IOrderRepository
+    {
+        Task<Order> CreateAsync(Order order);
+        Task<Order> GetByIdAsync(Guid id);
+        Task<IEnumerable<Order>> GetByUserIdAsync(Guid userId);
+        Task UpdateStatusAsync(Guid id, string status);
+        Task<OrderItem> GetOrderItemByIdAsync(Guid id);
+        Task UpdateOrderItemAsync(OrderItem orderItem);
+        Task DeleteOrderItemAsync(Guid id);
+    }
 }
