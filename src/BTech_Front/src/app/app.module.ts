@@ -28,6 +28,7 @@ import { PaymentComponent } from './core/components/payment/payment.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { SuccessComponent } from './core/components/success/success.component';
 import { EmAltaComponent } from './core/components/em-alta/em-alta.component';
+import { SearchResultsComponent } from './core/components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EmAltaComponent } from './core/components/em-alta/em-alta.component';
     PaymentComponent,
     SuccessComponent,
     EmAltaComponent,
+    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,

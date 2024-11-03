@@ -9,6 +9,7 @@ import { LoginComponent } from './core/components/login/login.component';
 import { ProductPageComponent } from './core/components/product-page/product-page.component';
 import { SuccessComponent } from './core/components/success/success.component';
 import { PaymentComponent } from './core/components/payment/payment.component';
+import { SearchResultsComponent } from './core/components/search-results/search-results.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'page/:id', component: ProductPageComponent},
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
-  { path: 'success', component: SuccessComponent }
+  { path: 'success', component: SuccessComponent },
+  { path: 'search', component: SearchResultsComponent }
 ];
 
 @NgModule({
