@@ -1,16 +1,25 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BlitzTech.Domain.Entities;
 
-public class OrderItemDto
+namespace BlitzTech.Domain.DTOs.OrderDTO
 {
-    [Required]
-    public Guid ProductId { get; set; }
+    public class OrderItemDTO : EntityBase
+    {
+        public Guid ProductId { get; set; }
+        public string ProductName { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int Quantity { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "The quantity must be at least 1.")]
-    public int Quantity { get; set; }
-
-    [Required]
-    [Range(0.01, double.MaxValue, ErrorMessage = "The unit price must be greater than zero.")]
-    public decimal UnitPrice { get; set; }
+        public OrderItemDTO(Guid id,Guid productId, string productName, decimal unitPrice, int quantity)
+        {
+            Id = id;
+            ProductId = productId;
+            ProductName = productName;
+            UnitPrice = unitPrice;
+            Quantity = quantity;
+        }
+    }
 }
