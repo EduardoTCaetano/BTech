@@ -7,7 +7,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #7c7c7c;
-  background-image: url('img/FundoPri.png'); /* Caminho para sua imagem */
+  background-image: url(/assets/mv_1.jpg);
   background-size: cover; /* Ajusta a imagem para cobrir toda a área */
   background-position: center; /* Centraliza a imagem no fundo */
   background-repeat: no-repeat; /* Evita que a imagem se repita */

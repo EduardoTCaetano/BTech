@@ -1,14 +1,9 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 
 /* Estilo Global */
 body {
   font-family: Arial, sans-serif;
-  background-image: url('imagens/FundoPri.png'); /* Caminho da imagem de fundo */
+  background-image: url(/assets/mv_1.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -17,6 +12,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-top: 100px;
 }
 
 /* Grid Container Responsivo */

@@ -55,6 +55,10 @@ export class NavbarComponent implements OnInit {
     this.menuOpen = !this.menuOpen;
   }
 
+  profile() {
+    this.router.navigate(['/profile']);
+  }
+  
   logout() {
     Swal.fire({
       title: 'Tem certeza?',

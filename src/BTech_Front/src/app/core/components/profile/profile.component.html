@@ -1,87 +1,97 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Conta</title>
-    <link rel="stylesheet" href="Perfil.css">
-</head>
+<app-navbar></app-navbar>
+
 <body>
+  <div class="container">
+    <nav class="sidebar">
+      <h2>Minha conta</h2>
+      <ul>
+        <li><a href="/profile-history">Compras</a></li>
+        <li><a href="#">Meu Perfil</a></li>
+        <li><a href="#">Configurações</a></li>
+      </ul>
+    </nav>
 
-    <div class="container">
-        <!-- Menu Lateral -->
-        <nav class="sidebar">
-            <h2>Minha conta</h2>
-            <ul>
-                <li><a href="#">Compras</a></li>
-                <li><a href="#">Vendas</a></li>
-                <li><a href="#">Empréstimos</a></li>
-                <li><a href="#">Assinaturas</a></li>
-                <li><a href="#">Bio livre</a></li>
-                <li><a href="#">Faturamento</a></li>
-                <li><a href="#">Meu perfil</a></li>
-                <li><a href="#">Configurações</a></li>
-            </ul>
-        </nav>
-
-        <!-- Conteúdo Principal -->
-        <div class="main-content">
-            <div class="profile-header">
-                <div class="profile-picture">
-                    <img src="imagens/802.png" alt="Foto do Perfil">
-                </div>
-                <div class="profile-info">
-                    <h3>Jean Marcos De Souza Leonello</h3>
-                    <p>btech&commat;gmail.com</p>
-                </div>
-            </div>
-
-            <div class="account-sections">
-                <div class="section-item">
-                    <h4>Dados pessoais</h4>
-                    <div class="icon-text">
-                        <img src="imagens/sorrir.png" alt="Icone de dados pessoais" class="icon">
-                        <p>Informações do seu documento de identidade e sua atividade econômica.</p>
-                    </div>
-                </div>
-                <div class="section-item">
-                    <h4>Dados da sua conta</h4>
-                    <div class="icon-text">
-                        <img src="imagens/grafico.png" alt="Icone de dados da conta" class="icon">
-                        <p>Dados que representam a conta no Mercado Livre e Mercado Pago.</p>
-                    </div>
-                </div>
-                <div class="section-item">
-                    <h4>Segurança</h4>
-                    <div class="icon-text">
-                        <img src="imagens/trancar.png" alt="Icone de segurança" class="icon">
-                        <p>Você configurou a segurança da sua conta.</p>
-                    </div>
-                </div>
-                <div class="section-item">
-                    <h4>Cartões</h4>
-                    <div class="icon-text">
-                        <img src="imagens/cartao-de-credito.png" alt="Icone de cartões" class="icon">
-                        <p>Cartões salvos na sua conta.</p>
-                    </div>
-                </div>
-                <div class="section-item">
-                    <h4>Endereços</h4>
-                    <div class="icon-text">
-                        <img src="imagens/casa.png" alt="Icone de endereços" class="icon">
-                        <p>Endereços salvos na sua conta.</p>
-                    </div>
-                </div>
-                <div class="section-item">
-                    <h4>Privacidade</h4>
-                    <div class="icon-text">
-                        <img src="imagens/impressao-digital.png" alt="Icone de privacidade" class="icon">
-                        <p>Configurações de privacidade da conta.</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+      <div class="profile-header">
+        <div class="profile-picture">
+          <img src="imagens/802.png" alt="Foto do Perfil" />
         </div>
-    </div>
+        <div class="profile-info">
+          <h3>Jean Marcos De Souza Leonello</h3>
+          <p>btech&commat;gmail.com</p>
+        </div>
+      </div>
 
+      <div class="account-sections">
+        <div class="section-item">
+          <h4>Dados pessoais</h4>
+          <div class="icon-text">
+            <img
+              src="imagens/sorrir.png"
+              alt="Icone de dados pessoais"
+              class="icon"
+            />
+            <p>
+              Informações do seu documento de identidade e sua atividade
+              econômica.
+            </p>
+          </div>
+        </div>
+        <div class="section-item">
+          <h4>Dados da sua conta</h4>
+          <div class="icon-text">
+            <img
+              src="imagens/grafico.png"
+              alt="Icone de dados da conta"
+              class="icon"
+            />
+            <p>
+              Dados que representam a conta no Mercado Livre e Mercado Pago.
+            </p>
+          </div>
+        </div>
+        <div class="section-item">
+          <h4>Segurança</h4>
+          <div class="icon-text">
+            <img
+              src="imagens/trancar.png"
+              alt="Icone de segurança"
+              class="icon"
+            />
+            <p>Você configurou a segurança da sua conta.</p>
+          </div>
+        </div>
+        <div class="section-item">
+          <h4>Cartões</h4>
+          <div class="icon-text">
+            <img
+              src="imagens/cartao-de-credito.png"
+              alt="Icone de cartões"
+              class="icon"
+            />
+            <p>Cartões salvos na sua conta.</p>
+          </div>
+        </div>
+        <div class="section-item">
+          <h4>Endereços</h4>
+          <div class="icon-text">
+            <img src="imagens/casa.png" alt="Icone de endereços" class="icon" />
+            <p>Endereços salvos na sua conta.</p>
+          </div>
+        </div>
+        <div class="section-item">
+          <h4>Privacidade</h4>
+          <div class="icon-text">
+            <img
+              src="imagens/impressao-digital.png"
+              alt="Icone de privacidade"
+              class="icon"
+            />
+            <p>Configurações de privacidade da conta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-</html>

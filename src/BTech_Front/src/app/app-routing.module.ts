@@ -10,6 +10,8 @@ import { ProductPageComponent } from './core/components/product-page/product-pag
 import { SuccessComponent } from './core/components/success/success.component';
 import { PaymentComponent } from './core/components/payment/payment.component';
 import { SearchResultsComponent } from './core/components/search-results/search-results.component';
+import { ProfileComponent } from './core/components/profile/profile.component';
+import { ProfileHistoryComponent } from './core/components/profile-history/profile-history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'page/:id', component: ProductPageComponent},
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'success', component: SuccessComponent },
-  { path: 'search', component: SearchResultsComponent }
+  { path: 'search', component: SearchResultsComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'profile-history', component: ProfileHistoryComponent },
 ];
 
 @NgModule({

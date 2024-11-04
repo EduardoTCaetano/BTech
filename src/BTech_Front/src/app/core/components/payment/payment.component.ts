@@ -80,7 +80,6 @@ export class PaymentComponent implements OnInit {
       },
       onApprove: (data, actions) => {
         actions.order.get().then((details: any) => {
-          console.log('Order approved, transaction details:', details);
           this.createOrder(details.id);
         });
       },
@@ -125,7 +124,7 @@ export class PaymentComponent implements OnInit {
       }
     }).subscribe((response: any) => {
       this.merchantOrderId = response.id;
-      window.location.href = response.init_point; // Redirecionamento aqui
+      window.location.href = response.init_point;
     }, (error) => {
       console.error('Erro ao criar preferência no Mercado Pago:', error);
     });
@@ -143,25 +142,29 @@ export class PaymentComponent implements OnInit {
         userId,
         totalValue: this.totalValue,
         orderItems,
-        merchantOrderId: this.merchantOrderId || '', // Garantir que seja uma string
+        merchantOrderId: this.merchantOrderId || '',
       };
 
-      this.orderService.createOrder(order).subscribe((response: Order) => {
-        console.log('Resposta da criação do pedido:', response);
-        if (response && response.merchantOrderId) {
-          this.merchantOrderId = response.merchantOrderId;
-          this.cartService.clearCart(userId).subscribe(() => {
-            console.log('Carrinho limpo após pagamento');
-            this.cartItems = [];
-            this.totalValue = 0;
-            this.router.navigate(['/success', this.merchantOrderId]); // Redireciona apenas após sucesso
-          });
-        } else {
-          console.error('ID do pedido não disponível na resposta da API');
+      this.orderService.createOrder(order).subscribe(
+        (response: Order) => {
+          if (response && response.merchantOrderId) {
+            this.merchantOrderId = response.merchantOrderId;
+            this.clearCartAfterPurchase(userId);
+          }
+        },
+        (error) => {
+          console.error('Erro ao criar pedido:', error);
         }
-      }, (error) => {
-        console.error('Erro ao criar pedido:', error);
-      });
+      );
+    });
+  }
+
+  private clearCartAfterPurchase(userId: string): void {
+    this.cartService.clearCart(userId).subscribe(() => {
+      this.cartItems = [];
+      this.totalValue = 0;
+      this.subTotal = 0;
+      this.router.navigate(['/home', this.merchantOrderId]);
     });
   }
 

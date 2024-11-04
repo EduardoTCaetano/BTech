@@ -15,7 +15,7 @@
         type="text"
         placeholder="Buscar...."
         [(ngModel)]="searchTerm"
-        (keyup.enter)="searchProducts()" 
+        (keyup.enter)="searchProducts()"
       />
       <button class="searchButton" (click)="searchProducts()">
         <svg
@@ -87,6 +87,7 @@
             {{ userName || 'Entrar' }}
           </a>
           <ul class="dropdown-menu" *ngIf="userName">
+            <li><a (click)="profile()">Pefil</a></li>
             <li><a (click)="logout()">Sair</a></li>
           </ul>
         </li>
