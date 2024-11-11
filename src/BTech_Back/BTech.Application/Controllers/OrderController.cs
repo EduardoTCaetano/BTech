@@ -23,9 +23,22 @@ namespace BTech.Application.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequestDTO orderDto)
         {
-            var order = orderDto.ToOrder();
-            await _orderRepository.CreateAsync(order);
-            return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order.ToOrderDto());
+            try
+            {
+                var order = orderDto.ToOrder();
+
+                if (order.TotalAmount <= 0)
+                {
+                    return BadRequest("O valor total do pedido deve ser maior que zero.");
+                }
+
+                await _orderRepository.CreateAsync(order);
+                return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order.ToOrderDto());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao criar pedido: {ex.Message}");
+            }
         }
 
         [HttpGet("{id}")]
@@ -42,6 +55,14 @@ namespace BTech.Application.Controllers
         {
             var orders = await _orderRepository.GetByUserIdAsync(userId);
             return Ok(orders.Select(o => o.ToOrderDto()));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var orders = await _orderRepository.GetAllAsync();
+            var orderDtos = orders.Select(order => order.ToOrderDto()).ToList();
+            return Ok(orderDtos);
         }
 
         [HttpPatch("{id}")]
@@ -65,7 +86,7 @@ namespace BTech.Application.Controllers
 
             orderItem.ProductId = orderItemDto.ProductId;
             orderItem.ProductName = orderItemDto.ProductName;
-            orderItem.UnitPrice = orderItemDto.UnitPrice;
+            orderItem.Price = orderItemDto.Price;
             orderItem.Quantity = orderItemDto.Quantity;
 
             await _orderRepository.UpdateOrderItemAsync(orderItem);
@@ -91,7 +112,7 @@ namespace BTech.Application.Controllers
             var order = await _orderRepository.GetByIdAsync(id);
             if (order == null) return NotFound();
 
-            var total = order.OrderItems.Sum(item => item.UnitPrice * item.Quantity);
+            var total = order.OrderItems.Sum(item => item.Price * item.Quantity);
             return Ok(new { Total = total });
         }
     }

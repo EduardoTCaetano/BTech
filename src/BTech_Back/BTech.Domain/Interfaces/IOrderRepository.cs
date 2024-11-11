@@ -15,5 +15,6 @@ namespace BlitzTech.Domain.Interfaces
         Task<OrderItem> GetOrderItemByIdAsync(Guid id);
         Task UpdateOrderItemAsync(OrderItem orderItem);
         Task DeleteOrderItemAsync(Guid id);
+        Task<IEnumerable<Order>> GetAllAsync();
     }
 }

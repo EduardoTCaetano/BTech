@@ -80,5 +80,12 @@ namespace BlitzTech.Data.Repository
             _context.OrderItems.Remove(orderItem);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Order>> GetAllAsync()
+        {
+            return await _context.Orders
+                .Include(o => o.OrderItems)
+                .ToListAsync();
+        }
     }
 }

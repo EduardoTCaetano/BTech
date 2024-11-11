@@ -120,7 +120,7 @@ namespace BlitzTech.Data.Mapping
                 orderItem.Id,
                 orderItem.ProductId,
                 orderItem.ProductName,
-                orderItem.UnitPrice,
+                orderItem.Price,
                 orderItem.Quantity
             );
         }
@@ -131,7 +131,6 @@ namespace BlitzTech.Data.Mapping
             {
                 UserId = orderRequestDto.UserId,
                 OrderDate = DateTime.Now,
-                TotalAmount = orderRequestDto.TotalAmount,
                 Status = "Pending",
                 OrderItems = orderRequestDto.OrderItems.Select(oi => oi.ToOrderItem()).ToList()
             };
@@ -145,7 +144,7 @@ namespace BlitzTech.Data.Mapping
             {
                 ProductId = orderItemDto.ProductId,
                 ProductName = orderItemDto.ProductName,
-                UnitPrice = orderItemDto.UnitPrice,
+                Price = orderItemDto.Price,
                 Quantity = orderItemDto.Quantity
             };
         }
