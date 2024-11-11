@@ -3,6 +3,7 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { CartService } from '../../../services/cart/cart.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { OrderService } from '../../../services/order/order.service';
+import { OrderPaymentService } from '../../../services/orderpayment/orderpayment.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../../../models/ordermodel';
@@ -24,12 +25,17 @@ export class PaymentComponent implements OnInit {
     private cartService: CartService,
     private authService: AuthService,
     private orderService: OrderService,
+    private orderPaymentService: OrderPaymentService,
     private router: Router,
     private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.initPayPalConfig();
+    this.loadCartItems();
+  }
+
+  private loadCartItems(): void {
     this.authService.getUserId().subscribe((userId) => {
       this.cartService.getCartItems(userId).subscribe((items) => {
         this.cartItems = items;
@@ -134,21 +140,22 @@ export class PaymentComponent implements OnInit {
     const orderItems = this.cartItems.map((item) => ({
       productId: item.productId,
       quantity: item.quantity,
-      unitPrice: item.price,
+      Price: item.price,
     }));
 
     this.authService.getUserId().subscribe((userId) => {
       const order: Order = {
         userId,
-        totalValue: this.totalValue,
         orderItems,
         merchantOrderId: this.merchantOrderId || '',
+        totalValue: 0
       };
 
-      this.orderService.createOrder(order).subscribe(
+      this.orderPaymentService.createOrder(order).subscribe(
         (response: Order) => {
           if (response && response.merchantOrderId) {
             this.merchantOrderId = response.merchantOrderId;
+            console.log('ID do pedido gerado:', response.merchantOrderId);
             this.clearCartAfterPurchase(userId);
           }
         },

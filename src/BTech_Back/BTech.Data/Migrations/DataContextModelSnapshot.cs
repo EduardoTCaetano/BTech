@@ -68,6 +68,9 @@ namespace BTech.Data.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("TEXT");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ProductId")
                         .HasColumnType("TEXT");
 
@@ -76,9 +79,6 @@ namespace BTech.Data.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -181,25 +181,25 @@ namespace BTech.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a6dfd124-c7dc-412b-886e-c8e966fe67ef",
+                            Id = "2f555bcb-aba0-43d8-830f-5a8ba301cd45",
                             Name = "Master",
                             NormalizedName = "Master"
                         },
                         new
                         {
-                            Id = "94366daa-1b8e-455b-a272-7e29663ee87a",
+                            Id = "e3fbdb01-e4c5-44e9-a864-c5098e986b55",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c24c4bee-c6e2-4867-bfa8-c6aa5b25ef1a",
+                            Id = "421ed962-d89c-4049-b033-55acd1a81b5e",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "fd706c7a-8e0e-45d7-a1e1-eed043271c47",
+                            Id = "325846ba-fc57-4f3c-9add-77afa5e763bb",
                             Name = "Order",
                             NormalizedName = "ORDER"
                         });
