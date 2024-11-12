@@ -139,6 +139,8 @@ export class PaymentComponent implements OnInit {
   private createOrder(paymentId: string): void {
     const orderItems = this.cartItems.map((item) => ({
       productId: item.productId,
+      nameProd: item.nameProd,
+      image: item.image,
       quantity: item.quantity,
       Price: item.price,
     }));

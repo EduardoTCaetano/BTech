@@ -85,9 +85,10 @@ namespace BTech.Application.Controllers
             if (orderItem == null) return NotFound();
 
             orderItem.ProductId = orderItemDto.ProductId;
-            orderItem.ProductName = orderItemDto.ProductName;
+            orderItem.Image = orderItemDto.Image;
+            orderItem.NameProd = orderItemDto.NameProd;
             orderItem.Price = orderItemDto.Price;
-            orderItem.Quantity = orderItemDto.Quantity;
+            orderItem.Quantity = orderItemDto.Quantity; 
 
             await _orderRepository.UpdateOrderItemAsync(orderItem);
             return NoContent();
