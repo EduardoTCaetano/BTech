@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BTech.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240912113031_AddMigration")]
-    partial class AddMigration
+    [Migration("20241112112809_AddProdAndImage")]
+    partial class AddProdAndImage
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,60 @@ namespace BTech.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("BlitzTech.Model.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BlitzTech.Model.OrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameProd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("BlitzTech.Model.Product", b =>
@@ -133,19 +187,25 @@ namespace BTech.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ab4bb500-67c3-470e-b343-e14f2e5679da",
+                            Id = "0c6f7c27-f066-4606-9e9c-f06bf5c2e193",
+                            Name = "Master",
+                            NormalizedName = "Master"
+                        },
+                        new
+                        {
+                            Id = "e28742ba-d25c-45da-ac38-fb83db047b8d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c3533cda-572e-4355-a0c4-c65aacbacacb",
+                            Id = "cfcf83b2-7b2d-4d04-9e66-e35921fa67c1",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "74465722-0203-4038-bb53-cf1b486e93b0",
+                            Id = "cea64c4f-ab10-4d1b-a945-04dc572e2c5c",
                             Name = "Order",
                             NormalizedName = "ORDER"
                         });
@@ -317,6 +377,17 @@ namespace BTech.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BlitzTech.Model.OrderItem", b =>
+                {
+                    b.HasOne("BlitzTech.Model.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("BlitzTech.Model.Product", b =>
                 {
                     b.HasOne("BlitzTech.Model.Category", "Category")
@@ -382,6 +453,11 @@ namespace BTech.Data.Migrations
             modelBuilder.Entity("BlitzTech.Model.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BlitzTech.Model.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

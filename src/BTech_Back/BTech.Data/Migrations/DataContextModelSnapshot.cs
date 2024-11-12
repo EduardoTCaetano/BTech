@@ -65,6 +65,12 @@ namespace BTech.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameProd")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("OrderId")
                         .HasColumnType("TEXT");
 
@@ -72,9 +78,6 @@ namespace BTech.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProductName")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Quantity")
@@ -181,25 +184,25 @@ namespace BTech.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2f555bcb-aba0-43d8-830f-5a8ba301cd45",
+                            Id = "0c6f7c27-f066-4606-9e9c-f06bf5c2e193",
                             Name = "Master",
                             NormalizedName = "Master"
                         },
                         new
                         {
-                            Id = "e3fbdb01-e4c5-44e9-a864-c5098e986b55",
+                            Id = "e28742ba-d25c-45da-ac38-fb83db047b8d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "421ed962-d89c-4049-b033-55acd1a81b5e",
+                            Id = "cfcf83b2-7b2d-4d04-9e66-e35921fa67c1",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "325846ba-fc57-4f3c-9add-77afa5e763bb",
+                            Id = "cea64c4f-ab10-4d1b-a945-04dc572e2c5c",
                             Name = "Order",
                             NormalizedName = "ORDER"
                         });

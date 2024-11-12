@@ -119,9 +119,10 @@ namespace BlitzTech.Data.Mapping
             (
                 orderItem.Id,
                 orderItem.ProductId,
-                orderItem.ProductName,
+                orderItem.NameProd,
                 orderItem.Price,
-                orderItem.Quantity
+                orderItem.Quantity,
+                orderItem.Image
             );
         }
 
@@ -143,9 +144,10 @@ namespace BlitzTech.Data.Mapping
             return new OrderItem
             {
                 ProductId = orderItemDto.ProductId,
-                ProductName = orderItemDto.ProductName,
+                NameProd = orderItemDto.NameProd,
                 Price = orderItemDto.Price,
-                Quantity = orderItemDto.Quantity
+                Quantity = orderItemDto.Quantity,
+                Image = orderItemDto.Image
             };
         }
     }
