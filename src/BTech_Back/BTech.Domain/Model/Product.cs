@@ -1,3 +1,4 @@
+using BlitzTech.Domain.DTOs.Product;
 using BlitzTech.Domain.Entities;
 using BlitzTech.Domain.Validations;
 using System;
@@ -72,6 +73,11 @@ namespace BlitzTech.Model
         private void ValidateCategoryId(Guid categoryId)
         {
             DomainExceptionValidations.ExceptionHandler(categoryId == Guid.Empty, "Invalid CategoryId. CategoryId is required!");
+        }
+
+        public UpdateProductRequestDto ToUpdateProductDto()
+        {
+            throw new NotImplementedException();
         }
     }
 }

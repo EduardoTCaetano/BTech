@@ -9,6 +9,7 @@ namespace BlitzTech.Data.Mapping
 {
     public static class AutoMapperProfiles
     {
+        // Mapping Category to CategoryDto
         public static CategoryDto ToCategoryDto(this Category category)
         {
             return new CategoryDto(
@@ -18,6 +19,7 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
+        // Mapping CreateCategoryRequestDto to Category
         public static Category ToCategoryFromCreateDTO(this CreateCategoryRequestDto categoryDto)
         {
             return new Category
@@ -28,6 +30,7 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
+        // Mapping Product to ProductDto
         public static ProductDto ToProductDto(this Product product)
         {
             return new ProductDto(
@@ -42,6 +45,7 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
+        // Mapping CreateProductRequestDto to Product
         public static Product ToProductFromCreateDTO(this CreateProductRequestDto productDto)
         {
             return new Product
@@ -57,6 +61,24 @@ namespace BlitzTech.Data.Mapping
                 IsActive = productDto.IsActive
             };
         }
+
+        // Mapping UpdateProductRequestDto to Product (For update scenarios)
+        public static Product ToProductFromUpdateDTO(this UpdateProductRequestDto updateProductDto, Product existingProduct)
+        {
+            if (existingProduct == null) throw new ArgumentNullException(nameof(existingProduct));
+
+            existingProduct.Name = updateProductDto.Name;
+            existingProduct.Description = updateProductDto.Description;
+            existingProduct.Price = updateProductDto.Price;
+            existingProduct.Stock = updateProductDto.Stock;
+            existingProduct.Image = updateProductDto.Image;
+            existingProduct.IsActive = updateProductDto.IsActive;
+            existingProduct.CategoryId = updateProductDto.CategoryId;
+
+            return existingProduct;
+        }
+
+        // Mapping CartItem to CartItemDto
         public static CartItemDto ToCartItemDto(this CartItem cartItem)
         {
             return new CartItemDto(
@@ -71,6 +93,7 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
+        // Mapping CreateCartItemRequestDto to CartItem
         public static CartItem ToCartItemFromCreateDTO(this CreateCartItemRequestDto cartItemDto)
         {
             return new CartItem
@@ -85,6 +108,7 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
+        // Mapping UpdateCartItemRequestDto to CartItem (For updates)
         public static CartItem ToCartItemFromUpdateDTO(this UpdateCartItemRequestDto cartItemDto, CartItem existingCartItem)
         {
             if (existingCartItem == null) throw new ArgumentNullException(nameof(existingCartItem));
@@ -100,6 +124,7 @@ namespace BlitzTech.Data.Mapping
             return existingCartItem;
         }
 
+        // Mapping Order to OrderDTO
         public static OrderDTO ToOrderDto(this Order order)
         {
             return new OrderDTO
@@ -113,6 +138,7 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
+        // Mapping OrderItem to OrderItemDTO
         public static OrderItemDTO ToOrderItemDto(this OrderItem orderItem)
         {
             return new OrderItemDTO
@@ -126,6 +152,7 @@ namespace BlitzTech.Data.Mapping
             );
         }
 
+        // Mapping CreateOrderRequestDTO to Order
         public static Order ToOrderFromCreateDTO(this CreateOrderRequestDTO orderRequestDto)
         {
             return new Order
@@ -136,11 +163,12 @@ namespace BlitzTech.Data.Mapping
                 OrderItems = orderRequestDto.OrderItems.Select(oi => oi.ToOrderItem()).ToList()
             };
         }
-        
+
+        // Mapping CreateOrderItemDTO to OrderItem
         public static OrderItem ToOrderItem(this CreateOrderItemDTO orderItemDto)
         {
             if (orderItemDto == null) throw new ArgumentNullException(nameof(orderItemDto));
-            
+
             return new OrderItem
             {
                 ProductId = orderItemDto.ProductId,

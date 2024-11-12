@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 using BlitzTech.Data.Mapping;
 using BlitzTech.Domain.DTOs.Product;
 
@@ -16,10 +18,12 @@ namespace BlitzTech.Application.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepo;
+        private readonly BlobStorageService _blobStorageService;
 
-        public ProductController(IProductRepository productRepo)
+        public ProductController(IProductRepository productRepo, BlobStorageService blobStorageService)
         {
             _productRepo = productRepo;
+            _blobStorageService = blobStorageService;
         }
 
         [HttpGet]
@@ -101,20 +105,54 @@ namespace BlitzTech.Application.Controllers
         }
 
         [HttpGet("search")]
-public async Task<IActionResult> SearchProducts([FromQuery] string name)
-{
-    var queryObject = new QueryObject { Name = name };
-    var products = await _productRepo.GetAllAsync(queryObject);
+        public async Task<IActionResult> SearchProducts([FromQuery] string name)
+        {
+            var queryObject = new QueryObject { Name = name };
+            var products = await _productRepo.GetAllAsync(queryObject);
 
-    if (!products.Any())
-    {
-        return NotFound("Nenhum produto encontrado.");
-    }
+            if (!products.Any())
+            {
+                return NotFound("Nenhum produto encontrado.");
+            }
 
-    var productDtos = products.Select(p => p.ToProductDto());
-    return Ok(productDtos);
-}
+            var productDtos = products.Select(p => p.ToProductDto());
+            return Ok(productDtos);
+        }
 
+        // New endpoint to upload product image
+        [Authorize(Roles = "Admin")]
+        [HttpPost("{id}/upload-image")]
+        public async Task<IActionResult> UploadProductImage([FromRoute] Guid id, [FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
 
+            // Ensure the file is an image
+            if (!file.ContentType.StartsWith("image"))
+            {
+                return BadRequest("Only image files are allowed.");
+            }
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName); // Generate unique filename
+            using (var stream = file.OpenReadStream())
+            {
+                // Upload the image to Azure Blob Storage
+                var fileUrl = await _blobStorageService.UploadFileAsync(stream, fileName);
+
+                // Update the product with the image URL (assuming Product has an ImageUrl property)
+                var product = await _productRepo.GetByIdAsync(id);
+                if (product == null)
+                {
+                    return NotFound("Produto não encontrado.");
+                }
+
+                product.Image = fileUrl; // Store the image URL in the product
+
+                await _productRepo.UpdateAsync(id, product.ToUpdateProductDto()); // Save the updated product
+                return Ok(new { FileUrl = fileUrl });
+            }
+        }
     }
 }
