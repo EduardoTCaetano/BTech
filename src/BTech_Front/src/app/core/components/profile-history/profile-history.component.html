@@ -1,103 +1,43 @@
 <app-navbar></app-navbar>
 
-<body>
-  <div class="container">
-    <!-- Barra de busca e informações de compras -->
-    <div class="top-section">
-      <h1>Compras</h1>
-      <div class="search-bar">
-        <input type="text" placeholder="Buscar" />
-        <button type="button">Buscar</button>
-      </div>
-      <div class="filters">
-        <span>Todas</span>
-        <span>4 compras</span>
-      </div>
+<div class="container">
+  <!-- Barra de busca e informações de compras -->
+  <div class="top-section">
+    <h1>Compras</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar" />
+      <button type="button">Buscar</button>
     </div>
-
-    <!-- Opinião dos produtos -->
-    <div class="opinion-section">
-      <p><strong>6 produtos esperam sua opinião</strong></p>
-      <button>Opinar</button>
-      <button (click)="profile()">Ajuda?</button>
+    <div class="filters">
+      <span>Todas</span>
+      <span>{{ orders.length }} compras</span>
     </div>
+  </div>
 
-    <!-- Lista de compras -->
-    <div class="purchase-list">
-      <!-- Item de compra -->
-      <div class="purchase-item">
-        <div class="purchase-date">
-          <p>5 de setembro</p>
-          <img src="img/mouse.jpeg" alt="Produto 1" class="product-image" />
-        </div>
-        <div class="purchase-details">
-          <div class="purchase-status">Entregue</div>
-          <p>Chegou no dia 7 de setembro</p>
-          <p>Mouse Logitech 1000 dpi</p>
-          <div class="purchase-actions">
-            <button>Ver compra</button>
-            <button>Comprar novamente</button>
-          </div>
+  <!-- Opinião dos produtos -->
+  <div class="opinion-section">
+    <p><strong>{{ orders.length }} pedidos esperam sua opinião</strong></p>
+    <button>Opinar</button>
+    <button (click)="profile()">Ajuda?</button>
+  </div>
+  <div class="purchase-list">
+    <div *ngFor="let order of orders" class="purchase-item">
+      <div class="purchase-date">
+        <p>{{ order.productName }}</p>
+        <!-- Exibir as imagens -->
+        <div class="product-images">
+          <img *ngFor="let image of order.productImages" [src]="image" alt="Imagem do Produto" class="product-image" />
         </div>
       </div>
-
-      <!-- Outro Item -->
-      <div class="purchase-item">
-        <div class="purchase-date">
-          <p>22 de agosto</p>
-          <img
-            src="img/mousepad-gamer.jpg"
-            alt="Produto 2"
-            class="product-image"
-          />
-        </div>
-        <div class="purchase-details">
-          <div class="purchase-status">Entregue</div>
-          <p>Chegou no dia 22 de agosto</p>
-          <p>
-            Mouse Pad Gamer Iluminado led Rgb Grande 80 cm por 30 com Mousepad
-            gamer Led com em volta superficie speed para jogos
-          </p>
-          <div class="purchase-actions">
-            <button>Ver compra</button>
-            <button>Comprar novamente</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Outro Item -->
-      <div class="purchase-item">
-        <div class="purchase-date">
-          <p>16 de agosto</p>
-          <img src="img/not.png" alt="Produto 3" class="product-image" />
-        </div>
-        <div class="purchase-details">
-          <div class="purchase-status">Entregue</div>
-          <p>Chegou no dia 16 de agosto</p>
-          <p>Notebook Gamer</p>
-          <div class="purchase-actions">
-            <button>Ver compra</button>
-            <button>Comprar novamente</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Outro Item -->
-      <div class="purchase-item">
-        <div class="purchase-date">
-          <p>15 de agosto</p>
-          <img src="img/teclado.png" alt="Produto 2" class="product-image" />
-        </div>
-        <div class="purchase-details">
-          <div class="purchase-status">Entregue</div>
-          <p>Chegou no dia 15 de agosto</p>
-          <p>teclado Gamer Logitech</p>
-          <div class="purchase-actions">
-            <button>Ver compra</button>
-            <button>Comprar novamente</button>
-          </div>
+      <div class="purchase-details">
+        <div class="purchase-status">{{ order.status }}</div>
+        <p>Chegou no dia {{ order.deliveryDate | date: 'dd/MM/yyyy' }}</p>
+        <p>{{ order.productName }}</p>
+        <div class="purchase-actions">
+          <button>Ver compra</button>
+          <button>Comprar novamente</button>
         </div>
       </div>
     </div>
   </div>
-</body>
+</div>

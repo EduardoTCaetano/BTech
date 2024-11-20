@@ -1,7 +1,13 @@
-<div *ngIf="orderStatus">
-  <h1>Pedido encontrado</h1>
-  <p>Status do Pedido: {{ orderStatus.status }}</p>
-</div>
-<div *ngIf="!orderStatus">
-  <h1>Carregando ou nenhum pedido encontrado</h1>
-</div>
+<app-navbar></app-navbar>
+<body>
+  <div class="success-container">
+    <div class="success-icon">
+      <i class="bx bxs-check-circle"></i>
+    </div>
+    <div class="success-message">Sucesso!</div>
+    <div class="success-description">Sua compra foi aprovada com sucesso.</div>
+    <a href="#" class="success-button">Voltar ao Início</a>
+    <a href="/profile-history" class="status-button">Ver pedido</a>
+  </div>
+</body>
+<app-footer></app-footer>

@@ -23,6 +23,6 @@ public class BlobStorageService
         var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
         var blobClient = containerClient.GetBlobClient(fileName);
         await blobClient.UploadAsync(fileStream, overwrite: true);
-        return blobClient.Uri.ToString(); 
-    }
+        return blobClient.Uri.ToString(); 
+    }
 }

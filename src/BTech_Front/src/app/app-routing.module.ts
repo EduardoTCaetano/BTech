@@ -7,11 +7,11 @@ import { CartComponent } from './core/components/cart/cart.component';
 import { SearchComponent } from './core/components/search/search.component';
 import { LoginComponent } from './core/components/login/login.component';
 import { ProductPageComponent } from './core/components/product-page/product-page.component';
-import { SuccessComponent } from './core/components/success/success.component';
 import { PaymentComponent } from './core/components/payment/payment.component';
 import { SearchResultsComponent } from './core/components/search-results/search-results.component';
 import { ProfileComponent } from './core/components/profile/profile.component';
 import { ProfileHistoryComponent } from './core/components/profile-history/profile-history.component';
+import { SuccessComponent } from './core/components/success/success.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,9 +23,9 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'page/:id', component: ProductPageComponent},
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
-  { path: 'success', component: SuccessComponent },
   { path: 'search', component: SearchResultsComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'sucesso', component: SuccessComponent },
   { path: 'profile-history', component: ProfileHistoryComponent },
 ];
 

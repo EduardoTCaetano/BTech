@@ -6,8 +6,8 @@ import { OrderService } from '../../../services/order/order.service';
 import { OrderPaymentService } from '../../../services/orderpayment/orderpayment.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Order } from '../../../models/ordermodel';
 import { environment } from '../../../../enviroments/enviroments';
+import { Order } from '../../../models/order';
 
 @Component({
   selector: 'app-payment',
@@ -53,7 +53,7 @@ export class PaymentComponent implements OnInit {
       currency: 'BRL',
       clientId: environment.paypalClientId,
       createOrderOnClient: () =>
-        <ICreateOrderRequest>{
+        <ICreateOrderRequest> {
           intent: 'CAPTURE',
           purchase_units: [
             {
@@ -87,6 +87,7 @@ export class PaymentComponent implements OnInit {
       onApprove: (data, actions) => {
         actions.order.get().then((details: any) => {
           this.createOrder(details.id);
+          this.router.navigate(['/sucesso']);
         });
       },
       onClientAuthorization: (data) => {
@@ -142,15 +143,24 @@ export class PaymentComponent implements OnInit {
       nameProd: item.nameProd,
       image: item.image,
       quantity: item.quantity,
-      Price: item.price,
+      price: item.price,
     }));
 
     this.authService.getUserId().subscribe((userId) => {
+      const productImage = this.cartItems[0]?.image || '';
+
       const order: Order = {
+        id: paymentId,
+        name: `Pedido ${paymentId}`,
+        productName: this.cartItems.map(item => item.nameProd).join(', '),
+        productImages: productImage,
+        date: new Date().toISOString(),
+        status: 'pending',
         userId,
+        deliveryDate: new Date(),
+        totalValue: this.totalValue,
         orderItems,
         merchantOrderId: this.merchantOrderId || '',
-        totalValue: 0
       };
 
       this.orderPaymentService.createOrder(order).subscribe(
@@ -159,6 +169,7 @@ export class PaymentComponent implements OnInit {
             this.merchantOrderId = response.merchantOrderId;
             console.log('ID do pedido gerado:', response.merchantOrderId);
             this.clearCartAfterPurchase(userId);
+            this.router.navigate(['/sucesso']);
           }
         },
         (error) => {
