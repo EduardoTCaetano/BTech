@@ -31,6 +31,7 @@ import { ProfileComponent } from './core/components/profile/profile.component';
 import { ProfileHistoryComponent } from './core/components/profile-history/profile-history.component';
 import { EmAltaComponent } from './core/components/em-alta/em-alta.component';
 import { SearchResultsComponent } from './core/components/search-results/search-results.component';
+import { UnderwayComponent } from './core/components/underway/underway.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SearchResultsComponent } from './core/components/search-results/search-
     ProfileHistoryComponent,
     EmAltaComponent,
     SearchResultsComponent,
+    UnderwayComponent,
   ],
   imports: [
     BrowserModule,

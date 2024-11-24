@@ -34,7 +34,7 @@
         <p>Chegou no dia {{ order.deliveryDate | date: 'dd/MM/yyyy' }}</p>
         <p>{{ order.productName }}</p>
         <div class="purchase-actions">
-          <button>Ver compra</button>
+          <button (click)="navigateToUnderway ()">Ver compra</button>
           <button>Comprar novamente</button>
         </div>
       </div>
