@@ -12,6 +12,7 @@ import { SearchResultsComponent } from './core/components/search-results/search-
 import { ProfileComponent } from './core/components/profile/profile.component';
 import { ProfileHistoryComponent } from './core/components/profile-history/profile-history.component';
 import { SuccessComponent } from './core/components/success/success.component';
+import { UnderwayComponent } from './core/components/underway/underway.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'sucesso', component: SuccessComponent },
   { path: 'profile-history', component: ProfileHistoryComponent },
+  { path: 'underway', component: UnderwayComponent },
 ];
 
 @NgModule({
